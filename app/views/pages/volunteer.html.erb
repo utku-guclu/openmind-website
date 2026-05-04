@@ -1,0 +1,69 @@
+<section class="about" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-hand-heart"></i> Volunteer</span>
+      <h1 class="section-header__title">Who <span class="text-primary">Volunteers</span></h1>
+      <p class="section-header__desc">Whether you're a gap year student, a professional looking to give back, or a retiree — volunteering with OpenMind Projects is an enriching experience for everyone.</p>
+    </div>
+
+    <div class="about__grid" style="margin-bottom: var(--space-4xl);">
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--blue"><i class="ph ph-student"></i></div>
+        <h3>Students & Gap Year</h3>
+        <p>Gain real-world experience, build your CV, and make a genuine difference before or after your studies.</p>
+      </div>
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--gold"><i class="ph ph-briefcase"></i></div>
+        <h3>Working Professionals</h3>
+        <p>Share your expertise in tech, education, or management. Take a career break with purpose.</p>
+      </div>
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--teal"><i class="ph ph-globe"></i></div>
+        <h3>Digital Nomads & Retirees</h3>
+        <p>Contribute remotely or onsite. Flexible programs that fit your lifestyle and schedule.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if @destinations.any? %>
+<section class="pillars">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-map-trifold"></i> Where</span>
+      <h2 class="section-header__title">Our <span class="text-primary">Destinations</span></h2>
+    </div>
+    <div class="pillars__grid">
+      <% colors = ["pillar-card--education", "pillar-card--development", "pillar-card--research"] %>
+      <% @destinations.each_with_index do |dest, i| %>
+        <div class="pillar-card <%= colors[i % 3] %>">
+          <div class="pillar-card__header">
+            <div class="pillar-card__number"><%= dest.country_code %></div>
+            <div class="pillar-card__icon"><i class="ph ph-map-pin"></i></div>
+          </div>
+          <h3 class="pillar-card__title"><%= dest.name %></h3>
+          <p class="pillar-card__desc"><%= dest.summary %></p>
+          <%= link_to destination_path(dest.slug), class: "pillar-card__link" do %>
+            Explore <i class="ph ph-arrow-right"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<section class="cta-section">
+  <div class="cta-section__bg"></div>
+  <div class="container">
+    <div class="cta-section__content">
+      <h2 class="cta-section__title">Ready to Volunteer?</h2>
+      <p class="cta-section__desc">Apply today and start your journey of making a real impact in communities across Southeast Asia.</p>
+      <div class="cta-section__actions">
+        <%= link_to new_application_path, class: "btn btn--accent btn--lg" do %>
+          <i class="ph ph-paper-plane-tilt"></i> Apply Now
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

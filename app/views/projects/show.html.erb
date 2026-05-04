@@ -1,0 +1,48 @@
+<section class="about" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-briefcase"></i> Project Details</span>
+      <h1 class="section-header__title"><%= @project.title %></h1>
+      <% if @project.destination %>
+        <p class="section-header__desc"><i class="ph ph-map-pin"></i> <%= @project.location_name || @project.destination.name %></p>
+      <% end %>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div class="about__card" style="margin-bottom: var(--space-xl);">
+        <p style="line-height: 1.8; color: var(--color-text-secondary);"><%= @project.description %></p>
+      </div>
+
+      <% if @project.duration_weeks_min || @project.duration_weeks_max %>
+        <div class="about__card" style="margin-bottom: var(--space-xl);">
+          <h3 style="margin-bottom: var(--space-md);">Program Duration</h3>
+          <p style="color: var(--color-text-secondary);">
+            <i class="ph ph-calendar"></i>
+            <%= @project.duration_weeks_min || "2" %> – <%= @project.duration_weeks_max || "12" %> weeks
+          </p>
+        </div>
+      <% end %>
+
+      <div style="text-align: center; margin-top: var(--space-2xl);">
+        <%= link_to new_application_path(project_id: @project.id), class: "btn btn--accent btn--lg" do %>
+          <i class="ph ph-paper-plane-tilt"></i> Apply for This Project
+        <% end %>
+      </div>
+    </div>
+
+    <% if @related_projects.any? %>
+      <div style="margin-top: var(--space-4xl);">
+        <h2 style="text-align: center; margin-bottom: var(--space-xl);">Related Projects</h2>
+        <div class="programs__grid">
+          <% @related_projects.each do |project| %>
+            <div class="program-card">
+              <h3 class="program-card__title"><%= project.title %></h3>
+              <p class="program-card__desc"><%= project.summary %></p>
+              <%= link_to "Learn More", project_path(project.slug), class: "btn btn--primary btn--full" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

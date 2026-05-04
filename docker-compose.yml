@@ -1,0 +1,20 @@
+services:
+  db:
+    image: timescale/timescaledb:latest-pg16
+    container_name: newomp_db
+    environment:
+      POSTGRES_USER: newomp
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-devpassword}
+      POSTGRES_DB: newomp_development
+    ports:
+      - "5433:5432"
+    volumes:
+      - newomp_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U newomp -d newomp_development"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  newomp_pgdata:

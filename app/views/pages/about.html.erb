@@ -1,0 +1,51 @@
+<section class="about" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-info"></i> About Us</span>
+      <h1 class="section-header__title">About <span class="text-primary">OpenMind Projects</span></h1>
+      <p class="section-header__desc"><%= @settings["org_mission"] %></p>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--blue"><i class="ph ph-target"></i></div>
+        <h3>Our Mission</h3>
+        <p><%= @settings["org_mission"] %></p>
+      </div>
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--gold"><i class="ph ph-eye"></i></div>
+        <h3>Our Vision</h3>
+        <p><%= @settings["org_vision"] %></p>
+      </div>
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--teal"><i class="ph ph-calendar"></i></div>
+        <h3>Founded</h3>
+        <p>Established in <%= @settings["org_founded"] || "2001" %>. <%= @settings["org_registration"] %></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if @team_members.any? %>
+<section class="team">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-users"></i> Our Team</span>
+      <h2 class="section-header__title">The People <span class="text-primary">Behind</span> the Mission</h2>
+    </div>
+    <div class="team__grid">
+      <% colors = ["", "team__avatar--accent", "team__avatar--green", "team__avatar--teal"] %>
+      <% @team_members.each_with_index do |member, i| %>
+        <div class="team__card">
+          <div class="team__avatar <%= colors[i % 4] %>"><i class="ph ph-user-circle"></i></div>
+          <h4 class="team__name"><%= member.name %></h4>
+          <p class="team__role"><%= member.role %></p>
+          <% if member.bio.present? %>
+            <p class="team__bio"><%= member.bio %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>

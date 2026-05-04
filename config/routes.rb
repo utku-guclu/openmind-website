@@ -1,0 +1,45 @@
+Rails.application.routes.draw do
+  # Public pages
+  root "pages#home"
+  get "about", to: "pages#about"
+  get "volunteer", to: "pages#volunteer"
+  get "research-development", to: "pages#research"
+
+  # Projects
+  resources :projects, only: [:index, :show], param: :slug
+
+  # Destinations
+  resources :destinations, only: [:index, :show], param: :slug
+
+  # News/Blog — Post model exists; controller + views land in Phase 2.
+  # resources :posts, only: [:index, :show], param: :slug, path: "news"
+
+  # Volunteer applications
+  resources :applications, only: [:new, :create], path: "apply"
+
+  # Contact
+  resource :contact, only: [:new, :create]
+
+  # Donate redirect
+  get "donate", to: redirect("https://fundhub.openskills.dev/", status: 302)
+
+  # Health check
+  get "up" => "rails/health#show", as: :rails_health_check
+
+  # PWA
+  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
+  # Admin namespace (Phase 4)
+  # namespace :admin do
+  #   root "dashboard#index"
+  #   resources :projects
+  #   resources :destinations
+  #   resources :posts
+  #   resources :applications, only: [:index, :show, :update]
+  #   resources :team_members
+  #   resources :partners
+  #   resources :testimonials
+  #   resource :settings, only: [:edit, :update]
+  # end
+end

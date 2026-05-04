@@ -1,0 +1,22 @@
+class PagesController < ApplicationController
+  def home
+    @featured_projects = Project.active.ordered.limit(3)
+    @partners = Partner.active.ordered
+    @settings = SiteSetting.to_hash
+  end
+
+  def about
+    @team_members = TeamMember.active.ordered
+    @settings = SiteSetting.to_hash
+  end
+
+  def volunteer
+    @projects = Project.active.ordered
+    @destinations = Destination.active.ordered
+    @testimonials = Testimonial.featured.ordered
+  end
+
+  def research
+    @settings = SiteSetting.to_hash
+  end
+end

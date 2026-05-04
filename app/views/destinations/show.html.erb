@@ -1,0 +1,29 @@
+<section class="about" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-map-pin"></i> Destination</span>
+      <h1 class="section-header__title">Volunteer in <span class="text-primary"><%= @destination.name %></span></h1>
+      <p class="section-header__desc"><%= @destination.summary %></p>
+    </div>
+
+    <% if @destination.description.present? %>
+      <div class="about__card" style="max-width: 800px; margin: 0 auto var(--space-3xl);">
+        <p style="line-height: 1.8; color: var(--color-text-secondary);"><%= @destination.description %></p>
+      </div>
+    <% end %>
+
+    <% if @projects.any? %>
+      <h2 style="text-align: center; margin-bottom: var(--space-xl);">Projects in <%= @destination.name %></h2>
+      <div class="programs__grid">
+        <% @projects.each do |project| %>
+          <div class="program-card">
+            <div class="program-card__icon"><i class="ph ph-<%= project_icon(project.category) %>"></i></div>
+            <h3 class="program-card__title"><%= project.title %></h3>
+            <p class="program-card__desc"><%= project.summary %></p>
+            <%= link_to "Learn More", project_path(project.slug), class: "btn btn--primary btn--full" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

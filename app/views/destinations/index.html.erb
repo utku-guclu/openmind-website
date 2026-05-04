@@ -1,0 +1,28 @@
+<section class="programs" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-map-trifold"></i> Destinations</span>
+      <h1 class="section-header__title">Where We <span class="text-primary">Work</span></h1>
+      <p class="section-header__desc">Our programs span across Southeast Asia, bringing education and opportunity to communities that need it most.</p>
+    </div>
+    <div class="pillars__grid">
+      <% @destinations.each_with_index do |dest, i| %>
+        <% colors = ["pillar-card--education", "pillar-card--development", "pillar-card--research"] %>
+        <div class="pillar-card <%= colors[i % 3] %>">
+          <div class="pillar-card__header">
+            <div class="pillar-card__number"><%= dest.country_code %></div>
+            <div class="pillar-card__icon"><i class="ph ph-map-pin"></i></div>
+          </div>
+          <h3 class="pillar-card__title"><%= dest.name %></h3>
+          <p class="pillar-card__desc"><%= dest.summary %></p>
+          <p style="font-size: .85rem; opacity: .8; margin-bottom: var(--space-lg);">
+            <%= dest.projects.active.count %> active project<%= dest.projects.active.count == 1 ? "" : "s" %>
+          </p>
+          <%= link_to destination_path(dest.slug), class: "pillar-card__link" do %>
+            Explore <i class="ph ph-arrow-right"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

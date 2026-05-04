@@ -1,0 +1,45 @@
+<section class="about" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-atom"></i> R&D</span>
+      <h1 class="section-header__title">Research & <span class="text-primary">Development</span></h1>
+      <p class="section-header__desc">Exploring innovative approaches to education through AI, open-source technology, and community-driven solutions.</p>
+    </div>
+
+    <div class="about__grid" style="margin-bottom: var(--space-4xl);">
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--blue"><i class="ph ph-brain"></i></div>
+        <h3>AI-Powered Learning</h3>
+        <p>Developing adaptive learning tools that personalize education for every student, regardless of their starting point.</p>
+      </div>
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--gold"><i class="ph ph-open-ai-logo"></i></div>
+        <h3>Open-Source Curricula</h3>
+        <p>Creating free, accessible educational content that can be adapted by communities worldwide.</p>
+      </div>
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--teal"><i class="ph ph-code"></i></div>
+        <h3>EdTech Innovation</h3>
+        <p>Building technology solutions that make quality education accessible even in low-resource environments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-section__bg"></div>
+  <div class="container">
+    <div class="cta-section__content">
+      <h2 class="cta-section__title">Join Our R&D Team</h2>
+      <p class="cta-section__desc">We're looking for developers, researchers, and educators who want to use their skills for social impact.</p>
+      <div class="cta-section__actions">
+        <%= link_to new_application_path(type: "volunteer_online"), class: "btn btn--accent btn--lg" do %>
+          <i class="ph ph-code"></i> Contribute Remotely
+        <% end %>
+        <%= link_to new_contact_path, class: "btn btn--glass-dark btn--lg" do %>
+          <i class="ph ph-envelope"></i> Get in Touch
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

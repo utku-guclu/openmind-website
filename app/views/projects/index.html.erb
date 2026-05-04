@@ -1,0 +1,30 @@
+<section class="programs" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-briefcase"></i> Our Projects</span>
+      <h1 class="section-header__title">Volunteer <span class="text-primary">Projects</span></h1>
+      <p class="section-header__desc">Explore our programs across Southeast Asia and find the perfect volunteer opportunity for you.</p>
+    </div>
+
+    <div class="programs__grid">
+      <% @projects.each do |project| %>
+        <div class="program-card" id="project-<%= project.slug %>">
+          <% if project.category.present? %>
+            <div class="program-card__badge"><%= project.category.titleize %></div>
+          <% end %>
+          <div class="program-card__icon">
+            <i class="ph ph-<%= project_icon(project.category) %>"></i>
+          </div>
+          <h3 class="program-card__title"><%= project.title %></h3>
+          <p class="program-card__desc"><%= project.summary %></p>
+          <% if project.destination %>
+            <p style="font-size: .85rem; color: var(--color-text-secondary); margin-bottom: var(--space-md);">
+              <i class="ph ph-map-pin"></i> <%= project.destination.name %>
+            </p>
+          <% end %>
+          <%= link_to "Learn More", project_path(project.slug), class: "btn btn--primary btn--full" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,296 @@
+<!-- ========== HERO ========== -->
+<header class="hero" id="hero">
+  <div class="hero__bg">
+    <div class="hero__particles" id="hero-particles" data-controller="particles"></div>
+    <div class="hero__gradient"></div>
+  </div>
+  <div class="hero__content">
+    <div class="hero__badge">
+      <i class="ph ph-sparkle"></i>
+      <span>Since <%= @settings["org_founded"] || "2001" %></span>
+    </div>
+    <h1 class="hero__title">
+      <span class="hero__title-line"><%= @settings["hero_title"] || "Fight Poverty" %></span>
+      <span class="hero__title-line hero__title-line--accent">with Education</span>
+    </h1>
+    <p class="hero__subtitle">
+      <%= @settings["hero_subtitle"] || "Ethical and responsible volunteer work empowering impoverished youth and their parents in Southeast Asia." %>
+    </p>
+    <div class="hero__cta-group">
+      <%= link_to new_application_path, class: "btn btn--primary btn--lg", id: "hero-volunteer" do %>
+        <i class="ph ph-hand-heart"></i>
+        <span>Volunteer Today</span>
+      <% end %>
+      <%= link_to projects_path, class: "btn btn--glass btn--lg", id: "hero-explore" do %>
+        <i class="ph ph-compass"></i>
+        <span>Explore Programs</span>
+      <% end %>
+    </div>
+    <div class="hero__stats" data-controller="counter">
+      <div class="hero__stat">
+        <span class="hero__stat-value" data-counter-target="counter" data-count="<%= @settings["impact_years"] || 20 %>">0</span><span class="hero__stat-suffix">+</span>
+        <span class="hero__stat-label">Years Active</span>
+      </div>
+      <div class="hero__stat-divider"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-value" data-counter-target="counter" data-count="<%= @settings["impact_students"] || 5000 %>">0</span><span class="hero__stat-suffix">+</span>
+        <span class="hero__stat-label">Students Trained</span>
+      </div>
+      <div class="hero__stat-divider"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-value" data-counter-target="counter" data-count="<%= @settings["impact_countries"] || 3 %>">0</span>
+        <span class="hero__stat-label">Countries</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero__scroll-indicator" id="scroll-indicator">
+    <span>Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</header>
+
+<!-- ========== ABOUT ========== -->
+<section class="about" id="about" data-controller="reveal">
+  <div class="container">
+    <div class="section-header" data-reveal-target="item">
+      <span class="section-header__tag"><i class="ph ph-info"></i> About Us</span>
+      <h2 class="section-header__title">Empowering Communities Through <span class="text-primary">Education</span></h2>
+      <p class="section-header__desc">
+        <%= @settings["org_mission"] || "Our mission is to empower disadvantaged youth in rural Southeast Asia through active learning." %>
+      </p>
+    </div>
+    <div class="about__grid">
+      <div class="about__card" data-reveal-target="item" id="about-mission">
+        <div class="about__card-icon about__card-icon--blue">
+          <i class="ph ph-target"></i>
+        </div>
+        <h3>Our Mission</h3>
+        <p><%= @settings["org_mission"] || "Empower disadvantaged youth through active learning, bridging the digital and educational divide." %></p>
+      </div>
+      <div class="about__card" data-reveal-target="item" id="about-vision">
+        <div class="about__card-icon about__card-icon--gold">
+          <i class="ph ph-eye"></i>
+        </div>
+        <h3>Our Vision</h3>
+        <p><%= @settings["org_vision"] || "A future of equal opportunities where young people have hope and confidence to realize their dreams." %></p>
+      </div>
+      <div class="about__card" data-reveal-target="item" id="about-approach">
+        <div class="about__card-icon about__card-icon--teal">
+          <i class="ph ph-strategy"></i>
+        </div>
+        <h3>Our Approach</h3>
+        <p>We combine hands-on training, technology workshops, and cross-cultural volunteer mentorship to create lasting impact in communities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PILLARS ========== -->
+<section class="pillars" id="pillars" data-controller="reveal">
+  <div class="container">
+    <div class="section-header" data-reveal-target="item">
+      <span class="section-header__tag"><i class="ph ph-stack"></i> What We Do</span>
+      <h2 class="section-header__title">Three Pillars of <span class="text-primary">Impact</span></h2>
+      <p class="section-header__desc">Our programs are built on three interconnected pillars that together create a comprehensive ecosystem for education and empowerment.</p>
+    </div>
+    <div class="pillars__grid">
+      <div class="pillar-card pillar-card--education" data-reveal-target="item" id="pillar-education">
+        <div class="pillar-card__header">
+          <div class="pillar-card__number">01</div>
+          <div class="pillar-card__icon"><i class="ph ph-graduation-cap"></i></div>
+        </div>
+        <h3 class="pillar-card__title">Educational & Cross-Cultural Training</h3>
+        <p class="pillar-card__desc">Volunteers help train youth and adults in IT, programming, and English. Gain cross-cultural skills while contributing to educational projects.</p>
+        <ul class="pillar-card__list">
+          <li><i class="ph ph-check-circle"></i> Coding bootcamps & workshops</li>
+          <li><i class="ph ph-check-circle"></i> English language classes</li>
+          <li><i class="ph ph-check-circle"></i> Digital literacy programs</li>
+          <li><i class="ph ph-check-circle"></i> Cross-cultural exchange</li>
+        </ul>
+        <%= link_to projects_path(category: "education"), class: "pillar-card__link" do %>
+          Learn more <i class="ph ph-arrow-right"></i>
+        <% end %>
+      </div>
+
+      <div class="pillar-card pillar-card--development" data-reveal-target="item" id="pillar-development">
+        <div class="pillar-card__header">
+          <div class="pillar-card__number">02</div>
+          <div class="pillar-card__icon"><i class="ph ph-trend-up"></i></div>
+        </div>
+        <h3 class="pillar-card__title">Upskill & Development for Local People</h3>
+        <p class="pillar-card__desc">We address educational and employment gaps faced by disadvantaged youth. Providing English, technology, and job skills training with mentorships.</p>
+        <ul class="pillar-card__list">
+          <li><i class="ph ph-check-circle"></i> Job skills development</li>
+          <li><i class="ph ph-check-circle"></i> Technology upskilling</li>
+          <li><i class="ph ph-check-circle"></i> Mentorship programs</li>
+          <li><i class="ph ph-check-circle"></i> Career pathway guidance</li>
+        </ul>
+        <%= link_to projects_path(category: "teaching"), class: "pillar-card__link" do %>
+          Learn more <i class="ph ph-arrow-right"></i>
+        <% end %>
+      </div>
+
+      <div class="pillar-card pillar-card--research" data-reveal-target="item" id="pillar-research">
+        <div class="pillar-card__header">
+          <div class="pillar-card__number">03</div>
+          <div class="pillar-card__icon"><i class="ph ph-atom"></i></div>
+        </div>
+        <h3 class="pillar-card__title">Research & Development</h3>
+        <p class="pillar-card__desc">Empowering youth through technology, English, and job skills development. Building innovative solutions through education.</p>
+        <ul class="pillar-card__list">
+          <li><i class="ph ph-check-circle"></i> AI-powered learning tools</li>
+          <li><i class="ph ph-check-circle"></i> Open-source curricula</li>
+          <li><i class="ph ph-check-circle"></i> Educational technology R&D</li>
+          <li><i class="ph ph-check-circle"></i> Community tech solutions</li>
+        </ul>
+        <%= link_to research_development_path, class: "pillar-card__link" do %>
+          Learn more <i class="ph ph-arrow-right"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== IMPACT ========== -->
+<section class="impact" id="impact" data-controller="reveal counter">
+  <div class="impact__bg"></div>
+  <div class="container">
+    <div class="section-header section-header--light" data-reveal-target="item">
+      <span class="section-header__tag section-header__tag--light"><i class="ph ph-chart-line-up"></i> Our Impact</span>
+      <h2 class="section-header__title">Making a <span class="text-accent-light">Measurable</span> Difference</h2>
+    </div>
+    <div class="impact__grid">
+      <div class="impact__card" data-reveal-target="item" id="impact-volunteers">
+        <div class="impact__card-icon"><i class="ph ph-users-three"></i></div>
+        <div class="impact__card-value" data-counter-target="counter" data-count="<%= @settings["impact_volunteers"] || 850 %>">0</div>
+        <div class="impact__card-label">Volunteers Globally</div>
+      </div>
+      <div class="impact__card" data-reveal-target="item" id="impact-workshops">
+        <div class="impact__card-icon"><i class="ph ph-chalkboard-teacher"></i></div>
+        <div class="impact__card-value" data-counter-target="counter" data-count="<%= @settings["impact_workshops"] || 120 %>">0</div>
+        <div class="impact__card-label">Workshops Delivered</div>
+      </div>
+      <div class="impact__card" data-reveal-target="item" id="impact-communities">
+        <div class="impact__card-icon"><i class="ph ph-map-trifold"></i></div>
+        <div class="impact__card-value" data-counter-target="counter" data-count="<%= @settings["impact_communities"] || 15 %>">0</div>
+        <div class="impact__card-label">Communities Served</div>
+      </div>
+      <div class="impact__card" data-reveal-target="item" id="impact-students">
+        <div class="impact__card-icon"><i class="ph ph-student"></i></div>
+        <div class="impact__card-value" data-counter-target="counter" data-count="<%= @settings["impact_students"] || 5000 %>">0</div>
+        <div class="impact__card-label">Students Trained</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROGRAMS ========== -->
+<section class="programs" id="programs" data-controller="reveal">
+  <div class="container">
+    <div class="section-header" data-reveal-target="item">
+      <span class="section-header__tag"><i class="ph ph-rocket-launch"></i> Programs</span>
+      <h2 class="section-header__title">How You Can <span class="text-primary">Contribute</span></h2>
+      <p class="section-header__desc">Whether you're a developer, educator, or simply passionate about making a difference — there's a place for you.</p>
+    </div>
+    <div class="programs__grid">
+      <div class="program-card" data-reveal-target="item" id="program-onsite">
+        <div class="program-card__badge">Most Popular</div>
+        <div class="program-card__icon"><i class="ph ph-map-pin"></i></div>
+        <h3 class="program-card__title">Onsite Volunteering</h3>
+        <p class="program-card__desc">Join us in Thailand, Laos, or Nepal. Teach coding, English, and digital skills to local communities.</p>
+        <ul class="program-card__features">
+          <li><i class="ph ph-check"></i> 2-12 week programs</li>
+          <li><i class="ph ph-check"></i> Accommodation provided</li>
+          <li><i class="ph ph-check"></i> Cultural immersion</li>
+          <li><i class="ph ph-check"></i> Mentorship training</li>
+        </ul>
+        <%= link_to "Apply Now", new_application_path(type: "volunteer_onsite"), class: "btn btn--primary btn--full", id: "program-onsite-cta" %>
+      </div>
+      <div class="program-card program-card--featured" data-reveal-target="item" id="program-online">
+        <div class="program-card__badge program-card__badge--accent">New</div>
+        <div class="program-card__icon"><i class="ph ph-globe"></i></div>
+        <h3 class="program-card__title">Online Volunteering</h3>
+        <p class="program-card__desc">Contribute remotely. Build tools, develop curricula, or mentor students from anywhere in the world.</p>
+        <ul class="program-card__features">
+          <li><i class="ph ph-check"></i> Flexible schedule</li>
+          <li><i class="ph ph-check"></i> Open-source contributions</li>
+          <li><i class="ph ph-check"></i> Project work</li>
+          <li><i class="ph ph-check"></i> Global team collaboration</li>
+        </ul>
+        <%= link_to "Apply Now", new_application_path(type: "volunteer_online"), class: "btn btn--accent btn--full", id: "program-online-cta" %>
+      </div>
+      <div class="program-card" data-reveal-target="item" id="program-intern">
+        <div class="program-card__icon"><i class="ph ph-briefcase"></i></div>
+        <h3 class="program-card__title">Internship Program</h3>
+        <p class="program-card__desc">Gain real-world experience. Work on impactful projects while building your portfolio and global network.</p>
+        <ul class="program-card__features">
+          <li><i class="ph ph-check"></i> Onsite in SE Asia</li>
+          <li><i class="ph ph-check"></i> Certificate provided</li>
+          <li><i class="ph ph-check"></i> Project-based learning</li>
+          <li><i class="ph ph-check"></i> Reference letter</li>
+        </ul>
+        <%= link_to "Apply Now", new_application_path(type: "internship"), class: "btn btn--primary btn--full", id: "program-intern-cta" %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RECOGNIZED BY ========== -->
+<section class="recognized" id="recognized" data-controller="reveal">
+  <div class="container">
+    <p class="recognized__label">Recognized & Recommended by</p>
+    <div class="recognized__logos" data-reveal-target="item">
+      <% @partners.each do |partner| %>
+        <div class="recognized__logo">
+          <% if partner.url.present? %>
+            <a href="<%= partner.url %>" target="_blank" rel="noopener"><%= partner.name %></a>
+          <% else %>
+            <span><%= partner.name %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-section" id="get-involved" data-controller="reveal">
+  <div class="cta-section__bg"></div>
+  <div class="container">
+    <div class="cta-section__content">
+      <h2 class="cta-section__title" data-reveal-target="item">Ready to Make an Impact?</h2>
+      <p class="cta-section__desc" data-reveal-target="item">
+        Join a global community of volunteers, developers, and educators
+        working to bridge the digital divide. Your skills can change lives.
+      </p>
+      <div class="cta-section__steps" data-reveal-target="item">
+        <div class="cta-step">
+          <div class="cta-step__number">1</div>
+          <p>Choose your program — Volunteer, Intern, or Contribute online</p>
+        </div>
+        <div class="cta-step">
+          <div class="cta-step__number">2</div>
+          <p>Tell us about your skills and interests</p>
+        </div>
+        <div class="cta-step">
+          <div class="cta-step__number">3</div>
+          <p>We'll match you with the perfect project</p>
+        </div>
+        <div class="cta-step">
+          <div class="cta-step__number">4</div>
+          <p>Start creating impact!</p>
+        </div>
+      </div>
+      <div class="cta-section__actions" data-reveal-target="item">
+        <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "cta-apply" do %>
+          <i class="ph ph-paper-plane-tilt"></i>
+          <span>Apply Today</span>
+        <% end %>
+        <%= link_to donate_path, class: "btn btn--glass-dark btn--lg", id: "cta-donate" do %>
+          <i class="ph ph-heart"></i>
+          <span>Support with a Donation</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

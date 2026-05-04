@@ -1,0 +1,28 @@
+<nav class="navbar" id="navbar" data-controller="navbar">
+  <div class="navbar__inner">
+    <a href="<%= root_path %>" class="navbar__logo" id="nav-logo">
+      <div class="navbar__logo-icon">
+        <i class="ph ph-globe-hemisphere-west"></i>
+      </div>
+      <span class="navbar__logo-text">OpenMind <span class="text-accent">Projects</span></span>
+    </a>
+    <div class="navbar__links" id="nav-links">
+      <%= link_to "About", about_path, class: "navbar__link" %>
+      <%= link_to "Projects", projects_path, class: "navbar__link" %>
+      <%= link_to "Destinations", destinations_path, class: "navbar__link" %>
+      <%= link_to "Volunteer", volunteer_path, class: "navbar__link" %>
+      <%= link_to "R&D", research_development_path, class: "navbar__link" %>
+    </div>
+    <div class="navbar__actions">
+      <%= link_to new_application_path, class: "btn btn--accent", id: "nav-apply" do %>
+        Get Involved
+      <% end %>
+      <%= link_to "Donate", donate_path, class: "btn btn--outline", id: "nav-donate" %>
+      <button class="navbar__hamburger" id="nav-hamburger" aria-label="Toggle menu" data-action="click->navbar#toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>
