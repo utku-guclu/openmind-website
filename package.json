@@ -1,0 +1,16 @@
+{
+  "name": "openmind",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Top-level orchestrator for the openmind-api (Rails + PostgREST + Caddy + Postgres) and openmind-client (React/Vite) workspaces. Wraps the Makefile so npm users get the same targets.",
+  "scripts": {
+    "up": "make up",
+    "down": "make down",
+    "clean": "make clean",
+    "logs": "make logs",
+    "ps": "make ps",
+    "dev": "make dev",
+    "e2e": "make e2e",
+    "e2e:ci": "make e2e-ci"
+  }
+}
