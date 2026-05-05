@@ -27,6 +27,34 @@ bin/rails server          # http://localhost:3000
 
 The seed prints the admin credentials on first run (default: `admin@openmindprojects.org / changeme123`).
 
+## Admin
+
+A full role-based admin UI lives at **`/admin`** (ActiveAdmin + Devise + CanCanCan).
+
+```
+http://localhost:3000/admin/login
+  email:    admin@openmindprojects.org
+  password: changeme123
+```
+
+What you get out of the box:
+
+- **Login screen** (Devise) with "remember me" and password reset
+- **Dashboard** (`/admin`) — recent volunteer applications, recent contact messages, draft posts, content counts; superadmins also see an Admin Users panel
+- **CRUD screens** for all 10 models — Projects, Destinations, Posts, Partners, Team Members, Testimonials, Site Settings, Volunteer Applications, Contact Messages, Admin Users
+- **Filters / search / CSV export** on every index page (via Ransack)
+- **Role-based access** via CanCanCan:
+
+  | Role         | Can do                                                  |
+  | ------------ | -------------------------------------------------------- |
+  | `superadmin` | Everything, including create/delete other admin users    |
+  | `admin`      | Manage all content; read Admin Users but not modify them |
+  | `editor`     | Create + edit their own posts; read other content        |
+
+To create another admin user: log in as superadmin → Admin Users → New, set role and password.
+
+> **Phase 2:** Trix WYSIWYG editor on rich-text fields (currently Post body / Project description / Team Member bio are plain HTML textareas).
+
 ## Routes
 
 | Path | Controller#action |

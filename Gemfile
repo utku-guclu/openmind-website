@@ -47,6 +47,15 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
+# Admin UI: ActiveAdmin (login + CRUD + dashboard) + Devise (auth) +
+# CanCanCan (role-based authorization for superadmin/admin/editor).
+gem "activeadmin"
+gem "devise"
+gem "cancancan"
+# ActiveAdmin's CSS is SCSS; dartsass-rails compiles it without dragging in
+# Sprockets (which would conflict with Propshaft).
+gem "dartsass-rails"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

@@ -25,9 +25,9 @@ class AdminUserTest < ActiveSupport::TestCase
     assert_includes dup.errors[:email], "has already been taken"
   end
 
-  test "authenticates with bcrypt" do
+  test "authenticates with bcrypt via Devise" do
     u = AdminUser.create!(email: "auth@example.com", role: "admin", password: "s3cret123")
-    assert u.authenticate("s3cret123")
-    assert_not u.authenticate("wrong")
+    assert u.valid_password?("s3cret123")
+    assert_not u.valid_password?("wrong")
   end
 end
