@@ -1,45 +1,43 @@
 <footer class="footer" id="footer">
+  <!-- Gold divider line -->
+  <div class="footer__divider"></div>
+
   <div class="container">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <div class="footer__logo">
-          <div class="navbar__logo-icon">
-            <i class="ph ph-globe-hemisphere-west"></i>
-          </div>
-          <span class="navbar__logo-text">OpenMind <span class="text-accent">Projects</span></span>
-        </div>
-        <p class="footer__tagline">Empowering youth through education and technology across Southeast Asia.</p>
-        <p class="footer__legal">Registered Nonprofit: 2526/2 Thailand EST. 2001</p>
+    <!-- Logo centered -->
+    <div class="footer__logo-wrap">
+      <img src="/omp-logo.png" alt="OpenMind Projects" class="footer__logo-img" height="36">
+    </div>
+
+    <!-- Registration -->
+    <p class="footer__registration">
+      Registered Nonprofit: 2526/2 Thailand EST. 2001
+    </p>
+
+    <!-- Recognized by -->
+    <p class="footer__recognized-title">Recognized and Recommended by:</p>
+
+    <!-- Partner logos — two rows matching the live site -->
+    <div class="footer__partners-carousel">
+      <div class="footer__partners-row">
+        <img src="/partners/awards-row1.png" alt="GreatNonprofits Top Rated, GlobalGiving Vetted, UNESCO, CNN, Riot Games Social Impact Fund" loading="lazy">
       </div>
-      <div class="footer__links-group">
-        <h4>Programs</h4>
-        <%= link_to "Projects", projects_path %>
-        <%= link_to "Destinations", destinations_path %>
-        <%= link_to "Volunteering", volunteer_path %>
-        <%= link_to "News", news_index_path %>
-        <%= link_to "R&D", research_development_path %>
-      </div>
-      <div class="footer__links-group">
-        <h4>Organization</h4>
-        <%= link_to "About Us", about_path %>
-        <%= link_to "Donate", donate_path %>
-        <%= link_to "Apply", new_application_path %>
-        <%= link_to "Contact", new_contact_path %>
-      </div>
-      <div class="footer__links-group">
-        <h4>Connect</h4>
-        <a href="https://github.com/openmindprojects" target="_blank"><i class="ph ph-github-logo"></i> GitHub</a>
-        <a href="#"><i class="ph ph-linkedin-logo"></i> LinkedIn</a>
-        <a href="#"><i class="ph ph-youtube-logo"></i> YouTube</a>
-        <%= link_to new_contact_path do %><i class="ph ph-envelope"></i> Contact<% end %>
+      <div class="footer__partners-row">
+        <img src="/partners/awards-row2.png" alt="Rotary Club of San Jose, Bangkok Post, Lonely Planet, TechSoup, Digital Lift" loading="lazy">
       </div>
     </div>
+
+    <!-- Bottom links -->
     <div class="footer__bottom">
-      <p>&copy; <%= Date.current.year %> OpenMind Projects. All rights reserved.</p>
       <div class="footer__bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
+        <%= link_to "About Us", about_path %>
+        <%= link_to "Projects", projects_path %>
+        <%= link_to "Volunteering", volunteer_path %>
+        <%= link_to "R&D", research_development_path %>
+        <%= link_to "Apply", new_application_path %>
+        <%= link_to "Donate", donate_path %>
+        <%= link_to "Contact", new_contact_path %>
       </div>
+      <p class="footer__copy">&copy; <%= Date.current.year %> OpenMind Projects. All rights reserved.</p>
     </div>
   </div>
 </footer>
