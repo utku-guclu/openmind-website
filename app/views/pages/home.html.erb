@@ -49,6 +49,83 @@
   </div>
 </header>
 
+<!-- ========== APPLY / GET INVOLVED ========== -->
+<section class="apply" id="apply" data-controller="reveal">
+  <div class="apply__bg"></div>
+  <div class="container">
+    <div class="apply__grid">
+      <div class="apply__intro" data-reveal-target="item">
+        <span class="section-header__tag"><i class="ph ph-paper-plane-tilt"></i> Get Involved</span>
+        <h2 class="apply__title">Volunteer <span class="text-primary">Application</span></h2>
+        <p class="apply__desc">
+          Four simple steps from interest to impact. Watch how previous volunteers
+          got started — then apply to join the next cohort.
+        </p>
+        <ol class="apply__steps">
+          <li><span class="apply__step-num">1</span><span>Choose your program — onsite, online, or internship</span></li>
+          <li><span class="apply__step-num">2</span><span>Tell us about your skills and interests</span></li>
+          <li><span class="apply__step-num">3</span><span>We match you with the right project</span></li>
+          <li><span class="apply__step-num">4</span><span>Start making an impact</span></li>
+        </ol>
+        <div class="apply__actions">
+          <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "apply-cta" do %>
+            <i class="ph ph-hand-heart"></i>
+            <span>Volunteer Today</span>
+          <% end %>
+          <%= link_to destinations_path, class: "btn btn--ghost btn--lg" do %>
+            <i class="ph ph-map-pin"></i>
+            <span>See Locations</span>
+          <% end %>
+        </div>
+      </div>
+      <div class="apply__video-wrap" data-reveal-target="item">
+        <div class="apply__video">
+          <iframe
+            src="https://www.youtube.com/embed/Sjdc-G7Ah7A"
+            title="OpenMind Projects — Volunteer Story"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="apply__video-caption">
+          <i class="ph ph-play-circle"></i>
+          <span>Hear it from our volunteers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHONBURI HUB CALLOUT ========== -->
+<section class="hub-callout" id="hub-callout" data-controller="reveal">
+  <div class="container">
+    <div class="hub-callout__card" data-reveal-target="item">
+      <div class="hub-callout__badge">
+        <i class="ph ph-star-four"></i>
+        <span>Featured Opportunity</span>
+      </div>
+      <h2 class="hub-callout__title">
+        <span class="hub-callout__title-accent">Chonburi Hub</span> is Calling
+      </h2>
+      <p class="hub-callout__desc">
+        Get up to <strong>100,000 THB</strong> in funding per project for our
+        skill development camps in Thailand. Help shape the next generation of
+        problem-solvers.
+      </p>
+      <div class="hub-callout__actions">
+        <%= link_to new_application_path(type: "hub"), class: "btn btn--accent btn--lg" do %>
+          <i class="ph ph-arrow-right"></i><span>Apply for Funding</span>
+        <% end %>
+        <%= link_to research_development_path, class: "btn btn--ghost btn--lg" do %>
+          Learn more
+        <% end %>
+      </div>
+      <div class="hub-callout__decor"><i class="ph ph-graduation-cap"></i></div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== ABOUT ========== -->
 <section class="about" id="about" data-controller="reveal">
   <div class="container">
@@ -183,6 +260,50 @@
     </div>
   </div>
 </section>
+
+<!-- ========== GET INSPIRED ========== -->
+<% if @testimonials.present? %>
+<section class="inspired" id="inspired" data-controller="reveal">
+  <div class="container">
+    <div class="section-header" data-reveal-target="item">
+      <span class="section-header__tag"><i class="ph ph-film-reel"></i> Stories</span>
+      <h2 class="section-header__title">Get <span class="text-primary">Inspired</span></h2>
+      <p class="section-header__desc">Hear directly from volunteers, alumni, and the communities we serve.</p>
+    </div>
+    <div class="inspired__grid">
+      <% @testimonials.each do |t| %>
+        <% if t.video_url.present? %>
+          <article class="video-card" data-reveal-target="item" id="video-<%= t.id %>">
+            <div class="video-card__media">
+              <iframe
+                src="<%= t.video_url.gsub("watch?v=", "embed/") %>"
+                title="Story from <%= t.name %>"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="video-card__body">
+              <h3 class="video-card__title"><%= t.name %></h3>
+              <% if t.role.present? || t.country.present? %>
+                <p class="video-card__meta"><%= [t.role, t.country].compact.join(" · ") %></p>
+              <% end %>
+            </div>
+          </article>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="inspired__actions" data-reveal-target="item">
+      <%= link_to new_application_path, class: "btn btn--primary btn--lg" do %>
+        <i class="ph ph-hand-heart"></i><span>Volunteer</span>
+      <% end %>
+      <%= link_to donate_path, class: "btn btn--accent btn--lg" do %>
+        <i class="ph ph-heart"></i><span>Give to a Project</span>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>
 
 <!-- ========== PROGRAMS ========== -->
 <section class="programs" id="programs" data-controller="reveal">

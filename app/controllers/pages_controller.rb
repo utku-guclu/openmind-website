@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   def home
     @featured_projects = Project.active.ordered.limit(3)
     @partners = Partner.active.ordered
+    @testimonials = Testimonial.featured.ordered.limit(6)
     @settings = SiteSetting.to_hash
   end
 

@@ -51,11 +51,11 @@
     </div>
 
     <div class="navbar__actions">
-      <%= link_to new_application_path, class: "btn btn--outline", id: "nav-apply" do %>
-        Apply
+      <%= link_to donate_path, class: "navbar__action navbar__action--ghost", id: "nav-donate" do %>
+        <i class="ph ph-heart"></i><span>Donate</span>
       <% end %>
-      <%= link_to donate_path, class: "btn btn--outline", id: "nav-donate" do %>
-        Donate
+      <%= link_to new_application_path, class: "navbar__action navbar__action--primary", id: "nav-apply" do %>
+        <i class="ph ph-paper-plane-tilt"></i><span>Apply</span>
       <% end %>
       <button class="navbar__hamburger" id="nav-hamburger" aria-label="Toggle menu" data-action="click->navbar#toggle">
         <span></span>
