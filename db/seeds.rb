@@ -152,4 +152,37 @@ AdminUser.find_or_create_by!(email: "admin@openmindprojects.org") do |u|
 end
 puts "  Admin user: admin@openmindprojects.org / changeme123"
 
+puts "Seeding team members..."
+[
+  {
+    name: "Sven Mauleon",
+    role: "Co-Founder & Director",
+    department: "leadership",
+    bio: "From Sweden. Sven set out to find how to use IT to help poor kids and has been bridging knowledge and culture divides together with volunteers and local people since 2001.",
+    linkedin_url: nil,
+    position: 0
+  },
+  {
+    name: "Gaweechat Joompaula",
+    role: "Co-Founder",
+    department: "leadership",
+    bio: "From Thailand. Gaweechat grew up without electricity but got a chance to learn to use computers and believes in learning by doing.",
+    linkedin_url: nil,
+    position: 1
+  },
+  {
+    name: "Utku Güçlü",
+    role: "Technology Lead",
+    department: "technology",
+    bio: "Leading the technology and development efforts for OpenMind Projects' digital platforms.",
+    linkedin_url: nil,
+    position: 2
+  }
+].each do |attrs|
+  TeamMember.find_or_create_by!(name: attrs[:name]) do |t|
+    t.assign_attributes(attrs)
+  end
+end
+puts "  Created #{TeamMember.count} team members"
+
 puts "\nSeeding complete!"

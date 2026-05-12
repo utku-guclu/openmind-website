@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   # Destinations
   resources :destinations, only: [:index, :show], param: :slug
 
-  # News/Blog — Post model exists; controller + views land in Phase 2.
-  # resources :posts, only: [:index, :show], param: :slug, path: "news"
+  # News/Blog
+  resources :posts, only: [:index, :show], param: :slug, path: "news", as: "news"
 
   # Volunteer applications
   resources :applications, only: [:new, :create], path: "apply"
@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
   # Donate redirect
   get "donate", to: redirect("https://fundhub.openskills.dev/", status: 302)
+
+  # Analytics beacon
+  post "analytics/track", to: "analytics#track"
 
   # Health check
   get "up" => "rails/health#show", as: :rails_health_check

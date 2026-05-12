@@ -1,0 +1,50 @@
+<% content_for(:title) { "News & Stories — OpenMind Projects" } %>
+<% content_for(:description) { "Latest news, stories, and updates from OpenMind Projects' volunteer programs across Southeast Asia." } %>
+
+<section class="programs" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-newspaper"></i> News & Stories</span>
+      <h1 class="section-header__title">Latest <span class="text-primary">Updates</span></h1>
+      <p class="section-header__desc">Stories from the field, program updates, and insights from our volunteer community.</p>
+    </div>
+
+    <% if params[:category].present? %>
+      <div style="text-align: center; margin-bottom: var(--space-xl);">
+        <span style="font-size: .85rem; color: var(--color-text-secondary);">
+          Showing: <strong><%= params[:category].titleize %></strong>
+        </span>
+        <%= link_to "Clear filter", news_index_path, style: "margin-left: var(--space-sm); font-size: .85rem; color: var(--color-primary);" %>
+      </div>
+    <% end %>
+
+    <% if @posts.any? %>
+      <div class="programs__grid">
+        <% @posts.each do |post| %>
+          <div class="program-card" id="post-<%= post.slug %>">
+            <% if post.category.present? %>
+              <div class="program-card__badge"><%= post.category.titleize %></div>
+            <% end %>
+            <div class="program-card__icon">
+              <i class="ph ph-<%= post_icon(post.category) %>"></i>
+            </div>
+            <h3 class="program-card__title"><%= post.title %></h3>
+            <p class="program-card__desc"><%= post.summary %></p>
+            <p style="font-size: .8rem; color: var(--color-text-secondary); margin-bottom: var(--space-md);">
+              <i class="ph ph-calendar-blank"></i> <%= post.published_at&.strftime("%B %d, %Y") %>
+              <% if post.author %>
+                · <i class="ph ph-user"></i> <%= post.author.name %>
+              <% end %>
+            </p>
+            <%= link_to "Read More", news_path(post.slug), class: "btn btn--primary btn--full" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div style="text-align: center; padding: var(--space-4xl) 0;">
+        <i class="ph ph-newspaper" style="font-size: 3rem; color: var(--color-text-secondary); opacity: .5;"></i>
+        <p style="margin-top: var(--space-md); color: var(--color-text-secondary);">No posts published yet. Check back soon!</p>
+      </div>
+    <% end %>
+  </div>
+</section>

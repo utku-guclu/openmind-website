@@ -1,0 +1,25 @@
+<%# Reusable pillar card partial
+     Locals:
+       pillar:      (Object/Hash) with :number, :icon, :title, :desc, :items, :link_path
+       color_class: (String) e.g. "pillar-card--education"
+%>
+<div class="pillar-card <%= local_assigns[:color_class] %>" id="pillar-<%= pillar[:number] %>">
+  <div class="pillar-card__header">
+    <div class="pillar-card__number"><%= pillar[:number] %></div>
+    <div class="pillar-card__icon"><i class="ph ph-<%= pillar[:icon] %>"></i></div>
+  </div>
+  <h3 class="pillar-card__title"><%= pillar[:title] %></h3>
+  <p class="pillar-card__desc"><%= pillar[:desc] %></p>
+  <% if pillar[:items].present? %>
+    <ul class="pillar-card__list">
+      <% pillar[:items].each do |item| %>
+        <li><i class="ph ph-check-circle"></i> <%= item %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if pillar[:link_path].present? %>
+    <%= link_to pillar[:link_path], class: "pillar-card__link" do %>
+      Learn more <i class="ph ph-arrow-right"></i>
+    <% end %>
+  <% end %>
+</div>

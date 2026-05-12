@@ -13,7 +13,7 @@ class CreateAnalyticsHypertables < ActiveRecord::Migration[8.1]
         properties JSONB DEFAULT '{}'
       );
     SQL
-    execute "SELECT create_hypertable('analytics_events', 'recorded_at');"
+    execute "SELECT create_hypertable('analytics_events', 'recorded_at');" rescue ActiveRecord::StatementInvalid
     execute "CREATE INDEX idx_analytics_event_type ON analytics_events (event_type, recorded_at DESC);"
     execute "CREATE INDEX idx_analytics_session ON analytics_events (session_id, recorded_at DESC);"
 
@@ -28,7 +28,7 @@ class CreateAnalyticsHypertables < ActiveRecord::Migration[8.1]
         meta JSONB DEFAULT '{}'
       );
     SQL
-    execute "SELECT create_hypertable('impact_metrics', 'recorded_at');"
+    execute "SELECT create_hypertable('impact_metrics', 'recorded_at');" rescue ActiveRecord::StatementInvalid
     execute "CREATE INDEX idx_impact_metric_name ON impact_metrics (metric_name, recorded_at DESC);"
   end
 
