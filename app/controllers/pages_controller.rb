@@ -19,4 +19,9 @@ class PagesController < ApplicationController
   def research
     @settings = SiteSetting.to_hash
   end
+
+  def styleguide
+    # Only available in development
+    head :not_found and return unless Rails.env.development?
+  end
 end

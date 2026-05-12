@@ -209,7 +209,9 @@ class SmokeTest < ActionDispatch::IntegrationTest
   test "navbar renders on every page with all links" do
     get root_path
     assert_select "nav.navbar"
-    assert_select "a.navbar__link", minimum: 5
+    assert_select ".navbar__link", minimum: 2               # About Us, R&D
+    assert_select ".navbar__dropdown", minimum: 1            # Volunteering dropdown
+    assert_select ".navbar__dropdown-item", minimum: 3       # What we do, Where we work, Who volunteers
   end
 
   test "footer renders on every page" do

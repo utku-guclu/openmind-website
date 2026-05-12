@@ -1,24 +1,62 @@
 <nav class="navbar" id="navbar" data-controller="navbar">
   <div class="navbar__inner">
     <a href="<%= root_path %>" class="navbar__logo" id="nav-logo">
-      <div class="navbar__logo-icon">
-        <i class="ph ph-globe-hemisphere-west"></i>
-      </div>
-      <span class="navbar__logo-text">OpenMind <span class="text-accent">Projects</span></span>
+      <img src="/omp-logo.png" alt="OpenMind Projects" class="navbar__logo-img" height="40">
     </a>
+
     <div class="navbar__links" id="nav-links">
-      <%= link_to "About", about_path, class: "navbar__link" %>
-      <%= link_to "Projects", projects_path, class: "navbar__link" %>
-      <%= link_to "Destinations", destinations_path, class: "navbar__link" %>
-      <%= link_to "Volunteer", volunteer_path, class: "navbar__link" %>
-      <%= link_to "News", news_index_path, class: "navbar__link" %>
-      <%= link_to "R&D", research_development_path, class: "navbar__link" %>
-    </div>
-    <div class="navbar__actions">
-      <%= link_to new_application_path, class: "btn btn--accent", id: "nav-apply" do %>
-        Get Involved
+      <%= link_to about_path, class: "navbar__link" do %>
+        <i class="ph ph-identification-card"></i> About Us
       <% end %>
-      <%= link_to "Donate", donate_path, class: "btn btn--outline", id: "nav-donate" %>
+
+      <div class="navbar__dropdown" data-controller="dropdown">
+        <button class="navbar__link navbar__link--dropdown" data-action="click->dropdown#toggle" aria-expanded="false">
+          <i class="ph ph-hand-waving"></i> Volunteering <i class="ph ph-caret-down navbar__caret"></i>
+        </button>
+        <div class="navbar__dropdown-menu" data-dropdown-target="menu">
+          <div class="navbar__dropdown-inner">
+            <%= link_to projects_path, class: "navbar__dropdown-item" do %>
+              <div class="navbar__dropdown-item-icon"><i class="ph ph-briefcase"></i></div>
+              <div>
+                <strong>What we do</strong>
+                <p>Explore our volunteer projects across Southeast Asia</p>
+              </div>
+            <% end %>
+            <%= link_to destinations_path, class: "navbar__dropdown-item" do %>
+              <div class="navbar__dropdown-item-icon"><i class="ph ph-map-pin"></i></div>
+              <div>
+                <strong>Where we work</strong>
+                <p>Thailand, Nepal, and Laos</p>
+              </div>
+            <% end %>
+            <%= link_to volunteer_path, class: "navbar__dropdown-item" do %>
+              <div class="navbar__dropdown-item-icon"><i class="ph ph-users-three"></i></div>
+              <div>
+                <strong>Who volunteers</strong>
+                <p>Gap year, career break, families, retirees &amp; interns</p>
+              </div>
+            <% end %>
+          </div>
+          <div class="navbar__dropdown-footer">
+            <%= link_to new_application_path, class: "btn btn--accent btn--full" do %>
+              <i class="ph ph-paper-plane-tilt"></i> Apply Today!
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%= link_to research_development_path, class: "navbar__link" do %>
+        <i class="ph ph-globe-hemisphere-west"></i> R&D
+      <% end %>
+    </div>
+
+    <div class="navbar__actions">
+      <%= link_to new_application_path, class: "btn btn--outline", id: "nav-apply" do %>
+        Apply
+      <% end %>
+      <%= link_to donate_path, class: "btn btn--outline", id: "nav-donate" do %>
+        Donate
+      <% end %>
       <button class="navbar__hamburger" id="nav-hamburger" aria-label="Toggle menu" data-action="click->navbar#toggle">
         <span></span>
         <span></span>
