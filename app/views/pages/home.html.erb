@@ -364,20 +364,28 @@
   </div>
 </section>
 
+<!-- ========== MISSION BAND ========== -->
+<section class="mission-band" id="mission-band" data-controller="reveal">
+  <div class="mission-band__inner" data-reveal-target="item">
+    <p class="mission-band__text">
+      Volunteer with <strong>OpenmindProjects</strong>, a nonprofit grassroots organization
+      empowering impoverished youth and their parents in Southeast Asia.
+    </p>
+    <div class="mission-band__divider" aria-hidden="true"></div>
+  </div>
+</section>
+
 <!-- ========== RECOGNIZED BY ========== -->
 <section class="recognized" id="recognized" data-controller="reveal">
   <div class="container">
-    <p class="recognized__label">Recognized & Recommended by</p>
-    <div class="recognized__logos" data-reveal-target="item">
-      <% @partners.each do |partner| %>
-        <div class="recognized__logo">
-          <% if partner.url.present? %>
-            <a href="<%= partner.url %>" target="_blank" rel="noopener"><%= partner.name %></a>
-          <% else %>
-            <span><%= partner.name %></span>
-          <% end %>
-        </div>
-      <% end %>
+    <p class="recognized__label">Recognized &amp; Recommended by</p>
+    <div class="recognized__rows" data-reveal-target="item">
+      <div class="recognized__row">
+        <img src="/partners/awards-row1.png" alt="GreatNonprofits Top Rated, GlobalGiving Vetted, UNESCO, CNN, Riot Games Social Impact Fund" loading="lazy">
+      </div>
+      <div class="recognized__row">
+        <img src="/partners/awards-row2.png" alt="Rotary Club of San Jose, Bangkok Post, Lonely Planet, TechSoup, Digital Lift" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
