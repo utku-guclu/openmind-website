@@ -38,5 +38,13 @@ module Newomp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.action_dispatch.default_headers = {
+      "X-Frame-Options" => "DENY",
+      "X-Content-Type-Options" => "nosniff",
+      "Referrer-Policy" => "strict-origin-when-cross-origin",
+      "Permissions-Policy" => "geolocation=(), microphone=(), camera=(), payment=()",
+      "Cross-Origin-Opener-Policy" => "same-origin"
+    }
   end
 end

@@ -14,6 +14,11 @@
 
     <div style="max-width: 700px; margin: 0 auto;">
       <%= form_with model: @application, url: applications_path, class: "form" do |f| %>
+        <div style="position: absolute; left: -9999px;" aria-hidden="true">
+          <%= f.label :website, "Leave this blank" %>
+          <%= f.text_field :website, autocomplete: "off", tabindex: -1 %>
+        </div>
+
         <% if @application.errors.any? %>
           <div style="padding: var(--space-md); background: rgba(231,76,60,.1); border: 1px solid #e74c3c; border-radius: var(--radius-md); margin-bottom: var(--space-lg); color: #e74c3c;">
             <% @application.errors.full_messages.each do |msg| %>

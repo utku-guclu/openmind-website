@@ -57,6 +57,53 @@
   </div>
 </header>
 
+<!-- ========== HUB CTA + IMAGE CAROUSEL (two-column) ========== -->
+<section class="hub-row" data-controller="reveal">
+  <div class="container">
+    <div class="hub-row__grid">
+      <div class="hub-row__cta" data-reveal-target="item">
+        <h2 class="hub-row__cta-title">Chonburi Hub is Calling</h2>
+        <p class="hub-row__cta-desc">Get up to 100,000 THB in funding per project for skill development camps.</p>
+        <%= link_to "https://sendimpact.com/?ff_landing=31", target: "_blank", rel: "noopener noreferrer nofollow", class: "btn btn--accent btn--lg" do %>
+          Apply Now
+        <% end %>
+      </div>
+
+      <div class="hub-row__carousel" data-reveal-target="item">
+        <div class="carousel"
+             data-controller="carousel"
+             data-carousel-autoplay-value="5000"
+             data-carousel-loop-value="true"
+             data-carousel-per-view-value="1">
+          <div class="carousel__viewport">
+            <div class="carousel__track" data-carousel-target="track">
+              <% [
+                ["https://openmindprojects.org/wp-content/uploads/2026/04/2.jpg-1024x1024.jpeg", "Google Data center"],
+                ["https://openmindprojects.org/wp-content/uploads/2026/04/13-1024x1024.jpg", "Skill development camp"],
+                ["https://openmindprojects.org/wp-content/uploads/2026/04/1-1024x1024.jpg", "Active learning"],
+                ["https://openmindprojects.org/wp-content/uploads/2026/04/11-1024x1024.jpg", "Community workshop"],
+                ["https://openmindprojects.org/wp-content/uploads/2026/04/9-1024x1024.jpg", "Student training"],
+                ["https://openmindprojects.org/wp-content/uploads/2026/04/8-1024x1024.jpg", "Volunteer with students"]
+              ].each_with_index do |(src, alt), i| %>
+                <figure class="carousel__slide" data-carousel-target="slide" aria-label="<%= i + 1 %> of 6">
+                  <img src="<%= src %>" alt="<%= alt %>" loading="<%= i == 0 ? "eager" : "lazy" %>">
+                </figure>
+              <% end %>
+            </div>
+          </div>
+          <button type="button" class="carousel__btn carousel__btn--prev" data-action="click->carousel#prev" aria-label="Previous slide">
+            <i class="ph ph-caret-left"></i>
+          </button>
+          <button type="button" class="carousel__btn carousel__btn--next" data-action="click->carousel#next" aria-label="Next slide">
+            <i class="ph ph-caret-right"></i>
+          </button>
+          <div class="carousel__pagination" data-carousel-target="pagination" role="tablist"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== APPLY / GET INVOLVED ========== -->
 <section class="apply" id="apply" data-controller="reveal">
   <div class="apply__bg"></div>
@@ -105,172 +152,70 @@
   </div>
 </section>
 
-<!-- ========== CHONBURI HUB CALLOUT ========== -->
-<section class="hub-callout" id="hub-callout" data-controller="reveal">
-  <div class="container">
-    <div class="hub-callout__card" data-reveal-target="item">
-      <div class="hub-callout__badge">
-        <i class="ph ph-star-four"></i>
-        <span>Featured Opportunity</span>
-      </div>
-      <h2 class="hub-callout__title">
-        <span class="hub-callout__title-accent">Chonburi Hub</span> is Calling
-      </h2>
-      <p class="hub-callout__desc">
-        Get up to <strong>100,000 THB</strong> in funding per project for our
-        skill development camps in Thailand. Help shape the next generation of
-        problem-solvers.
-      </p>
-      <div class="hub-callout__actions">
-        <%= link_to new_application_path(type: "hub"), class: "btn btn--accent btn--lg" do %>
-          <i class="ph ph-arrow-right"></i><span>Apply for Funding</span>
-        <% end %>
-        <%= link_to research_development_path, class: "btn btn--ghost btn--lg" do %>
-          Learn more
-        <% end %>
-      </div>
-      <div class="hub-callout__decor"><i class="ph ph-graduation-cap"></i></div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== ABOUT ========== -->
-<section class="about" id="about" data-controller="reveal">
-  <div class="container">
-    <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-info"></i> About Us</span>
-      <h2 class="section-header__title">Empowering Communities Through <span class="text-primary">Education</span></h2>
-      <p class="section-header__desc">
-        <%= @settings["org_mission"] || "Our mission is to empower disadvantaged youth in rural Southeast Asia through active learning." %>
-      </p>
-    </div>
-    <div class="about__grid">
-      <div class="about__card" data-reveal-target="item" id="about-mission">
-        <div class="about__card-icon about__card-icon--blue">
-          <i class="ph ph-target"></i>
-        </div>
-        <h3>Our Mission</h3>
-        <p><%= @settings["org_mission"] || "Empower disadvantaged youth through active learning, bridging the digital and educational divide." %></p>
-      </div>
-      <div class="about__card" data-reveal-target="item" id="about-vision">
-        <div class="about__card-icon about__card-icon--gold">
-          <i class="ph ph-eye"></i>
-        </div>
-        <h3>Our Vision</h3>
-        <p><%= @settings["org_vision"] || "A future of equal opportunities where young people have hope and confidence to realize their dreams." %></p>
-      </div>
-      <div class="about__card" data-reveal-target="item" id="about-approach">
-        <div class="about__card-icon about__card-icon--teal">
-          <i class="ph ph-strategy"></i>
-        </div>
-        <h3>Our Approach</h3>
-        <p>We combine hands-on training, technology workshops, and cross-cultural volunteer mentorship to create lasting impact in communities.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ========== PILLARS ========== -->
 <section class="pillars" id="pillars" data-controller="reveal">
   <div class="container">
     <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-stack"></i> What We Do</span>
-      <h2 class="section-header__title">Three Pillars of <span class="text-primary">Impact</span></h2>
-      <p class="section-header__desc">Our programs are built on three interconnected pillars that together create a comprehensive ecosystem for education and empowerment.</p>
+      <h2 class="section-header__title pillars__heading">What We Focus On</h2>
     </div>
     <div class="pillars__grid">
       <div class="pillar-card pillar-card--education" data-reveal-target="item" id="pillar-education">
-        <div class="pillar-card__header">
-          <div class="pillar-card__number">01</div>
-          <div class="pillar-card__icon"><i class="ph ph-graduation-cap"></i></div>
-        </div>
-        <h3 class="pillar-card__title">Educational & Cross-Cultural Training</h3>
-        <p class="pillar-card__desc">Volunteers help train youth and adults in IT, programming, and English. Gain cross-cultural skills while contributing to educational projects.</p>
-        <ul class="pillar-card__list">
-          <li><i class="ph ph-check-circle"></i> Coding bootcamps & workshops</li>
-          <li><i class="ph ph-check-circle"></i> English language classes</li>
-          <li><i class="ph ph-check-circle"></i> Digital literacy programs</li>
-          <li><i class="ph ph-check-circle"></i> Cross-cultural exchange</li>
-        </ul>
-        <%= link_to projects_path(category: "education"), class: "pillar-card__link" do %>
-          Learn more <i class="ph ph-arrow-right"></i>
+        <%= link_to "/projects/computer-training", class: "pillar-card__tab" do %>
+          Learn more <i class="ph-fill ph-arrow-circle-down"></i>
         <% end %>
+        <figure class="pillar-card__image">
+          <img src="https://openmindprojects.org/wp-content/uploads/2024/08/openmindprojects-training-center-scaled-e1724850364350.jpg"
+               alt="OpenmindProjects volunteers and training center" loading="lazy">
+        </figure>
+        <h3 class="pillar-card__title">Educational &amp; Cross-cultural Training</h3>
+        <div class="pillar-card__body">
+          <p class="pillar-card__desc">Volunteers. Help and Train Youth and Adults</p>
+          <p class="pillar-card__desc">Volunteer with OpenmindProjects. Help disadvantaged youth in Southeast Asia. Gain cross-cultural skills and contribute to our educational projects. Create a positive impact for others while you also learn and grow!</p>
+        </div>
       </div>
 
       <div class="pillar-card pillar-card--development" data-reveal-target="item" id="pillar-development">
-        <div class="pillar-card__header">
-          <div class="pillar-card__number">02</div>
-          <div class="pillar-card__icon"><i class="ph ph-trend-up"></i></div>
-        </div>
-        <h3 class="pillar-card__title">Upskill & Development for Local People</h3>
-        <p class="pillar-card__desc">We address educational and employment gaps faced by disadvantaged youth. Providing English, technology, and job skills training with mentorships.</p>
-        <ul class="pillar-card__list">
-          <li><i class="ph ph-check-circle"></i> Job skills development</li>
-          <li><i class="ph ph-check-circle"></i> Technology upskilling</li>
-          <li><i class="ph ph-check-circle"></i> Mentorship programs</li>
-          <li><i class="ph ph-check-circle"></i> Career pathway guidance</li>
-        </ul>
-        <%= link_to projects_path(category: "teaching"), class: "pillar-card__link" do %>
-          Learn more <i class="ph ph-arrow-right"></i>
+        <%= link_to "/projects/computer-training", class: "pillar-card__tab" do %>
+          Learn more <i class="ph-fill ph-arrow-circle-down"></i>
         <% end %>
+        <figure class="pillar-card__image">
+          <img src="https://openmindprojects.org/wp-content/uploads/2024/08/volunteer-laos-ecotourism5.jpg"
+               alt="Volunteer in Laos — ecotourism and local development" loading="lazy">
+        </figure>
+        <h3 class="pillar-card__title">Upskill &amp; Development for Local People</h3>
+        <div class="pillar-card__body">
+          <p class="pillar-card__desc">We address educational and employment gaps faced by disadvantaged youth in Southeast Asia. We provide English, technology and job skills training, and mentorships. We want to contribute to a more equitable society where underprivileged young people also can succeed.</p>
+        </div>
       </div>
 
       <div class="pillar-card pillar-card--research" data-reveal-target="item" id="pillar-research">
-        <div class="pillar-card__header">
-          <div class="pillar-card__number">03</div>
-          <div class="pillar-card__icon"><i class="ph ph-atom"></i></div>
-        </div>
-        <h3 class="pillar-card__title">Research & Development</h3>
-        <p class="pillar-card__desc">Empowering youth through technology, English, and job skills development. Building innovative solutions through education.</p>
-        <ul class="pillar-card__list">
-          <li><i class="ph ph-check-circle"></i> AI-powered learning tools</li>
-          <li><i class="ph ph-check-circle"></i> Open-source curricula</li>
-          <li><i class="ph ph-check-circle"></i> Educational technology R&D</li>
-          <li><i class="ph ph-check-circle"></i> Community tech solutions</li>
-        </ul>
-        <%= link_to research_development_path, class: "pillar-card__link" do %>
-          Learn more <i class="ph ph-arrow-right"></i>
+        <%= link_to research_development_path, class: "pillar-card__tab" do %>
+          Learn more <i class="ph-fill ph-arrow-circle-down"></i>
         <% end %>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== IMPACT ========== -->
-<section class="impact" id="impact" data-controller="reveal counter">
-  <div class="impact__bg"></div>
-  <div class="container">
-    <div class="section-header section-header--light" data-reveal-target="item">
-      <span class="section-header__tag section-header__tag--light"><i class="ph ph-chart-line-up"></i> Our Impact</span>
-      <h2 class="section-header__title">Making a <span class="text-accent-light">Measurable</span> Difference</h2>
-    </div>
-    <div class="impact__grid">
-      <div class="impact__card" data-reveal-target="item" id="impact-volunteers">
-        <div class="impact__card-icon"><i class="ph ph-users-three"></i></div>
-        <div class="impact__card-value" data-counter-target="counter" data-count="<%= @settings["impact_volunteers"] || 850 %>">0</div>
-        <div class="impact__card-label">Volunteers Globally</div>
-      </div>
-      <div class="impact__card" data-reveal-target="item" id="impact-workshops">
-        <div class="impact__card-icon"><i class="ph ph-chalkboard-teacher"></i></div>
-        <div class="impact__card-value" data-counter-target="counter" data-count="<%= @settings["impact_workshops"] || 120 %>">0</div>
-        <div class="impact__card-label">Workshops Delivered</div>
-      </div>
-      <div class="impact__card" data-reveal-target="item" id="impact-communities">
-        <div class="impact__card-icon"><i class="ph ph-map-trifold"></i></div>
-        <div class="impact__card-value" data-counter-target="counter" data-count="<%= @settings["impact_communities"] || 15 %>">0</div>
-        <div class="impact__card-label">Communities Served</div>
-      </div>
-      <div class="impact__card" data-reveal-target="item" id="impact-students">
-        <div class="impact__card-icon"><i class="ph ph-student"></i></div>
-        <div class="impact__card-value" data-counter-target="counter" data-count="<%= @settings["impact_students"] || 5000 %>">0</div>
-        <div class="impact__card-label">Students Trained</div>
+        <figure class="pillar-card__image">
+          <img src="https://openmindprojects.org/wp-content/uploads/2024/08/disable-learn-codeing-scaled.jpg"
+               alt="Students learning coding — research and development" loading="lazy">
+        </figure>
+        <h3 class="pillar-card__title">Research &amp; Development</h3>
+        <div class="pillar-card__body">
+          <p class="pillar-card__desc">We are dedicated to empowering disadvantaged youth through technology, English and job skills development. We look for passionate people to help us and contribute expertise and support to our development work. We focus on creating innovative solutions to help local people through education and the access to it.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ========== GET INSPIRED ========== -->
-<% if @testimonials.present? %>
+<%
+  source_videos = [
+    { id: "64KzIobxLJI", title: "Francesco Palmieri Lupia — Teaching & Solar Energy", meta: "Volunteer · 4:38" },
+    { id: "qiEXsT7PuWs", title: "IT Volunteer — Teach Coding",                         meta: "Workshop · 1:47" },
+    { id: "3AfDLor6AM8", title: "A True Story — Alumni James",                         meta: "Alumni · 2:58" },
+    { id: "63j5vQzyHew", title: "Day 2 of the Active Learning Camp",                   meta: "Camp · 1:12" },
+    { id: "hZW4CRhD5wQ", title: "Couple Volunteer Abroad — Chris & Jacqueline",        meta: "Austria · 0:53" },
+    { id: "D24B0i06c_M", title: "Laura Colantonio — Crafting Stories",                 meta: "Italy · 2:26" }
+  ]
+%>
 <section class="inspired" id="inspired" data-controller="reveal">
   <div class="container">
     <div class="section-header" data-reveal-target="item">
@@ -279,87 +224,31 @@
       <p class="section-header__desc">Hear directly from volunteers, alumni, and the communities we serve.</p>
     </div>
     <div class="inspired__grid">
-      <% @testimonials.each do |t| %>
-        <% if t.video_url.present? %>
-          <article class="video-card" data-reveal-target="item" id="video-<%= t.id %>">
-            <div class="video-card__media">
-              <iframe
-                src="<%= t.video_url.gsub("watch?v=", "embed/") %>"
-                title="Story from <%= t.name %>"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                loading="lazy"
-              ></iframe>
-            </div>
-            <div class="video-card__body">
-              <h3 class="video-card__title"><%= t.name %></h3>
-              <% if t.role.present? || t.country.present? %>
-                <p class="video-card__meta"><%= [t.role, t.country].compact.join(" · ") %></p>
-              <% end %>
-            </div>
-          </article>
-        <% end %>
+      <% source_videos.each do |v| %>
+        <article class="video-card" data-reveal-target="item" id="video-<%= v[:id] %>">
+          <div class="video-card__media">
+            <iframe
+              src="https://www.youtube.com/embed/<%= v[:id] %>?rel=0"
+              title="<%= v[:title] %>"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="video-card__body">
+            <h3 class="video-card__title"><%= v[:title] %></h3>
+            <p class="video-card__meta"><%= v[:meta] %></p>
+          </div>
+        </article>
       <% end %>
     </div>
     <div class="inspired__actions" data-reveal-target="item">
       <%= link_to new_application_path, class: "btn btn--primary btn--lg" do %>
         <i class="ph ph-hand-heart"></i><span>Volunteer</span>
       <% end %>
-      <%= link_to donate_path, class: "btn btn--accent btn--lg" do %>
-        <i class="ph ph-heart"></i><span>Give to a Project</span>
+      <%= link_to "https://idream.openmindprojects.org/", target: "_blank", rel: "noopener noreferrer nofollow", class: "btn btn--accent btn--lg" do %>
+        <i class="ph ph-heart"></i><span>Give Today</span>
       <% end %>
-    </div>
-  </div>
-</section>
-<% end %>
-
-<!-- ========== PROGRAMS ========== -->
-<section class="programs" id="programs" data-controller="reveal">
-  <div class="container">
-    <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-rocket-launch"></i> Programs</span>
-      <h2 class="section-header__title">How You Can <span class="text-primary">Contribute</span></h2>
-      <p class="section-header__desc">Whether you're a developer, educator, or simply passionate about making a difference — there's a place for you.</p>
-    </div>
-    <div class="programs__grid">
-      <div class="program-card" data-reveal-target="item" id="program-onsite">
-        <div class="program-card__badge">Most Popular</div>
-        <div class="program-card__icon"><i class="ph ph-map-pin"></i></div>
-        <h3 class="program-card__title">Onsite Volunteering</h3>
-        <p class="program-card__desc">Join us in Thailand, Laos, or Nepal. Teach coding, English, and digital skills to local communities.</p>
-        <ul class="program-card__features">
-          <li><i class="ph ph-check"></i> 2-12 week programs</li>
-          <li><i class="ph ph-check"></i> Accommodation provided</li>
-          <li><i class="ph ph-check"></i> Cultural immersion</li>
-          <li><i class="ph ph-check"></i> Mentorship training</li>
-        </ul>
-        <%= link_to "Apply Now", new_application_path(type: "volunteer_onsite"), class: "btn btn--primary btn--full", id: "program-onsite-cta" %>
-      </div>
-      <div class="program-card program-card--featured" data-reveal-target="item" id="program-online">
-        <div class="program-card__badge program-card__badge--accent">New</div>
-        <div class="program-card__icon"><i class="ph ph-globe"></i></div>
-        <h3 class="program-card__title">Online Volunteering</h3>
-        <p class="program-card__desc">Contribute remotely. Build tools, develop curricula, or mentor students from anywhere in the world.</p>
-        <ul class="program-card__features">
-          <li><i class="ph ph-check"></i> Flexible schedule</li>
-          <li><i class="ph ph-check"></i> Open-source contributions</li>
-          <li><i class="ph ph-check"></i> Project work</li>
-          <li><i class="ph ph-check"></i> Global team collaboration</li>
-        </ul>
-        <%= link_to "Apply Now", new_application_path(type: "volunteer_online"), class: "btn btn--accent btn--full", id: "program-online-cta" %>
-      </div>
-      <div class="program-card" data-reveal-target="item" id="program-intern">
-        <div class="program-card__icon"><i class="ph ph-briefcase"></i></div>
-        <h3 class="program-card__title">Internship Program</h3>
-        <p class="program-card__desc">Gain real-world experience. Work on impactful projects while building your portfolio and global network.</p>
-        <ul class="program-card__features">
-          <li><i class="ph ph-check"></i> Onsite in SE Asia</li>
-          <li><i class="ph ph-check"></i> Certificate provided</li>
-          <li><i class="ph ph-check"></i> Project-based learning</li>
-          <li><i class="ph ph-check"></i> Reference letter</li>
-        </ul>
-        <%= link_to "Apply Now", new_application_path(type: "internship"), class: "btn btn--primary btn--full", id: "program-intern-cta" %>
-      </div>
     </div>
   </div>
 </section>
