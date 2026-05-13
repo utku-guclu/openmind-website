@@ -1,0 +1,28 @@
+<%# Hub Row organism — CTA card (left) + image carousel (right). %>
+<section class="hub-row" data-controller="reveal">
+  <div class="container">
+    <div class="hub-row__grid">
+      <div class="hub-row__cta" data-reveal-target="item">
+        <h2 class="hub-row__cta-title">Chonburi Hub is Calling</h2>
+        <p class="hub-row__cta-desc">Get up to 100,000 THB in funding per project for skill development camps.</p>
+        <%= link_to "https://sendimpact.com/?ff_landing=31", target: "_blank", rel: "noopener noreferrer nofollow", class: "btn btn--accent btn--lg" do %>
+          Apply Now
+        <% end %>
+      </div>
+
+      <div class="hub-row__carousel" data-reveal-target="item">
+        <%= render "molecules/carousel",
+                   slides: [
+                     ["https://openmindprojects.org/wp-content/uploads/2026/04/2.jpg-1024x1024.jpeg", "Google Data center"],
+                     ["https://openmindprojects.org/wp-content/uploads/2026/04/13-1024x1024.jpg",     "Skill development camp"],
+                     ["https://openmindprojects.org/wp-content/uploads/2026/04/1-1024x1024.jpg",      "Active learning"],
+                     ["https://openmindprojects.org/wp-content/uploads/2026/04/11-1024x1024.jpg",     "Community workshop"],
+                     ["https://openmindprojects.org/wp-content/uploads/2026/04/9-1024x1024.jpg",      "Student training"],
+                     ["https://openmindprojects.org/wp-content/uploads/2026/04/8-1024x1024.jpg",      "Volunteer with students"]
+                   ],
+                   autoplay: 5000,
+                   per_view: 1 %>
+      </div>
+    </div>
+  </div>
+</section>

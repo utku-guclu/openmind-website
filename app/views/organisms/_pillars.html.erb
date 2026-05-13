@@ -1,0 +1,39 @@
+<%# Pillars organism — "What We Focus On" with 3 pillar cards. %>
+<section class="pillars" id="pillars" data-controller="reveal">
+  <div class="container">
+    <div class="section-header" data-reveal-target="item">
+      <h2 class="section-header__title pillars__heading">What We Focus On</h2>
+    </div>
+    <div class="pillars__grid">
+      <%= render "molecules/pillar_card",
+                 variant:   "education",
+                 dom_id:    "pillar-education",
+                 image_src: "https://openmindprojects.org/wp-content/uploads/2024/08/openmindprojects-training-center-scaled-e1724850364350.jpg",
+                 image_alt: "OpenmindProjects volunteers and training center",
+                 title:     "Educational &amp; Cross-cultural Training",
+                 body:      [
+                   "Volunteers. Help and Train Youth and Adults",
+                   "Volunteer with OpenmindProjects. Help disadvantaged youth in Southeast Asia. Gain cross-cultural skills and contribute to our educational projects. Create a positive impact for others while you also learn and grow!"
+                 ],
+                 link_url:  "/projects/computer-training" %>
+
+      <%= render "molecules/pillar_card",
+                 variant:   "development",
+                 dom_id:    "pillar-development",
+                 image_src: "https://openmindprojects.org/wp-content/uploads/2024/08/volunteer-laos-ecotourism5.jpg",
+                 image_alt: "Volunteer in Laos — ecotourism and local development",
+                 title:     "Upskill &amp; Development for Local People",
+                 body:      "We address educational and employment gaps faced by disadvantaged youth in Southeast Asia. We provide English, technology and job skills training, and mentorships. We want to contribute to a more equitable society where underprivileged young people also can succeed.",
+                 link_url:  "/projects/computer-training" %>
+
+      <%= render "molecules/pillar_card",
+                 variant:   "research",
+                 dom_id:    "pillar-research",
+                 image_src: "https://openmindprojects.org/wp-content/uploads/2024/08/disable-learn-codeing-scaled.jpg",
+                 image_alt: "Students learning coding — research and development",
+                 title:     "Research &amp; Development",
+                 body:      "We are dedicated to empowering disadvantaged youth through technology, English and job skills development. We look for passionate people to help us and contribute expertise and support to our development work. We focus on creating innovative solutions to help local people through education and the access to it.",
+                 link_url:  research_development_path %>
+    </div>
+  </div>
+</section>

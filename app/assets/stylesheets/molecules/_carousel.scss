@@ -1,0 +1,80 @@
+/* Molecule — Carousel (slides + nav buttons + pagination) */
+.carousel {
+  position: relative;
+  width: 100%;
+}
+.carousel__viewport {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.carousel__track {
+  display: flex;
+  transition: transform 500ms var(--ease-out);
+  will-change: transform;
+}
+.carousel__slide {
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-section);
+}
+.carousel__slide img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+.carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-text-primary);
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  z-index: 2;
+  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.carousel__btn:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.05);
+}
+.carousel__btn--prev { left: 12px; }
+.carousel__btn--next { right: 12px; }
+.carousel__pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+.carousel__pagination button {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.carousel__pagination button.is-active {
+  background: var(--color-primary);
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .carousel__btn { width: 36px; height: 36px; font-size: 1rem; }
+}

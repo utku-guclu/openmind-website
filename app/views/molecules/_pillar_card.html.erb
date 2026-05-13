@@ -1,0 +1,31 @@
+<%# Pillar Card molecule — Learn-more pill at top, image, title, body paragraphs.
+    Locals:
+      variant:    "education" | "development" | "research" — required
+      image_src:  string — required
+      image_alt:  string — required
+      title:      string — required
+      body:       string or Array<string> — required
+      link_url:   string — required
+      dom_id:     string — optional %>
+<% variant   = local_assigns.fetch(:variant) %>
+<% image_src = local_assigns.fetch(:image_src) %>
+<% image_alt = local_assigns.fetch(:image_alt) %>
+<% title     = local_assigns.fetch(:title) %>
+<% body      = Array(local_assigns.fetch(:body)) %>
+<% link_url  = local_assigns.fetch(:link_url) %>
+<% dom_id    = local_assigns[:dom_id] %>
+
+<div class="pillar-card pillar-card--<%= variant %>" data-reveal-target="item" id="<%= dom_id %>">
+  <%= link_to link_url, class: "pillar-card__tab" do %>
+    Learn more <i class="ph-fill ph-arrow-circle-down"></i>
+  <% end %>
+  <figure class="pillar-card__image">
+    <img src="<%= image_src %>" alt="<%= image_alt %>" loading="lazy">
+  </figure>
+  <h3 class="pillar-card__title"><%= title.html_safe %></h3>
+  <div class="pillar-card__body">
+    <% body.each do |paragraph| %>
+      <p class="pillar-card__desc"><%= paragraph %></p>
+    <% end %>
+  </div>
+</div>
