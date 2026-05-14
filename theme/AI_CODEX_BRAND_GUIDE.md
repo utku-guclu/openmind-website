@@ -113,13 +113,13 @@ The OpenMind Projects website uses a warm, trustworthy, and education-focused de
 
 | Role | Font Family | Fallback | Source |
 |---|---|---|---|
-| **Headings** | Inter | -apple-system, sans-serif | Google Fonts |
-| **Body** | Inter | Segoe UI, Helvetica Neue, sans-serif | Google Fonts |
+| **Headings** | Outfit | -apple-system, sans-serif | Google Fonts |
+| **Body** | Outfit | Segoe UI, Helvetica Neue, sans-serif | Google Fonts |
 | **Code / Tech** | Roboto Mono | Consolas, monospace | Google Fonts |
 | **Decorative / Hero** | Playfair Display | Georgia, serif | Google Fonts |
 
 > [!NOTE]
-> OpenMind Projects uses italic serif text for the hero headline ("Fight Poverty with Education"). The `Playfair Display` font captures this editorial feel for hero sections while keeping `Inter` as the workhorse.
+> OpenMind Projects uses italic serif text for the hero headline ("Fight Poverty with Education"). The `Playfair Display` font captures this editorial feel for hero sections while keeping `Outfit` as the workhorse.
 
 ### 3.2 Type Scale
 
@@ -139,10 +139,10 @@ The OpenMind Projects website uses a warm, trustworthy, and education-focused de
 
 ```css
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Roboto+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Roboto+Mono:wght@400;500&display=swap');
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--color-text-primary);
@@ -150,7 +150,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Outfit', sans-serif;
   margin-bottom: 0.5em;
 }
 
@@ -519,7 +519,7 @@ Derived from the OpenMind Projects mission, adapted for AI Codex:
 <!-- Add to <head> -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 ```
 
 ```css
@@ -544,7 +544,7 @@ Derived from the OpenMind Projects mission, adapted for AI Codex:
   --color-dark: #1A1A2E;
   
   /* Typography */
-  --font-primary: 'Inter', -apple-system, sans-serif;
+  --font-primary: 'Outfit', -apple-system, sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
   --font-mono: 'Roboto Mono', Consolas, monospace;
   

@@ -63,7 +63,7 @@ class SmokeTest < ActionDispatch::IntegrationTest
     end
 
     {
-      "hero_title" => "Fight Poverty with Education",
+      "hero_title" => "Fight Poverty",
       "hero_subtitle" => "Ethical volunteer work in Southeast Asia.",
       "org_mission" => "Empower disadvantaged youth.",
       "org_vision" => "Equal opportunities for all.",

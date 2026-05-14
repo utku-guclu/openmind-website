@@ -14,33 +14,41 @@
           <i class="ph ph-hand-waving"></i> Volunteering <i class="ph ph-caret-down navbar__caret"></i>
         </button>
         <div class="navbar__dropdown-menu" data-dropdown-target="menu">
-          <div class="navbar__dropdown-inner">
-            <%= link_to projects_path, class: "navbar__dropdown-item" do %>
-              <div class="navbar__dropdown-item-icon"><i class="ph ph-briefcase"></i></div>
-              <div>
-                <strong>What we do</strong>
-                <p>Explore our volunteer projects across Southeast Asia</p>
+          <div class="mega-menu-grid">
+            <%= link_to projects_path, class: "mega-menu-card" do %>
+              <div class="mega-menu-card__img-wrap">
+                <img src="https://openmindprojects.org/wp-content/uploads/elementor/thumbs/Laos-village-girl2-scaled-qt9scq8octyj90f59fb9o18hh405wftukfkfe0eu88.jpg" alt="What we do">
+              </div>
+              <div class="mega-menu-card__content">
+                <div class="mega-menu-card__title">What we do</div>
+                <p class="mega-menu-card__desc">We empower students, especially those with disabilities, with 21st-century skills for brighter futures through IT, programming, and English training, along with mentorship and coaching.</p>
               </div>
             <% end %>
-            <%= link_to destinations_path, class: "navbar__dropdown-item" do %>
-              <div class="navbar__dropdown-item-icon"><i class="ph ph-map-pin"></i></div>
-              <div>
-                <strong>Where we work</strong>
-                <p>Thailand, Nepal, and Laos</p>
+
+            <%= link_to destinations_path, class: "mega-menu-card" do %>
+              <div class="mega-menu-card__img-wrap">
+                <img src="https://openmindprojects.org/wp-content/uploads/elementor/thumbs/272390-P5JPWJ-124-qy09yi905f0vdcqadwtc3490q2yfuj0fk3g42m1jt4.jpg" alt="Where we work">
+              </div>
+              <div class="mega-menu-card__content">
+                <div class="mega-menu-card__title">Where we work</div>
+                <p class="mega-menu-card__desc">Make a lasting impact in Southeast Asia. Volunteer opportunities await in Thailand, Laos, and Nepal, where you can contribute to local communities and immerse yourself in unique cultures.</p>
               </div>
             <% end %>
-            <%= link_to volunteer_path, class: "navbar__dropdown-item" do %>
-              <div class="navbar__dropdown-item-icon"><i class="ph ph-users-three"></i></div>
-              <div>
-                <strong>Who volunteers</strong>
-                <p>Gap year, career break, families, retirees &amp; interns</p>
+
+            <%= link_to volunteer_path, class: "mega-menu-card" do %>
+              <div class="mega-menu-card__img-wrap">
+                <img src="https://openmindprojects.org/wp-content/uploads/elementor/thumbs/Babyboomer-volunteers-qtno6ssksufnh5tplixw56run0kv9y44xs8g92tdsg.jpg" alt="Who volunteers">
+              </div>
+              <div class="mega-menu-card__content">
+                <div class="mega-menu-card__title">Who volunteers</div>
+                <p class="mega-menu-card__desc">We welcome you to volunteer whether you're on a career break, holiday, gap year, family traveling, retired, or seeking an interesting internship. We offer meaningful volunteering for you in Southeast Asia.</p>
               </div>
             <% end %>
           </div>
-          <div class="navbar__dropdown-footer">
-            <%= link_to new_application_path, class: "btn btn--accent btn--full" do %>
-              <i class="ph ph-paper-plane-tilt"></i> Apply Today!
-            <% end %>
+
+          <div class="mega-menu-footer">
+            <h3 class="mega-menu-footer__title">GET INVOLVED</h3>
+            <%= link_to "Apply Today!", new_application_path, class: "btn btn--primary" %>
           </div>
         </div>
       </div>

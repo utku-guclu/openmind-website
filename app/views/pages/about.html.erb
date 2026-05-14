@@ -1,207 +1,148 @@
 <% content_for(:title) { "About Us — OpenMind Projects" } %>
-<% content_for(:description) { "OpenmindProjects is a nonprofit charity founded in Thailand in 2002, empowering disadvantaged youth through education and technology." } %>
 
-<!-- ========== OUR STORY ========== -->
-<section class="about" style="padding-top: 120px;" data-controller="reveal">
-  <div class="container">
-    <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-info"></i> About Us</span>
-      <h1 class="section-header__title">About <span class="text-primary">OpenMind Projects</span></h1>
-      <p class="section-header__desc"><%= @settings["org_mission"] %></p>
-    </div>
+<% hero_media = site_setting("about_hero_image") %>
+<% hero_title = site_setting("about_hero_title")&.value || "Join us on a Mission to Fight Poverty" %>
+<% hero_subtitle = site_setting("about_hero_subtitle")&.value || "Volunteer with OpenmindProjects, a nonprofit grassroots organization empowering impoverished youth and their parents in Southeast Asia." %>
 
-    <div style="max-width: 800px; margin: 0 auto;" data-reveal-target="item">
-      <div class="about__card" style="margin-bottom: var(--space-xl);">
-        <p style="line-height: 1.8; color: var(--color-text-secondary); font-size: 1.05rem;">
-          <%= @settings["org_story"] || "OpenmindProjects is a nonprofit charity founded in Thailand, empowering disadvantaged youth through education and technology across Southeast Asia." %>
-        </p>
-      </div>
-    </div>
+<section class="about-hero" style="position: relative; padding: 180px 0 120px; color: #fff; text-align: center; overflow: hidden; background-color: var(--color-dark);">
+  <% if hero_media&.file&.attached? %>
+    <%= image_tag url_for(hero_media.file), style: "position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 1;" %>
+  <% else %>
+    <!-- Default background image as requested -->
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 30, 55, 0.6) 0%, rgba(12, 30, 55, 0.8) 100%); z-index: 1;"></div>
+    <img src="https://openmindprojects.org/wp-content/uploads/2024/11/family-volunteer-makenew-friends14.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; z-index: 0;" alt="Family Volunteer Make New Friends" />
+  <% end %>
+  <div class="container" style="position: relative; z-index: 2; max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 3.5rem; margin-bottom: var(--space-md); font-weight: 700; color: #fff; line-height: 1.2;"><%= hero_title %></h2>
+    <h3 style="font-size: 1.25rem; font-weight: 400; margin: 0 auto var(--space-lg); line-height: 1.6; color: #f0f0f0;"><%= hero_subtitle %></h3>
+    <%= link_to "Get Involved", new_application_path, class: "btn btn--primary btn--lg", style: "margin-top: var(--space-md);" %>
   </div>
 </section>
 
-<!-- ========== VISION & MISSION ========== -->
-<section class="about" data-controller="reveal">
-  <div class="container">
-    <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-compass"></i> Our Purpose</span>
-      <h2 class="section-header__title">Vision & <span class="text-primary">Mission</span></h2>
-    </div>
-
-    <div class="about__grid">
-      <div class="about__card" data-reveal-target="item" id="about-mission">
-        <div class="about__card-icon about__card-icon--blue"><i class="ph ph-target"></i></div>
-        <h3>Our Mission</h3>
-        <p><%= @settings["org_mission"] %></p>
-      </div>
-      <div class="about__card" data-reveal-target="item" id="about-vision">
-        <div class="about__card-icon about__card-icon--gold"><i class="ph ph-eye"></i></div>
-        <h3>Our Vision</h3>
-        <p><%= @settings["org_vision"] %></p>
-      </div>
-      <div class="about__card" data-reveal-target="item" id="about-founded">
-        <div class="about__card-icon about__card-icon--teal"><i class="ph ph-calendar"></i></div>
-        <h3>Founded</h3>
-        <p>Established in <%= @settings["org_founded"] || "2001" %>. <%= @settings["org_registration"] %></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== EAST MEETS WEST — FOUNDERS ========== -->
-<section class="about" data-controller="reveal">
-  <div class="container">
-    <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-handshake"></i> East Meets West</span>
-      <h2 class="section-header__title">Our <span class="text-primary">Founders</span></h2>
-      <p class="section-header__desc"><%= @settings["org_founders_intro"] %></p>
-    </div>
-
-    <div class="about__grid" style="max-width: 700px; margin: 0 auto;">
-      <% founders = @team_members.select { |m| m.department == "leadership" } %>
-      <% founders.each_with_index do |founder, i| %>
-        <div class="about__card" data-reveal-target="item" id="founder-<%= founder.name.parameterize %>" style="text-align: center;">
-          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(<%= i == 0 ? '--gradient-primary' : '--gradient-accent' %>); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); font-size: 2rem; color: #fff;">
-            <i class="ph ph-user-circle"></i>
-          </div>
-          <h3><%= founder.name %></h3>
-          <p style="color: var(--color-primary); font-weight: 600; font-size: .9rem; margin-bottom: var(--space-sm);"><%= founder.role %></p>
-          <p style="color: var(--color-text-secondary); line-height: 1.7;"><%= founder.bio %></p>
-          <% if founder.linkedin_url.present? %>
-            <a href="<%= founder.linkedin_url %>" target="_blank" rel="noopener" style="color: var(--color-primary); font-size: .9rem;">
-              <i class="ph ph-linkedin-logo"></i> LinkedIn
-            </a>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-
-    <% if @settings["org_press_url"].present? %>
-      <div style="text-align: center; margin-top: var(--space-xl);" data-reveal-target="item">
-        <a href="<%= @settings["org_press_url"] %>" target="_blank" rel="noopener" class="btn btn--glass btn--lg">
-          <i class="ph ph-newspaper"></i>
-          <span><%= @settings["org_press_title"] || "Read about our founders in the press" %></span>
-        </a>
-      </div>
+<% intro_text = site_setting("about_intro_text") %>
+<section class="about-intro" style="padding: var(--space-xl) 0; text-align: left; background: #fff;">
+  <div class="container" style="max-width: 1000px;">
+    <% if intro_text&.content&.present? %>
+      <div style="font-size: 1.15rem; line-height: 1.8; color: var(--color-text);"><%= intro_text.content %></div>
+    <% else %>
+      <p style="font-size: 1.15rem; line-height: 1.8; color: var(--color-text); margin: 0;">
+        OpenmindProjects is a nonprofit charity founded in Thailand in 2002. We started with IT learning for the underprivileged in 2001 and have since expanded to help disadvantaged people throughout Southeast Asia. We are supported by a local and global network of staff, trainees, volunteers, friends, and alumni. Our focus is on helping poor children through schools, camps, and a Training Center. <span style="color: var(--color-text);">The Covid pandemic disrupted our work, leading us to launch online training programs. We are now working to restart our pre-Covid projects and welcome volunteers. As a nonprofit charity, we rely on donations to continue our mission.</span>
+      </p>
     <% end %>
   </div>
 </section>
 
-<!-- ========== TIMELINE ========== -->
-<section class="about" data-controller="reveal">
-  <div class="container">
-    <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-clock-countdown"></i> Our Journey</span>
-      <h2 class="section-header__title">Key <span class="text-primary">Milestones</span></h2>
+<section class="about-dna-founders" style="padding: var(--space-xl) 0; background: var(--color-surface);">
+  <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-xl);">
+    
+    <!-- Left Column: DNA -->
+    <div class="about-dna" style="background: transparent;">
+      <h1 style="color: var(--color-text); margin-bottom: var(--space-lg); font-size: 2.5rem; font-weight: 700;">Our DNA</h1>
+      
+      <h1 style="font-size: 2rem; margin-bottom: var(--space-sm); font-weight: 700;">Vision</h1>
+      <% vision = site_setting("about_vision") %>
+      <blockquote style="font-size: 1.15rem; font-style: italic; color: var(--color-text-secondary); margin: 0 0 var(--space-xl) 0; padding-left: var(--space-md); border-left: 4px solid var(--color-primary);">
+        <% if vision&.content&.present? %>
+          <%= vision.content %>
+        <% else %>
+          <p>We envision a future of equal opportunities in which young people, no matter their backgrounds, have hope, inspiration and confidence to realize their dreams.</p>
+        <% end %>
+      </blockquote>
+
+      <h1 style="font-size: 2rem; margin-bottom: var(--space-sm); font-weight: 700;">Mission</h1>
+      <% mission = site_setting("about_mission") %>
+      <blockquote style="font-size: 1.15rem; font-style: italic; color: var(--color-text-secondary); margin: 0; padding-left: var(--space-md); border-left: 4px solid var(--color-primary);">
+        <% if mission&.content&.present? %>
+          <%= mission.content %>
+        <% else %>
+          <p>Our mission is to empower disadvantaged youth in rural Southeast Asia through active learning, bridging the digital and educational divide, and fostering confidence for a brighter future.</p>
+        <% end %>
+      </blockquote>
     </div>
 
-    <div style="max-width: 600px; margin: 0 auto;">
-      <% [
-        { year: "2001", icon: "rocket-launch", title: "IT for the Underprivileged", desc: "Started with IT learning programs for underprivileged communities." },
-        { year: "2002", icon: "buildings", title: "Official Registration", desc: "Registered as a nonprofit charity in Thailand (2526/2)." },
-        { year: "2005", icon: "graduation-cap", title: "Education Expansion", desc: "Expanded to English teaching and cross-cultural volunteer programs." },
-        { year: "2010", icon: "globe-hemisphere-west", title: "Southeast Asia Growth", desc: "Programs extended to Laos and Nepal, impacting more communities." },
-        { year: "2020", icon: "wifi-high", title: "Covid Adaptation", desc: "Launched online training programs to continue our mission during the pandemic." },
-        { year: "2024", icon: "arrow-counter-clockwise", title: "Post-Covid Restart", desc: "Restarting pre-Covid projects and welcoming volunteers back on-site." }
-      ].each_with_index do |milestone, i| %>
-        <div class="about__card" data-reveal-target="item" style="display: flex; gap: var(--space-lg); align-items: flex-start; margin-bottom: var(--space-md);">
-          <div style="min-width: 60px; text-align: center;">
-            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; margin: 0 auto var(--space-xs);">
-              <i class="ph ph-<%= milestone[:icon] %>"></i>
-            </div>
-            <span style="font-family: var(--font-mono); font-size: .8rem; color: var(--color-primary); font-weight: 600;"><%= milestone[:year] %></span>
+    <!-- Right Column: Founders -->
+    <div class="about-founders" style="background: transparent;">
+      <h1 style="color: var(--color-text); margin-bottom: var(--space-lg); font-size: 2.5rem; font-weight: 700;">Founders</h1>
+      
+      <% founders_media = site_setting("about_founders_video") %>
+      <div style="aspect-ratio: 16/9; background: #000; border-radius: var(--radius-md); overflow: hidden; margin-bottom: var(--space-md); position: relative; box-shadow: var(--shadow-sm);">
+        <% if founders_media&.file&.attached? %>
+          <% if founders_media.file.content_type.start_with?('video/') %>
+            <%= video_tag url_for(founders_media.file), controls: true, style: "width: 100%; height: 100%; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag url_for(founders_media.file), style: "width: 100%; height: 100%; object-fit: cover;" %>
+          <% end %>
+        <% else %>
+          <!-- Fallback Vimeo Video or Image -->
+          <img src="https://openmindprojects.org/wp-content/uploads/2024/09/1openmindprojecs-co-founder-1024x1024-1.jpg" alt="Photo of OpenmindProjects Co-founders Gaweechat Joompaula and Sven Mauleon." style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.9); font-size: 4rem; cursor: pointer;">
+            <i class="ph-fill ph-play-circle"></i>
           </div>
-          <div>
-            <h4 style="margin-bottom: var(--space-xs);"><%= milestone[:title] %></h4>
-            <p style="color: var(--color-text-secondary); font-size: .95rem; line-height: 1.6;"><%= milestone[:desc] %></p>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</section>
+        <% end %>
+      </div>
 
-<!-- ========== VIDEO ========== -->
-<% if @settings["org_video_url"].present? %>
-<section class="about" data-controller="reveal">
-  <div class="container">
-    <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-play-circle"></i> Stories</span>
-      <h2 class="section-header__title"><span class="text-primary">Impact</span> Stories</h2>
-      <p class="section-header__desc"><%= @settings["org_video_title"] %></p>
-    </div>
-
-    <div style="max-width: 800px; margin: 0 auto;" data-reveal-target="item">
-      <div style="border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 16/9; box-shadow: var(--shadow-card);">
-        <iframe
-          src="<%= @settings["org_video_url"] %>"
-          style="width: 100%; height: 100%; border: 0;"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-          title="<%= @settings["org_video_title"] %>"
-        ></iframe>
+      <h2 style="font-size: 1.8rem; margin-bottom: var(--space-sm); font-weight: 700;">Sven Mauleon and Gaweechat Joompaula</h2>
+      <% founders_text = site_setting("about_founders_text") %>
+      <div style="font-size: 1rem; line-height: 1.7; color: var(--color-text);">
+        <% if founders_text&.content&.present? %>
+          <%= founders_text.content %>
+        <% else %>
+          <p><strong>East meets West!</strong></p>
+          <p>About our founders Sven Mauleon and Gaweechat Joompaula. Sven, from Sweden, and Gaweechat, from Thailand, once set out to find how to use IT to help poor kids.</p>
+          <p>We wanted to bridge knowledge divides using IT and the internet and included English learning. Since then we have bridged knowledge and culture divides together with volunteers and local people, old and young.</p>
+          <p><span style="color: var(--color-primary);"><strong><a style="color: var(--color-primary);" href="http://www.gp.se/livsstil/svens-mission-%C3%A4r-att-st%C3%B6tta-barn-i-thailand-1.9537303" target="_blank" rel="noopener noreferrer nofollow">Read About: Sven in leading Swedish newspaper, Goteborgs Posten</a>.</strong></span></p>
+          <p><strong>Gaweechat:</strong> ‘I grew up without electricity but got a chance to learn to use computers and believe in learning by doing.’</p>
+        <% end %>
       </div>
     </div>
   </div>
 </section>
-<% end %>
 
 <!-- ========== TEAM ========== -->
-<% if @team_members.any? %>
-<section class="team" data-controller="reveal">
+<section class="about-team" style="padding: var(--space-xl) 0; background: #fff;">
   <div class="container">
-    <div class="section-header" data-reveal-target="item">
-      <span class="section-header__tag"><i class="ph ph-users"></i> Our Team</span>
-      <h2 class="section-header__title">The People <span class="text-primary">Behind</span> the Mission</h2>
-    </div>
-    <div class="team__grid">
-      <% colors = ["", "team__avatar--accent", "team__avatar--green", "team__avatar--teal"] %>
-      <% @team_members.each_with_index do |member, i| %>
-        <div class="team__card" data-reveal-target="item">
-          <div class="team__avatar <%= colors[i % 4] %>"><i class="ph ph-user-circle"></i></div>
-          <h4 class="team__name"><%= member.name %></h4>
-          <p class="team__role"><%= member.role %></p>
-          <% if member.department.present? %>
-            <p style="font-size: .75rem; color: var(--color-primary); text-transform: uppercase; letter-spacing: .5px; margin-bottom: var(--space-sm);"><%= member.department %></p>
-          <% end %>
-          <% if member.bio.present? %>
-            <p class="team__bio"><%= member.bio %></p>
-          <% end %>
-          <div style="display: flex; gap: var(--space-sm); justify-content: center; margin-top: var(--space-sm);">
-            <% if member.linkedin_url.present? %>
-              <a href="<%= member.linkedin_url %>" target="_blank" rel="noopener" style="color: var(--color-text-secondary); font-size: 1.2rem;"><i class="ph ph-linkedin-logo"></i></a>
+    <h1 style="color: var(--color-text); margin-bottom: var(--space-xl); font-size: 3rem; font-weight: 700;">Our Team</h1>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-xl);">
+      <% @team_members.each do |member| %>
+        <div class="team-card" style="display: flex; flex-direction: column; gap: var(--space-md);">
+          <!-- Image -->
+          <div style="width: 100%; aspect-ratio: 1/1; overflow: hidden;">
+            <% if member.image.attached? %>
+              <%= image_tag url_for(member.image), style: "width: 100%; height: 100%; object-fit: cover;" %>
+            <% else %>
+              <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: #ccc; background: var(--color-surface);">
+                <i class="ph ph-user-circle"></i>
+              </div>
             <% end %>
-            <% if member.github_url.present? %>
-              <a href="<%= member.github_url %>" target="_blank" rel="noopener" style="color: var(--color-text-secondary); font-size: 1.2rem;"><i class="ph ph-github-logo"></i></a>
+          </div>
+          
+          <!-- Name & Role -->
+          <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <i class="ph ph-address-card" style="font-size: 1.5rem; color: var(--color-text); margin-top: 4px;"></i>
+            <div>
+              <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 2px;"><%= member.name %></h3>
+              <p style="font-size: .95rem; color: var(--color-text-secondary); margin: 0;"><%= member.role %></p>
+            </div>
+          </div>
+
+          <!-- Tabs: Country & Bio (Static approach for simplicity, combining both) -->
+          <div style="border: 1px solid var(--color-border); padding: var(--space-md); border-radius: 4px; background: #fafafa; display: flex; flex-direction: column; gap: var(--space-sm); flex-grow: 1;">
+            <% if member.country.present? %>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="ph ph-globe-asia" style="font-size: 1.25rem; color: var(--color-text);"></i>
+                <span style="font-size: .95rem; font-weight: 600;"><%= member.country %></span>
+              </div>
+            <% end %>
+            
+            <% if member.bio.present? %>
+              <div style="font-size: .95rem; color: var(--color-text-secondary); line-height: 1.6;">
+                <%= simple_format member.bio %>
+              </div>
             <% end %>
           </div>
         </div>
       <% end %>
-    </div>
-  </div>
-</section>
-<% end %>
-
-<!-- ========== CTA ========== -->
-<section class="cta-section" data-controller="reveal">
-  <div class="cta-section__bg"></div>
-  <div class="container">
-    <div class="cta-section__content">
-      <h2 class="cta-section__title" data-reveal-target="item">Join Our Mission</h2>
-      <p class="cta-section__desc" data-reveal-target="item">
-        Whether you want to volunteer, donate, or spread the word — every contribution helps us empower more young people across Southeast Asia.
-      </p>
-      <div class="cta-section__actions" data-reveal-target="item">
-        <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "about-cta-apply" do %>
-          <i class="ph ph-paper-plane-tilt"></i>
-          <span>Apply to Volunteer</span>
-        <% end %>
-        <%= link_to donate_path, class: "btn btn--glass-dark btn--lg", id: "about-cta-donate" do %>
-          <i class="ph ph-heart"></i>
-          <span>Support with a Donation</span>
-        <% end %>
-      </div>
     </div>
   </div>
 </section>

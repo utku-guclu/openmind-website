@@ -5,12 +5,21 @@
 <header class="hero" id="hero">
   <div class="hero__bg">
     <div class="hero__video-bg">
-      <iframe
-        src="https://www.youtube.com/embed/Sjdc-G7Ah7A?autoplay=1&mute=1&loop=1&playlist=Sjdc-G7Ah7A&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
-        title="OpenMind Projects Background"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        frameborder="0"
-        allowfullscreen></iframe>
+      <% hero_media = site_setting("hero_media") %>
+      <% if hero_media&.file&.attached? %>
+        <% if hero_media.file.content_type.start_with?('video/') %>
+          <%= video_tag url_for(hero_media.file), autoplay: true, muted: true, loop: true, playsinline: true, style: "width: 100vw; height: 56.25vw; min-height: 100%; min-width: 177.78vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover; border: 0;" %>
+        <% else %>
+          <%= image_tag url_for(hero_media.file), style: "width: 100vw; height: 56.25vw; min-height: 100%; min-width: 177.78vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover; border: 0;" %>
+        <% end %>
+      <% else %>
+        <iframe
+          src="https://www.youtube.com/embed/Sjdc-G7Ah7A?autoplay=1&mute=1&loop=1&playlist=Sjdc-G7Ah7A&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1"
+          title="OpenMind Projects Background"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          frameborder="0"
+          allowfullscreen></iframe>
+      <% end %>
     </div>
     <div class="hero__overlay"></div>
   </div>

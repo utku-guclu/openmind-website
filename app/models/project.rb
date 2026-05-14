@@ -1,4 +1,7 @@
 class Project < ApplicationRecord
+  has_one_attached :image
+  has_rich_text :content
+
   belongs_to :destination, optional: true
   has_many :testimonials, dependent: :nullify
   has_many :volunteer_applications, dependent: :nullify

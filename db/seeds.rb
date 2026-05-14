@@ -125,7 +125,7 @@ puts "  Created #{Partner.count} partners"
 
 puts "Seeding site settings..."
 {
-  "hero_title" => "Fight Poverty with Education",
+  "hero_title" => "Fight Poverty",
   "hero_subtitle" => "Ethical and responsible volunteer work empowering impoverished youth and their parents in Southeast Asia.",
   "impact_years" => "20",
   "impact_students" => "5000",
@@ -153,35 +153,59 @@ end
 puts "  Admin user: admin@openmindprojects.org / changeme123"
 
 puts "Seeding team members..."
+TeamMember.destroy_all
 [
   {
-    name: "Sven Mauleon",
-    role: "Co-Founder & Director",
-    department: "leadership",
-    bio: "From Sweden. Sven set out to find how to use IT to help poor kids and has been bridging knowledge and culture divides together with volunteers and local people since 2001.",
-    linkedin_url: nil,
+    name: "Ranjan Bhandari",
+    role: "coordinator, volunteer contact",
+    country: "Nepal",
+    department: "coordination",
     position: 0
   },
   {
-    name: "Gaweechat Joompaula",
-    role: "Co-Founder",
-    department: "leadership",
-    bio: "From Thailand. Gaweechat grew up without electricity but got a chance to learn to use computers and believes in learning by doing.",
-    linkedin_url: nil,
+    name: "Gorawan Joompaula",
+    role: "coordinator, volunteer contact , Administrative officer",
+    country: "Thailand",
+    department: "coordination",
     position: 1
   },
   {
-    name: "Utku Güçlü",
-    role: "Technology Lead",
-    department: "technology",
-    bio: "Leading the technology and development efforts for OpenMind Projects' digital platforms.",
-    linkedin_url: nil,
+    name: "Pharinya (James) Auttho",
+    role: "coordinator, volunteer contact",
+    country: "Thailand, Laos",
+    department: "coordination",
     position: 2
+  },
+  {
+    name: "Dr. Thitichaya Boonsom (Mui)",
+    role: "Projects Director, volunteer contact",
+    country: "Thailand",
+    department: "leadership",
+    position: 3
+  },
+  {
+    name: "Dr. Jim Brown",
+    role: "advisory, volunteer contact",
+    country: "United States of America",
+    department: "advisory",
+    position: 4
+  },
+  {
+    name: "Sven Mauleon",
+    role: "advisory, Co-funder",
+    country: "Thailand, Sweden",
+    department: "leadership",
+    position: 5
+  },
+  {
+    name: "Gaweechat Joompaula",
+    role: "Co-funder, Projects Director",
+    country: "Thailand, Cambodia, Nepal, Laos",
+    department: "leadership",
+    position: 6
   }
 ].each do |attrs|
-  TeamMember.find_or_create_by!(name: attrs[:name]) do |t|
-    t.assign_attributes(attrs)
-  end
+  TeamMember.create!(attrs)
 end
 puts "  Created #{TeamMember.count} team members"
 

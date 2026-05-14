@@ -1,4 +1,5 @@
 class TeamMember < ApplicationRecord
+  has_one_attached :image
   validates :name, presence: true
   validates :role, presence: true
 

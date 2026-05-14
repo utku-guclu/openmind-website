@@ -1,6 +1,9 @@
 class SiteSetting < ApplicationRecord
   validates :key, presence: true, uniqueness: true
 
+  has_one_attached :file
+  has_rich_text :content
+
   def self.get(key, default = nil)
     setting = find_by(key: key)
     setting ? setting.typed_value : default
