@@ -1,0 +1,18 @@
+/* Atom — Location pin (inline) */
+.location-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--color-bg-tint);
+  color: var(--color-primary);
+  font-size: .82rem;
+  font-weight: 600;
+}
+.location-pin i { font-size: .9rem; color: var(--color-accent); }
+.location-pin__region {
+  font-size: .72rem;
+  opacity: .75;
+  font-weight: 500;
+}

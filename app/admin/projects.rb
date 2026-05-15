@@ -1,6 +1,6 @@
 ActiveAdmin.register Project do
   permit_params :title, :slug, :summary, :description, :status, :category,
-                :destination_id, :location_name, :duration_weeks_min,
+                :destination_id, :location_id, :location_name, :duration_weeks_min,
                 :duration_weeks_max, :cover_image_alt, :position, :image, :content
 
   controller do
@@ -9,7 +9,7 @@ ActiveAdmin.register Project do
 
   filter :title
   filter :status, as: :select, collection: %w[draft active archived]
-  filter :category
+  filter :category, as: :select, collection: Project::CATEGORIES.map { |k, m| [m[:label], k] }
   filter :destination
 
   index do
@@ -53,11 +53,13 @@ ActiveAdmin.register Project do
       f.input :slug, hint: "Auto-generated from the title if left blank"
       f.input :summary
       f.input :description, as: :text, input_html: { rows: 4 }
-      f.input :content, as: :quill_editor
+      f.input :content, as: :text, input_html: { rows: 10 },
+              hint: "HTML allowed. WYSIWYG editor is deferred — paste HTML or write plain text."
       f.input :status, as: :select, collection: %w[draft active archived]
-      f.input :category
+      f.input :category, as: :select, collection: Project::CATEGORIES.map { |k, m| [m[:label], k] }, include_blank: true
       f.input :destination
-      f.input :location_name
+      f.input :location, as: :select, collection: Location.includes(:destination).active.order("destinations.position ASC, locations.position ASC").map { |l| ["#{l.destination.name} — #{l.name}", l.id] }, include_blank: "—"
+      f.input :location_name, label: "Location name (legacy free-text)"
       f.input :duration_weeks_min
       f.input :duration_weeks_max
       f.input :position

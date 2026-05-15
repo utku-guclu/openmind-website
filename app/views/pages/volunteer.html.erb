@@ -1,30 +1,16 @@
+<% content_for(:title) { "Who Volunteers — OpenMind Projects" } %>
+
 <section class="about" style="padding-top: 120px;">
   <div class="container">
     <div class="section-header">
-      <span class="section-header__tag"><i class="ph ph-hand-heart"></i> Volunteer</span>
+      <span class="section-header__tag"><i class="ph ph-hand-heart"></i> Volunteer with us</span>
       <h1 class="section-header__title">Who <span class="text-primary">Volunteers</span></h1>
-      <p class="section-header__desc">Whether you're a gap year student, a professional looking to give back, or a retiree — volunteering with OpenMind Projects is an enriching experience for everyone.</p>
-    </div>
-
-    <div class="about__grid" style="margin-bottom: var(--space-4xl);">
-      <div class="about__card">
-        <div class="about__card-icon about__card-icon--blue"><i class="ph ph-student"></i></div>
-        <h3>Students & Gap Year</h3>
-        <p>Gain real-world experience, build your CV, and make a genuine difference before or after your studies.</p>
-      </div>
-      <div class="about__card">
-        <div class="about__card-icon about__card-icon--gold"><i class="ph ph-briefcase"></i></div>
-        <h3>Working Professionals</h3>
-        <p>Share your expertise in tech, education, or management. Take a career break with purpose.</p>
-      </div>
-      <div class="about__card">
-        <div class="about__card-icon about__card-icon--teal"><i class="ph ph-globe"></i></div>
-        <h3>Digital Nomads & Retirees</h3>
-        <p>Contribute remotely or onsite. Flexible programs that fit your lifestyle and schedule.</p>
-      </div>
+      <p class="section-header__desc">Whether you're on a career break, holiday, gap year, traveling with family, retired, or seeking an interesting internship — there's a meaningful volunteering path for you in Southeast Asia.</p>
     </div>
   </div>
 </section>
+
+<%= render "organisms/audience_grid", audiences: @audiences %>
 
 <% if @destinations.any? %>
 <section class="pillars">
@@ -53,17 +39,4 @@
 </section>
 <% end %>
 
-<section class="cta-section">
-  <div class="cta-section__bg"></div>
-  <div class="container">
-    <div class="cta-section__content">
-      <h2 class="cta-section__title">Ready to Volunteer?</h2>
-      <p class="cta-section__desc">Apply today and start your journey of making a real impact in communities across Southeast Asia.</p>
-      <div class="cta-section__actions">
-        <%= link_to new_application_path, class: "btn btn--accent btn--lg" do %>
-          <i class="ph ph-paper-plane-tilt"></i> Apply Now
-        <% end %>
-      </div>
-    </div>
-  </div>
-</section>
+<%= render "organisms/cta_section" %>

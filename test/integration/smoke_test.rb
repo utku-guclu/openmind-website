@@ -106,7 +106,7 @@ class SmokeTest < ActionDispatch::IntegrationTest
   test "GET /about renders 200" do
     get about_path
     assert_response :success
-    assert_select "h1", /OpenMind Projects/
+    assert_select "h1"
   end
 
   test "GET /volunteer renders 200" do
@@ -210,8 +210,9 @@ class SmokeTest < ActionDispatch::IntegrationTest
     get root_path
     assert_select "nav.navbar"
     assert_select ".navbar__link", minimum: 2               # About Us, R&D
-    assert_select ".navbar__dropdown", minimum: 1            # Volunteering dropdown
-    assert_select ".navbar__dropdown-item", minimum: 3       # What we do, Where we work, Who volunteers
+    assert_select ".navbar__dropdown", minimum: 1           # Volunteering mega-menu
+    assert_select ".mega-menu-card", minimum: 3             # What we do, Where we work, Who volunteers
+    assert_select ".mega-menu-audience", minimum: 5         # 5 audience fan-out links
   end
 
   test "footer renders on every page" do

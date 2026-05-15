@@ -1,0 +1,8 @@
+<% content_for(:title) { "#{@audience.name} Volunteers — OpenMind Projects" } %>
+
+<%= render "organisms/audience_hero", audience: @audience %>
+<%= render "organisms/audience_intro", audience: @audience %>
+<%= render "organisms/audience_benefits", audience: @audience %>
+<%= render "organisms/audience_journey", audience: @audience %>
+<%= render "organisms/cta_section" %>
+<%= render "organisms/audience_other", audiences: @other_audiences %>

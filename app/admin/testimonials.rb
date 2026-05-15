@@ -22,7 +22,7 @@ ActiveAdmin.register Testimonial do
     f.inputs "Testimonial" do
       f.input :name
       f.input :role
-      f.input :country
+      f.input :country, as: :string
       f.input :project
       f.input :quote, as: :text, input_html: { rows: 6 }
       f.input :video_url

@@ -1,7 +1,10 @@
 class ProjectsController < ApplicationController
   def index
+    @current_category = params[:category].presence
+    @categories = Project.available_categories
+    @category_counts = Project.active.group(:category).count
     @projects = Project.active.ordered
-    @projects = @projects.by_category(params[:category]) if params[:category].present?
+    @projects = @projects.by_category(@current_category) if @current_category
     @destinations = Destination.active.ordered
   end
 

@@ -1,14 +1,11 @@
-class Destination < ApplicationRecord
+class Location < ApplicationRecord
+  belongs_to :destination
   has_many :projects, dependent: :nullify
-  has_many :volunteer_applications, dependent: :nullify
-  has_many :locations, -> { ordered }, dependent: :destroy
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true
-  validates :country_code, length: { is: 2 }, allow_blank: true
 
   scope :active, -> { where(status: "active") }
-  scope :visible, -> { where(status: %w[active coming_soon]) }
   scope :ordered, -> { order(position: :asc) }
 
   before_validation :generate_slug, if: -> { slug.blank? && name.present? }
@@ -17,13 +14,10 @@ class Destination < ApplicationRecord
     slug
   end
 
-  def coming_soon?
-    status == "coming_soon"
-  end
-
   private
 
   def generate_slug
-    self.slug = name.parameterize
+    base = "#{destination&.slug}-#{name}".parameterize
+    self.slug = base
   end
 end

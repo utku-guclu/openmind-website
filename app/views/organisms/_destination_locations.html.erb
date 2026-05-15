@@ -1,0 +1,34 @@
+<%# locals: { destination: } %>
+<% locations = destination.locations.active.ordered.to_a %>
+<% return if locations.empty? %>
+
+<section class="destination-locations">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-map-pin-area"></i> Where we work</span>
+      <h2 class="section-header__title">Communities in <%= destination.name %></h2>
+      <p class="section-header__desc">Our work is concentrated in these locations — each with its own partners, schools, and stories.</p>
+    </div>
+
+    <div class="locations-grid">
+      <% locations.each do |loc| %>
+        <article class="location-card">
+          <div class="location-card__pin"><i class="ph ph-map-pin"></i></div>
+          <h3 class="location-card__name"><%= loc.name %></h3>
+          <% if loc.region.present? %>
+            <p class="location-card__region"><%= loc.region %></p>
+          <% end %>
+          <% if loc.summary.present? %>
+            <p class="location-card__summary"><%= loc.summary %></p>
+          <% end %>
+          <% project_count = loc.projects.where(status: "active").count %>
+          <% if project_count > 0 %>
+            <p style="margin-top: var(--space-sm); font-size: .82rem; color: var(--color-primary); font-weight: 600;">
+              <i class="ph ph-briefcase"></i> <%= pluralize(project_count, "project") %>
+            </p>
+          <% end %>
+        </article>
+      <% end %>
+    </div>
+  </div>
+</section>

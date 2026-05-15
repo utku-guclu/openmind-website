@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_14_113047) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_101423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "timescaledb"
@@ -139,6 +139,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_14_113047) do
     t.index ["recorded_at"], name: "impact_metrics_recorded_at_idx", order: :desc
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "destination_id", null: false
+    t.decimal "latitude", precision: 10, scale: 7
+    t.decimal "longitude", precision: 10, scale: 7
+    t.string "name", null: false
+    t.integer "position", default: 0
+    t.string "region"
+    t.string "slug", null: false
+    t.string "status", default: "active"
+    t.text "summary"
+    t.datetime "updated_at", null: false
+    t.index ["destination_id"], name: "index_locations_on_destination_id"
+    t.index ["slug"], name: "index_locations_on_slug", unique: true
+    t.index ["status"], name: "index_locations_on_status"
+  end
+
   create_table "partners", force: :cascade do |t|
     t.boolean "active", default: true
     t.datetime "created_at", null: false
@@ -175,6 +192,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_14_113047) do
     t.bigint "destination_id"
     t.integer "duration_weeks_max"
     t.integer "duration_weeks_min"
+    t.bigint "location_id"
     t.string "location_name"
     t.jsonb "meta", default: {}
     t.integer "position", default: 0
@@ -185,6 +203,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_14_113047) do
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_projects_on_category"
     t.index ["destination_id"], name: "index_projects_on_destination_id"
+    t.index ["location_id"], name: "index_projects_on_location_id"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
     t.index ["status"], name: "index_projects_on_status"
   end
@@ -255,8 +274,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_14_113047) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "locations", "destinations"
   add_foreign_key "posts", "admin_users", column: "author_id"
   add_foreign_key "projects", "destinations"
+  add_foreign_key "projects", "locations"
   add_foreign_key "testimonials", "projects"
   add_foreign_key "volunteer_applications", "destinations"
   add_foreign_key "volunteer_applications", "projects"

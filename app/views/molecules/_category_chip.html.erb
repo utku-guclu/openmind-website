@@ -1,0 +1,6 @@
+<%# locals: { key:, label:, icon:, active: false, href:, count: nil } %>
+<%= link_to href, class: "category-chip#{active ? ' is-active' : ''}" do %>
+  <i class="ph <%= icon %>"></i>
+  <span class="category-chip__label"><%= label %></span>
+  <% if count %><span class="category-chip__count"><%= count %></span><% end %>
+<% end %>

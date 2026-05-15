@@ -15,6 +15,12 @@
   <% end %>
   <div class="project-hero__overlay"></div>
   <div class="project-hero__inner">
+    <% if @project.category.present? %>
+      <%= link_to projects_path(category: @project.category), class: "category-badge category-badge--#{@project.category_color}", style: "margin-bottom: var(--space-md); background: rgba(255,255,255,.15); color: #fff; backdrop-filter: blur(8px);" do %>
+        <i class="ph <%= @project.category_icon %>"></i>
+        <%= @project.category_label %>
+      <% end %>
+    <% end %>
     <h1 class="project-hero__title"><%= @project.title %></h1>
     <%= link_to new_application_path(project_id: @project.id), class: "btn btn--accent btn--lg" do %>
       <i class="ph ph-paper-plane-tilt"></i> Apply Now

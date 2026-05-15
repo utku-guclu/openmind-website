@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   root "pages#home"
   get "about", to: "pages#about"
   get "volunteer", to: "pages#volunteer"
+  get "volunteer/retired",       to: "pages#volunteer_audience", defaults: { audience: "retired" },       as: :volunteer_retired
+  get "volunteer/gap-year",      to: "pages#volunteer_audience", defaults: { audience: "gap_year" },      as: :volunteer_gap_year
+  get "volunteer/internship",    to: "pages#volunteer_audience", defaults: { audience: "internship" },    as: :volunteer_internship
+  get "volunteer/career-break",  to: "pages#volunteer_audience", defaults: { audience: "career_break" },  as: :volunteer_career_break
+  get "volunteer/csr",           to: "pages#volunteer_audience", defaults: { audience: "csr" },           as: :volunteer_csr
   get "research-development", to: "pages#research"
 
   # Projects

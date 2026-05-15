@@ -1,0 +1,6 @@
+<%# locals: { name:, region: nil } %>
+<span class="location-pin">
+  <i class="ph ph-map-pin"></i>
+  <span class="location-pin__name"><%= name %></span>
+  <% if region.present? %><span class="location-pin__region"><%= region %></span><% end %>
+</span>

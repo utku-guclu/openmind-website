@@ -1,0 +1,69 @@
+/* Organism — Destination locations grid */
+.destination-locations {
+  padding: var(--space-4xl) 0;
+  background: var(--color-bg-tint);
+}
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-lg);
+}
+.location-card {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-bg-section);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+.location-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--color-accent);
+  transform: scaleY(0.35);
+  transform-origin: top center;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.location-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(15,32,55,.10);
+  border-color: rgba(12,122,191,.18);
+}
+.location-card:hover::before { transform: scaleY(1); }
+.location-card__pin {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(232,155,28,.12);
+  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: var(--space-md);
+}
+.location-card__name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 4px;
+}
+.location-card__region {
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin: 0 0 var(--space-sm);
+}
+.location-card__summary {
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  margin: 0;
+}

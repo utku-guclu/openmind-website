@@ -43,7 +43,7 @@ ActiveAdmin.register TeamMember do
       f.input :name
       f.input :image, as: :file
       f.input :role
-      f.input :country, hint: "e.g., Thailand, Nepal, USA"
+      f.input :country, as: :string, hint: "e.g., Thailand, Nepal, USA"
       f.input :department
       f.input :bio, as: :text, input_html: { rows: 6 }
       f.input :linkedin_url

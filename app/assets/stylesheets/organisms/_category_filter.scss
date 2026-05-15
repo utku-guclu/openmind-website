@@ -1,0 +1,41 @@
+/* Organism — Category filter strip */
+.category-filter {
+  background: var(--color-bg-white);
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid var(--color-bg-section);
+  position: sticky;
+  top: 72px;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,.94);
+}
+.category-filter__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Card badge — sits on project cards to show category */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--color-bg-tint);
+  color: var(--color-primary);
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.category-badge i { font-size: .85rem; }
+.category-badge--accent { background: rgba(232,155,28,.12); color: var(--color-accent-dark); }
+.category-badge--teal   { background: rgba(0,139,139,.10);  color: var(--color-teal); }
+.category-badge--green  { background: rgba(76,175,80,.12);  color: #2e7d32; }
+.category-badge--cornflower { background: rgba(107,142,199,.14); color: #4a6fa5; }
+
+@media (max-width: 640px) {
+  .category-filter { position: static; }
+}

@@ -46,6 +46,18 @@
             <% end %>
           </div>
 
+          <div class="mega-menu-audiences">
+            <div class="mega-menu-audiences__title">FIND YOUR PATH</div>
+            <div class="mega-menu-audiences__grid">
+              <% VolunteerAudience.all.each do |a| %>
+                <%= link_to a.path, class: "mega-menu-audience" do %>
+                  <i class="ph <%= a.icon %>"></i>
+                  <span><%= a.name %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
           <div class="mega-menu-footer">
             <h3 class="mega-menu-footer__title">GET INVOLVED</h3>
             <%= link_to "Apply Today!", new_application_path, class: "btn btn--primary" %>

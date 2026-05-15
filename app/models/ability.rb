@@ -17,14 +17,14 @@ class Ability
       can :manage, :all
     when "admin"
       can :manage, [
-        Project, Destination, Post, Partner, TeamMember,
+        Project, Destination, Location, Post, Partner, TeamMember,
         Testimonial, SiteSetting, VolunteerApplication, ContactMessage,
         ActiveAdmin::Comment
       ]
       can :read, AdminUser
       cannot :destroy, AdminUser
     when "editor"
-      can :read, [Project, Destination, Partner, TeamMember, Testimonial,
+      can :read, [Project, Destination, Location, Partner, TeamMember, Testimonial,
                   SiteSetting, VolunteerApplication, ContactMessage]
       can :create, Post
       can :read,   Post
