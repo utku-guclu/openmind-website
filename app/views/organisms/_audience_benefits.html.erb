@@ -9,9 +9,9 @@
     <div class="audience-benefits__grid">
       <% audience.benefits.each do |b| %>
         <article class="benefit-card">
-          <div class="benefit-card__icon"><i class="ph <%= b[:icon] %>"></i></div>
-          <h3 class="benefit-card__title"><%= b[:title] %></h3>
-          <p class="benefit-card__text"><%= b[:text] %></p>
+          <div class="benefit-card__icon"><i class="ph <%= b.icon %>"></i></div>
+          <h3 class="benefit-card__title"><%= b.title %></h3>
+          <p class="benefit-card__text"><%= b.text %></p>
         </article>
       <% end %>
     </div>

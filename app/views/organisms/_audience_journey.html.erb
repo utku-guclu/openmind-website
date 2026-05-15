@@ -9,9 +9,9 @@
     <ol class="audience-journey__steps">
       <% audience.journey.each do |s| %>
         <li class="journey-step">
-          <div class="journey-step__num"><%= s[:step] %></div>
-          <h3 class="journey-step__title"><%= s[:title] %></h3>
-          <p class="journey-step__text"><%= s[:text] %></p>
+          <div class="journey-step__num"><%= s.step_label %></div>
+          <h3 class="journey-step__title"><%= s.title %></h3>
+          <p class="journey-step__text"><%= s.text %></p>
         </li>
       <% end %>
     </ol>

@@ -6,9 +6,12 @@
       <h2 class="section-header__title"><%= title %></h2>
     </div>
     <div class="image-gallery">
-      <% images.each_with_index do |url, idx| %>
-        <a href="<%= url %>" class="image-gallery__item" target="_blank" rel="noopener" aria-label="Gallery image <%= idx + 1 %>">
-          <img src="<%= url %>" alt="" loading="lazy">
+      <% images.each_with_index do |image, idx| %>
+        <% url = image.is_a?(String) ? image : image.display_url %>
+        <% next unless url %>
+        <% alt_text = image.respond_to?(:alt) ? image.alt.presence : nil %>
+        <a href="<%= url %>" class="image-gallery__item" target="_blank" rel="noopener" aria-label="<%= alt_text || "Gallery image #{idx + 1}" %>">
+          <img src="<%= url %>" alt="<%= alt_text %>" loading="lazy">
         </a>
       <% end %>
     </div>

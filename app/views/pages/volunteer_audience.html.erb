@@ -24,7 +24,7 @@
 
 <%# 3. Additional intro sections (e.g. "Make a Difference Together") %>
 <% @audience.intro_sections.each do |section| %>
-  <%= render "organisms/text_block", heading: section[:heading], body: section[:body], surface: "light" %>
+  <%= render "organisms/text_block", heading: section.heading, body: section.body, surface: "light" %>
 <% end %>
 
 <%# 4. Image gallery %>
@@ -36,8 +36,8 @@
 <% end %>
 
 <%# 5. Video playlist %>
-<% if @audience.video_playlist.any? %>
-  <%= render "organisms/video_playlist", videos: @audience.video_playlist %>
+<% if @audience.videos.any? %>
+  <%= render "organisms/video_playlist", videos: @audience.videos %>
 <% end %>
 
 <%# 6. Podcast (with deep-dive card for Family, plain otherwise) %>
@@ -67,8 +67,8 @@
 <%# 8. Bond / philosophy sections — stacked text blocks %>
 <% @audience.bond_sections.each_with_index do |section, i| %>
   <%= render "organisms/text_block",
-        heading: section[:heading],
-        body: section[:body],
+        heading: section.heading,
+        body: section.body,
         surface: i.even? ? "light" : "tint" %>
 <% end %>
 

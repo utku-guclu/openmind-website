@@ -1,4 +1,20 @@
 class VolunteerAudience < ApplicationRecord
+  has_one_attached :hero_image
+  has_one_attached :podcast_deepdive_image
+
+  has_many :benefits,          -> { ordered }, class_name: "AudienceBenefit",        dependent: :destroy
+  has_many :journey,           -> { ordered }, class_name: "AudienceJourneyStep",    dependent: :destroy
+  has_many :intro_sections,    -> { ordered }, class_name: "AudienceIntroSection",   dependent: :destroy
+  has_many :bond_sections,     -> { ordered }, class_name: "AudienceBondSection",    dependent: :destroy
+  has_many :activity_bullets,  -> { ordered }, class_name: "AudienceActivityBullet", dependent: :destroy
+  has_many :videos,            -> { ordered }, class_name: "AudienceVideo",          dependent: :destroy
+  has_many :faqs,              -> { ordered }, class_name: "AudienceFaq",            dependent: :destroy
+  has_many :gallery_images,    -> { ordered }, class_name: "AudienceGalleryImage",   dependent: :destroy
+
+  accepts_nested_attributes_for :benefits, :journey, :intro_sections, :bond_sections,
+                                :activity_bullets, :videos, :faqs, :gallery_images,
+                                allow_destroy: true, reject_if: :all_blank
+
   validates :slug, presence: true, uniqueness: true
   validates :name, presence: true
 
@@ -14,28 +30,33 @@ class VolunteerAudience < ApplicationRecord
     "/volunteer/#{slug.to_s.tr('_', '-')}"
   end
 
-  # Content JSON readers — return symbol-keyed hashes so existing views
-  # (which use b[:icon], s[:heading], etc.) keep working unchanged.
-
-  def benefits;         fetch_list_of_hashes("benefits");       end
-  def journey;          fetch_list_of_hashes("journey");        end
-  def intro_sections;   fetch_list_of_hashes("intro_sections"); end
-  def bond_sections;    fetch_list_of_hashes("bond_sections");  end
-  def video_playlist;   fetch_list_of_hashes("video_playlist"); end
-  def faqs;             fetch_list_of_hashes("faqs");           end
-
-  def gallery_images;   Array(content&.dig("gallery_images")); end
-  def activity_bullets; Array(content&.dig("activity_bullets")); end
-  def activity_intro;   content&.dig("activity_intro"); end
-
-  def podcast_deepdive
-    h = content&.dig("podcast_deepdive")
-    h.is_a?(Hash) ? h.deep_symbolize_keys : nil
+  # Returns the hero image: uploaded attachment if present, otherwise the
+  # fallback URL stored on `hero_image_url`.
+  def hero_image_src
+    if hero_image.attached?
+      Rails.application.routes.url_helpers.url_for(hero_image)
+    else
+      hero_image_url.presence
+    end
   end
 
-  private
+  # Same fallback strategy for the podcast deep-dive thumbnail.
+  def podcast_deepdive_image_src
+    if podcast_deepdive_image.attached?
+      Rails.application.routes.url_helpers.url_for(podcast_deepdive_image)
+    else
+      nil
+    end
+  end
 
-  def fetch_list_of_hashes(key)
-    Array(content&.dig(key)).map { |row| row.is_a?(Hash) ? row.deep_symbolize_keys : row }
+  # The view organism wants a hash with title/image/description keys.
+  # Built from the dedicated columns + attachment URL.
+  def podcast_deepdive
+    return nil unless podcast_deepdive_title.present? || podcast_deepdive_description.present?
+    {
+      title:       podcast_deepdive_title,
+      description: podcast_deepdive_description,
+      image:       podcast_deepdive_image_src
+    }
   end
 end

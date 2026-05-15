@@ -10,8 +10,8 @@
       <div class="video-playlist__stage">
         <iframe
           data-video-playlist-target="player"
-          src="https://www.youtube.com/embed/<%= videos.first[:youtube_id] %>?rel=0&enablejsapi=1"
-          title="<%= videos.first[:title] %>"
+          src="https://www.youtube.com/embed/<%= videos.first.youtube_id %>?rel=0&enablejsapi=1"
+          title="<%= videos.first.title %>"
           frameborder="0"
           allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
@@ -21,13 +21,13 @@
         <% videos.each_with_index do |v, i| %>
           <li class="video-playlist__item <%= 'is-active' if i == 0 %>"
               data-video-playlist-target="item"
-              data-youtube-id="<%= v[:youtube_id] %>"
-              data-title="<%= v[:title] %>"
+              data-youtube-id="<%= v.youtube_id %>"
+              data-title="<%= v.title %>"
               data-action="click->video-playlist#select">
-            <img class="video-playlist__thumb" src="https://img.youtube.com/vi/<%= v[:youtube_id] %>/mqdefault.jpg" alt="" loading="lazy">
+            <img class="video-playlist__thumb" src="https://img.youtube.com/vi/<%= v.youtube_id %>/mqdefault.jpg" alt="" loading="lazy">
             <div class="video-playlist__meta">
-              <h4 class="video-playlist__title"><%= v[:title] %></h4>
-              <span class="video-playlist__duration"><i class="ph ph-clock"></i> <%= v[:duration] %></span>
+              <h4 class="video-playlist__title"><%= v.title %></h4>
+              <span class="video-playlist__duration"><i class="ph ph-clock"></i> <%= v.duration %></span>
             </div>
           </li>
         <% end %>

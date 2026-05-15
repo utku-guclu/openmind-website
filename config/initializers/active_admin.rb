@@ -233,6 +233,10 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   config.register_javascript 'https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js'
+  # SortableJS for drag-and-drop reordering of has_many nested forms.
+  config.register_javascript 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js'
+  config.register_javascript '/admin-sortable.js'
+  config.register_stylesheet '/admin-sortable.css'
 
   # == CSV options
   #

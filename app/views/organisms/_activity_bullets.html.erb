@@ -11,7 +11,7 @@
       <% bullets.each do |bullet| %>
         <li class="activity-bullets__item">
           <i class="ph ph-check-circle"></i>
-          <span><%= bullet %></span>
+          <span><%= bullet.is_a?(String) ? bullet : bullet.body %></span>
         </li>
       <% end %>
     </ul>

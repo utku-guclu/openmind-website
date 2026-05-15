@@ -9,12 +9,12 @@
       <% faqs.each_with_index do |f, i| %>
         <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
           <summary class="faq-item__q" itemprop="name">
-            <span><%= f[:question] %></span>
+            <span><%= f.question %></span>
             <i class="ph ph-plus-circle faq-item__icon-closed"></i>
             <i class="ph ph-minus-circle faq-item__icon-open"></i>
           </summary>
           <div class="faq-item__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <div itemprop="text"><%= f[:answer] %></div>
+            <div itemprop="text"><%= simple_format(f.answer) %></div>
           </div>
         </details>
       <% end %>

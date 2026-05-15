@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_15_122539) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_131000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "timescaledb"
@@ -98,6 +98,96 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_122539) do
     t.index ["event_type", "recorded_at"], name: "idx_analytics_event_type", order: { recorded_at: :desc }
     t.index ["recorded_at"], name: "analytics_events_recorded_at_idx", order: :desc
     t.index ["session_id", "recorded_at"], name: "idx_analytics_session", order: { recorded_at: :desc }
+  end
+
+  create_table "audience_activity_bullets", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_audience_id", null: false
+    t.index ["volunteer_audience_id", "position"], name: "idx_on_volunteer_audience_id_position_0460c70966"
+    t.index ["volunteer_audience_id"], name: "index_audience_activity_bullets_on_volunteer_audience_id"
+  end
+
+  create_table "audience_benefits", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "icon"
+    t.integer "position", default: 0, null: false
+    t.text "text"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_audience_id", null: false
+    t.index ["volunteer_audience_id", "position"], name: "index_audience_benefits_on_volunteer_audience_id_and_position"
+    t.index ["volunteer_audience_id"], name: "index_audience_benefits_on_volunteer_audience_id"
+  end
+
+  create_table "audience_bond_sections", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.string "heading"
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_audience_id", null: false
+    t.index ["volunteer_audience_id", "position"], name: "idx_on_volunteer_audience_id_position_225facddbf"
+    t.index ["volunteer_audience_id"], name: "index_audience_bond_sections_on_volunteer_audience_id"
+  end
+
+  create_table "audience_faqs", force: :cascade do |t|
+    t.text "answer"
+    t.datetime "created_at", null: false
+    t.integer "position", default: 0, null: false
+    t.string "question", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_audience_id", null: false
+    t.index ["volunteer_audience_id", "position"], name: "index_audience_faqs_on_volunteer_audience_id_and_position"
+    t.index ["volunteer_audience_id"], name: "index_audience_faqs_on_volunteer_audience_id"
+  end
+
+  create_table "audience_gallery_images", force: :cascade do |t|
+    t.string "alt"
+    t.datetime "created_at", null: false
+    t.string "image_url", comment: "Fallback URL when no file is attached"
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_audience_id", null: false
+    t.index ["volunteer_audience_id", "position"], name: "idx_on_volunteer_audience_id_position_1298e5b3c7"
+    t.index ["volunteer_audience_id"], name: "index_audience_gallery_images_on_volunteer_audience_id"
+  end
+
+  create_table "audience_intro_sections", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.string "heading"
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_audience_id", null: false
+    t.index ["volunteer_audience_id", "position"], name: "idx_on_volunteer_audience_id_position_c1766f326f"
+    t.index ["volunteer_audience_id"], name: "index_audience_intro_sections_on_volunteer_audience_id"
+  end
+
+  create_table "audience_journey_steps", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "position", default: 0, null: false
+    t.string "step_label"
+    t.text "text"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_audience_id", null: false
+    t.index ["volunteer_audience_id", "position"], name: "idx_on_volunteer_audience_id_position_e311a922a7"
+    t.index ["volunteer_audience_id"], name: "index_audience_journey_steps_on_volunteer_audience_id"
+  end
+
+  create_table "audience_videos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "duration"
+    t.integer "position", default: 0, null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "volunteer_audience_id", null: false
+    t.string "youtube_id", null: false
+    t.index ["volunteer_audience_id", "position"], name: "index_audience_videos_on_volunteer_audience_id_and_position"
+    t.index ["volunteer_audience_id"], name: "index_audience_videos_on_volunteer_audience_id"
   end
 
   create_table "contact_messages", force: :cascade do |t|
@@ -274,15 +364,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_122539) do
   end
 
   create_table "volunteer_audiences", force: :cascade do |t|
+    t.text "activity_intro"
     t.jsonb "content", default: {}, null: false
     t.datetime "created_at", null: false
     t.string "cta_text", default: "Apply Today"
     t.string "duration"
-    t.string "hero_image"
+    t.string "hero_image_url"
     t.string "hero_video_id"
     t.string "icon"
     t.text "intro"
     t.string "name", null: false
+    t.text "podcast_deepdive_description"
+    t.string "podcast_deepdive_title"
     t.string "podcast_url"
     t.integer "position", default: 0
     t.string "slug", null: false
@@ -297,6 +390,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_122539) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "audience_activity_bullets", "volunteer_audiences"
+  add_foreign_key "audience_benefits", "volunteer_audiences"
+  add_foreign_key "audience_bond_sections", "volunteer_audiences"
+  add_foreign_key "audience_faqs", "volunteer_audiences"
+  add_foreign_key "audience_gallery_images", "volunteer_audiences"
+  add_foreign_key "audience_intro_sections", "volunteer_audiences"
+  add_foreign_key "audience_journey_steps", "volunteer_audiences"
+  add_foreign_key "audience_videos", "volunteer_audiences"
   add_foreign_key "locations", "destinations"
   add_foreign_key "posts", "admin_users", column: "author_id"
   add_foreign_key "projects", "destinations"

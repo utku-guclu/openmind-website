@@ -353,10 +353,59 @@ puts "  Created #{Post.count} posts"
 
 puts "Seeding volunteer audiences..."
 VOLUNTEER_AUDIENCES_SEED.each do |attrs|
+  content = attrs[:content] || {}
   audience = VolunteerAudience.find_or_initialize_by(slug: attrs[:slug])
-  audience.assign_attributes(attrs)
+  # Exclude :hero_image (would collide with the ActiveStorage attachment setter)
+  # and :content (handled separately below).
+  audience.assign_attributes(attrs.except(:content, :hero_image, :hero_image_url).merge(
+    hero_image_url:                attrs[:hero_image] || attrs[:hero_image_url],
+    activity_intro:                content["activity_intro"],
+    podcast_deepdive_title:        content.dig("podcast_deepdive", "title"),
+    podcast_deepdive_description:  content.dig("podcast_deepdive", "description")
+  ))
   audience.save!
+
+  # Children — rebuild from scratch each seed run to keep ordering/positions clean.
+  audience.benefits.destroy_all
+  Array(content["benefits"]).each_with_index do |b, i|
+    audience.benefits.create!(icon: b["icon"], title: b["title"], text: b["text"], position: i)
+  end
+
+  audience.journey.destroy_all
+  Array(content["journey"]).each_with_index do |s, i|
+    audience.journey.create!(step_label: s["step"], title: s["title"], text: s["text"], position: i)
+  end
+
+  audience.intro_sections.destroy_all
+  Array(content["intro_sections"]).each_with_index do |s, i|
+    audience.intro_sections.create!(heading: s["heading"], body: s["body"], position: i)
+  end
+
+  audience.bond_sections.destroy_all
+  Array(content["bond_sections"]).each_with_index do |s, i|
+    audience.bond_sections.create!(heading: s["heading"], body: s["body"], position: i)
+  end
+
+  audience.activity_bullets.destroy_all
+  Array(content["activity_bullets"]).each_with_index do |body, i|
+    audience.activity_bullets.create!(body: body, position: i)
+  end
+
+  audience.videos.destroy_all
+  Array(content["video_playlist"]).each_with_index do |v, i|
+    audience.videos.create!(youtube_id: v["youtube_id"], title: v["title"], duration: v["duration"], position: i)
+  end
+
+  audience.faqs.destroy_all
+  Array(content["faqs"]).each_with_index do |f, i|
+    audience.faqs.create!(question: f["question"], answer: f["answer"], position: i)
+  end
+
+  audience.gallery_images.destroy_all
+  Array(content["gallery_images"]).each_with_index do |url, i|
+    audience.gallery_images.create!(image_url: url, position: i)
+  end
 end
-puts "  Created/updated #{VolunteerAudience.count} volunteer audiences"
+puts "  Created/updated #{VolunteerAudience.count} volunteer audiences (#{AudienceFaq.count} FAQs, #{AudienceGalleryImage.count} gallery images)"
 
 puts "\nSeeding complete!"
