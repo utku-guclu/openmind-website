@@ -1,0 +1,10 @@
+<%# locals: { text: "Apply Today!", href: nil, surface: "light" } %>
+<% href ||= nil %>
+<% surface ||= "light" %>
+<section class="inline-cta inline-cta--<%= surface %>">
+  <div class="container inline-cta__inner">
+    <%= link_to (href || new_application_path), class: "btn btn--accent btn--lg" do %>
+      <i class="ph ph-paper-plane-tilt"></i> <%= text %>
+    <% end %>
+  </div>
+</section>

@@ -21,6 +21,29 @@ class Destination < ApplicationRecord
     status == "coming_soon"
   end
 
+  def activities
+    Array(meta&.dig("activities"))
+  end
+
+  def activities=(value)
+    self.meta = (meta || {}).merge("activities" => Array(value))
+  end
+
+  def location_names
+    locations.active.ordered.pluck(:name)
+  end
+
+  def flag_emoji
+    case country_code&.upcase
+    when "TH" then "🇹🇭"
+    when "LA" then "🇱🇦"
+    when "NP" then "🇳🇵"
+    when "KH" then "🇰🇭"
+    when "VN" then "🇻🇳"
+    when "MM" then "🇲🇲"
+    end
+  end
+
   private
 
   def generate_slug

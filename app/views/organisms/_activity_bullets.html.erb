@@ -1,0 +1,19 @@
+<%# locals: { bullets:, heading: nil, intro: nil } %>
+<section class="activity-bullets">
+  <div class="container activity-bullets__inner">
+    <% if heading.present? %>
+      <h2 class="activity-bullets__heading"><%= heading %></h2>
+    <% end %>
+    <% if intro.present? %>
+      <p class="activity-bullets__intro"><%= intro %></p>
+    <% end %>
+    <ul class="activity-bullets__list">
+      <% bullets.each do |bullet| %>
+        <li class="activity-bullets__item">
+          <i class="ph ph-check-circle"></i>
+          <span><%= bullet %></span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>

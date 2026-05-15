@@ -86,12 +86,22 @@ class SmokeTest < ActionDispatch::IntegrationTest
     end
 
     @post = Post.find_or_create_by!(slug: "welcome") do |p|
-      p.title = "Welcome to OpenMind Projects"
+      p.title = "Welcome to OpenmindProjects"
       p.summary = "Our first post."
       p.body = "Hello world."
       p.category = "news"
       p.status = "published"
       p.published_at = 1.day.ago
+    end
+
+    # Volunteer audiences power the navbar mega-menu fan-out
+    %w[retired gap_year internship career_break csr family].each_with_index do |slug, i|
+      VolunteerAudience.find_or_create_by!(slug: slug) do |a|
+        a.name = slug.titleize
+        a.title = "#{slug.titleize} Volunteering"
+        a.icon = "ph-users-three"
+        a.position = i
+      end
     end
   end
 

@@ -1,5 +1,7 @@
 # db/seeds.rb - Seed data from openmindprojects.org content
 
+require_relative "seed_data/volunteer_audiences"
+
 puts "Seeding destinations..."
 destination_data = [
   {
@@ -11,6 +13,8 @@ destination_data = [
     longitude: 100.5018,
     position: 0,
     status: "active",
+    hero_image_url: "https://openmindprojects.org/wp-content/uploads/2024/11/family-volunteer-kids-trip15.jpg",
+    activities: ["Teach English", "Learning Camp", "IT Training", "Conservation", "Social Media", "Online Marketing", "Ethnic Minority", "Migrant"],
     locations: [
       { "name" => "Nong Khai",  "region" => "Northeast Thailand",  "summary" => "Our primary hub — schools, training centers, and the volunteer base." },
       { "name" => "Mae Sot",    "region" => "Tak Province",        "summary" => "Border town supporting Burmese migrant communities and schools." },
@@ -27,6 +31,8 @@ destination_data = [
     longitude: 102.6331,
     position: 1,
     status: "active",
+    hero_image_url: "https://openmindprojects.org/wp-content/uploads/2024/11/volunteer-in-laos.jpg",
+    activities: ["Teach English", "Eco Tourism"],
     locations: [
       { "name" => "Nalong",            "region" => "Vientiane Province", "summary" => "Rural village partner for IT training and learning camps." },
       { "name" => "Phou Khao Khouay",  "region" => "National Park",      "summary" => "Eco-tourism and conservation collaboration site." }
@@ -41,6 +47,8 @@ destination_data = [
     longitude: 85.3240,
     position: 2,
     status: "active",
+    hero_image_url: "https://openmindprojects.org/wp-content/uploads/2024/11/kids-nepal2-scaled.jpg",
+    activities: ["Teach English", "Conservation", "Eco Tourism", "Social Media"],
     locations: [
       { "name" => "Chitwan", "region" => "Central Nepal", "summary" => "Lowland community partner for English teaching and conservation." }
     ]
@@ -54,6 +62,8 @@ destination_data = [
     longitude: 104.9282,
     position: 3,
     status: "coming_soon",
+    hero_image_url: nil,
+    activities: [],
     locations: []
   }
 ]
@@ -61,10 +71,12 @@ destination_data = [
 destinations = {}
 destination_data.each do |attrs|
   locs = attrs.delete(:locations)
+  activities = attrs.delete(:activities)
   dest = Destination.find_or_initialize_by(slug: attrs[:slug])
   dest.assign_attributes(attrs)
   # Wipe legacy meta.locations payload — now lives in the locations table
   dest.meta = (dest.meta || {}).except("locations") if dest.meta.is_a?(Hash)
+  dest.activities = activities if activities
   dest.save!
   destinations[attrs[:slug].to_sym] = dest
 
@@ -338,5 +350,13 @@ posts_data.each do |attrs|
   post.save!
 end
 puts "  Created #{Post.count} posts"
+
+puts "Seeding volunteer audiences..."
+VOLUNTEER_AUDIENCES_SEED.each do |attrs|
+  audience = VolunteerAudience.find_or_initialize_by(slug: attrs[:slug])
+  audience.assign_attributes(attrs)
+  audience.save!
+end
+puts "  Created/updated #{VolunteerAudience.count} volunteer audiences"
 
 puts "\nSeeding complete!"

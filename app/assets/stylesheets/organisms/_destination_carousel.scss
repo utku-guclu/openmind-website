@@ -1,0 +1,112 @@
+/* Organism — Destination carousel/grid (matches openmindprojects.org/location archive) */
+.destination-carousel {
+  padding: var(--space-2xl) 0 var(--space-4xl);
+  background: var(--color-bg-white);
+}
+.destination-carousel__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+@media (max-width: 1024px) {
+  .destination-carousel__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .destination-carousel__grid { grid-template-columns: 1fr; }
+}
+
+.destination-card {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-bg-section);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+.destination-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(232,155,28,.4);
+  box-shadow: 0 18px 38px rgba(15,32,55,.10);
+}
+.destination-card--coming-soon { opacity: .82; }
+
+.destination-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+.destination-card__flag {
+  font-size: 2rem;
+  line-height: 1;
+}
+.destination-card__name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.destination-card__name:hover { color: var(--color-primary-dark); }
+.destination-card__name--muted { color: var(--color-text-secondary); cursor: default; }
+.destination-card__soon {
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.06);
+  color: var(--color-text-secondary);
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.destination-card__media {
+  display: block;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-tint);
+}
+.destination-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.destination-card__media:hover img { transform: scale(1.04); }
+.destination-card__media--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-light);
+  font-size: 3.5rem;
+}
+
+.destination-card__meta {
+  display: flex;
+  gap: var(--space-sm);
+  font-size: .95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+.destination-card__meta i {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.destination-card__meta--activities i { color: var(--color-accent); }
+
+.destination-card__actions {
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+.destination-card__actions .btn {
+  width: 100%;
+  justify-content: center;
+}

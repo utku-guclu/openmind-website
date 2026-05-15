@@ -1,65 +1,13 @@
-<% content_for(:title) { "Destinations — OpenMind Projects" } %>
+<% content_for(:title) { "Destinations — OpenmindProjects" } %>
 
-<section class="programs" style="padding-top: 120px;">
+<section class="programs" style="padding-top: 120px; padding-bottom: var(--space-md);">
   <div class="container">
     <div class="section-header">
       <span class="section-header__tag"><i class="ph ph-map-trifold"></i> Destinations</span>
       <h1 class="section-header__title">Where We <span class="text-primary">Work</span></h1>
-      <p class="section-header__desc">Our programs span across Southeast Asia, bringing education and opportunity to communities that need it most.</p>
-    </div>
-    <div class="pillars__grid">
-      <% colors = ["pillar-card--education", "pillar-card--development", "pillar-card--research"] %>
-      <% @destinations.each_with_index do |dest, i| %>
-        <% coming_soon = dest.coming_soon? %>
-        <div class="pillar-card <%= colors[i % 3] %>" style="<%= 'opacity: .85;' if coming_soon %> position: relative;">
-          <% if coming_soon %>
-            <span style="position: absolute; top: var(--space-md); right: var(--space-md); background: rgba(0,0,0,.35); color: #fff; padding: 4px 12px; border-radius: 999px; font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; backdrop-filter: blur(8px);">
-              <i class="ph ph-clock"></i> Coming soon
-            </span>
-          <% end %>
-          <div class="pillar-card__header">
-            <div class="pillar-card__number"><%= dest.country_code %></div>
-            <div class="pillar-card__icon"><i class="ph ph-map-pin"></i></div>
-          </div>
-          <h3 class="pillar-card__title"><%= dest.name %></h3>
-          <p class="pillar-card__desc"><%= dest.summary %></p>
-
-          <% dest_locations = dest.locations.active.ordered.to_a %>
-          <% if dest_locations.any? %>
-            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--space-md);">
-              <% dest_locations.first(3).each do |loc| %>
-                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.18); font-size: .72rem; font-weight: 600;">
-                  <i class="ph ph-map-pin" style="font-size: .8rem;"></i><%= loc.name %>
-                </span>
-              <% end %>
-              <% if dest_locations.size > 3 %>
-                <span style="padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.10); font-size: .72rem; font-weight: 600;">
-                  +<%= dest_locations.size - 3 %>
-                </span>
-              <% end %>
-            </div>
-          <% end %>
-
-          <p style="font-size: .85rem; opacity: .8; margin-bottom: var(--space-lg);">
-            <% active_count = dest.projects.active.count %>
-            <% if coming_soon %>
-              Programs starting soon
-            <% else %>
-              <%= active_count %> active project<%= active_count == 1 ? "" : "s" %>
-            <% end %>
-          </p>
-
-          <% if coming_soon %>
-            <span class="pillar-card__link" style="cursor: not-allowed; opacity: .6;">
-              Stay tuned <i class="ph ph-clock"></i>
-            </span>
-          <% else %>
-            <%= link_to destination_path(dest.slug), class: "pillar-card__link" do %>
-              Explore <i class="ph ph-arrow-right"></i>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
+      <p class="section-header__desc">Our programs span Southeast Asia, bringing education and opportunity to communities that need it most.</p>
     </div>
   </div>
 </section>
+
+<%= render "organisms/destination_carousel", destinations: @destinations %>

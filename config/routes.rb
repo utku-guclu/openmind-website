@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "volunteer/internship",    to: "pages#volunteer_audience", defaults: { audience: "internship" },    as: :volunteer_internship
   get "volunteer/career-break",  to: "pages#volunteer_audience", defaults: { audience: "career_break" },  as: :volunteer_career_break
   get "volunteer/csr",           to: "pages#volunteer_audience", defaults: { audience: "csr" },           as: :volunteer_csr
+  get "volunteer/family",        to: "pages#volunteer_audience", defaults: { audience: "family" },        as: :volunteer_family
   get "research-development", to: "pages#research"
 
   # Projects

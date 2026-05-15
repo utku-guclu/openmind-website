@@ -1,0 +1,16 @@
+<%# locals: { images:, tag: "Gallery", title: "Moments from the field" } %>
+<section class="image-gallery-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-images"></i> <%= tag %></span>
+      <h2 class="section-header__title"><%= title %></h2>
+    </div>
+    <div class="image-gallery">
+      <% images.each_with_index do |url, idx| %>
+        <a href="<%= url %>" class="image-gallery__item" target="_blank" rel="noopener" aria-label="Gallery image <%= idx + 1 %>">
+          <img src="<%= url %>" alt="" loading="lazy">
+        </a>
+      <% end %>
+    </div>
+  </div>
+</section>

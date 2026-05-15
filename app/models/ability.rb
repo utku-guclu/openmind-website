@@ -19,13 +19,13 @@ class Ability
       can :manage, [
         Project, Destination, Location, Post, Partner, TeamMember,
         Testimonial, SiteSetting, VolunteerApplication, ContactMessage,
-        ActiveAdmin::Comment
+        VolunteerAudience, ActiveAdmin::Comment
       ]
       can :read, AdminUser
       cannot :destroy, AdminUser
     when "editor"
       can :read, [Project, Destination, Location, Partner, TeamMember, Testimonial,
-                  SiteSetting, VolunteerApplication, ContactMessage]
+                  SiteSetting, VolunteerApplication, ContactMessage, VolunteerAudience]
       can :create, Post
       can :read,   Post
       can :update, Post, author_id: user.id

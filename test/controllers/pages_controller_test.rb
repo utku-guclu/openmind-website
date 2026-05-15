@@ -4,7 +4,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   test "GET / renders the home page" do
     get root_path
     assert_response :success
-    assert_select "title", text: /OpenMind Projects/
+    assert_select "title", text: /OpenmindProjects/
   end
 
   test "GET /about renders the about page" do

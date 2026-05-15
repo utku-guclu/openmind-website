@@ -1,0 +1,57 @@
+<%# locals: { destinations: } %>
+<section class="destination-carousel">
+  <div class="container">
+    <div class="destination-carousel__grid" data-controller="carousel">
+      <% destinations.each do |dest| %>
+        <% coming_soon = dest.coming_soon? %>
+        <article class="destination-card <%= 'destination-card--coming-soon' if coming_soon %>">
+          <header class="destination-card__head">
+            <span class="destination-card__flag" aria-hidden="true"><%= dest.flag_emoji %></span>
+            <% if coming_soon %>
+              <span class="destination-card__name destination-card__name--muted"><%= dest.name %></span>
+            <% else %>
+              <%= link_to dest.name, destination_path(dest.slug), class: "destination-card__name" %>
+            <% end %>
+            <% if coming_soon %>
+              <span class="destination-card__soon">Coming soon</span>
+            <% end %>
+          </header>
+
+          <% if coming_soon %>
+            <div class="destination-card__media destination-card__media--placeholder">
+              <i class="ph ph-map-trifold"></i>
+            </div>
+          <% else %>
+            <%= link_to destination_path(dest.slug), class: "destination-card__media" do %>
+              <% if dest.hero_image_url.present? %>
+                <img src="<%= dest.hero_image_url %>" alt="Volunteer in <%= dest.name %>" loading="lazy">
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <div class="destination-card__meta">
+            <i class="ph ph-map-pin-line"></i>
+            <span><%= dest.location_names.any? ? dest.location_names.join(", ") : "Locations coming soon" %></span>
+          </div>
+
+          <div class="destination-card__meta destination-card__meta--activities">
+            <i class="ph ph-check-circle"></i>
+            <span><%= dest.activities.any? ? dest.activities.join(", ") : "Programs being established" %></span>
+          </div>
+
+          <div class="destination-card__actions">
+            <% if coming_soon %>
+              <span class="btn btn--outline" style="opacity:.6; cursor: not-allowed;">
+                <i class="ph ph-clock"></i> Stay tuned
+              </span>
+            <% else %>
+              <%= link_to destination_path(dest.slug), class: "btn btn--outline" do %>
+                <i class="ph ph-newspaper"></i> Learn more
+              <% end %>
+            <% end %>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </div>
+</section>

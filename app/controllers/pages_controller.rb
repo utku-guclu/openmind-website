@@ -15,13 +15,13 @@ class PagesController < ApplicationController
     @projects = Project.active.ordered
     @destinations = Destination.active.ordered
     @testimonials = Testimonial.featured.ordered
-    @audiences = VolunteerAudience.all
+    @audiences = VolunteerAudience.active.ordered
   end
 
   def volunteer_audience
-    @audience = VolunteerAudience.find(params[:audience])
+    @audience = VolunteerAudience.active.find_by(slug: params[:audience])
     raise ActionController::RoutingError, "Not Found" unless @audience
-    @other_audiences = VolunteerAudience.all.reject { |a| a.slug == @audience.slug }
+    @other_audiences = VolunteerAudience.active.ordered.where.not(id: @audience.id)
     @projects = Project.active.ordered.limit(3)
     render :volunteer_audience
   end

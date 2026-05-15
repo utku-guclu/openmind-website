@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_15_101423) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_122539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "timescaledb"
@@ -115,6 +115,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_101423) do
     t.string "country_code", limit: 2
     t.datetime "created_at", null: false
     t.text "description"
+    t.string "hero_image_url"
     t.decimal "latitude", precision: 10, scale: 7
     t.decimal "longitude", precision: 10, scale: 7
     t.jsonb "meta", default: {}
@@ -270,6 +271,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_101423) do
     t.index ["email"], name: "index_volunteer_applications_on_email"
     t.index ["project_id"], name: "index_volunteer_applications_on_project_id"
     t.index ["status"], name: "index_volunteer_applications_on_status"
+  end
+
+  create_table "volunteer_audiences", force: :cascade do |t|
+    t.jsonb "content", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.string "cta_text", default: "Apply Today"
+    t.string "duration"
+    t.string "hero_image"
+    t.string "hero_video_id"
+    t.string "icon"
+    t.text "intro"
+    t.string "name", null: false
+    t.string "podcast_url"
+    t.integer "position", default: 0
+    t.string "slug", null: false
+    t.string "status", default: "active"
+    t.text "subtitle"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["position"], name: "index_volunteer_audiences_on_position"
+    t.index ["slug"], name: "index_volunteer_audiences_on_slug", unique: true
+    t.index ["status"], name: "index_volunteer_audiences_on_status"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

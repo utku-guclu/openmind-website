@@ -2,12 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title><%= content_for(:title) || "OpenMind Projects — Fight Poverty with Education" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="<%= content_for(:description) || "Ethical and responsible volunteer work empowering impoverished youth in Southeast Asia through education and technology." %>">
-    <meta property="og:title" content="<%= content_for(:title) || "OpenMind Projects" %>">
-    <meta property="og:description" content="<%= content_for(:description) || "Fight Poverty with Education" %>">
-    <meta property="og:type" content="website">
+
+    <%= display_meta_tags(
+          site:        "OpenmindProjects",
+          title:       content_for(:title).presence || "Fight Poverty with Education",
+          description: content_for(:description).presence || "Ethical and responsible volunteer work empowering impoverished youth in Southeast Asia through education and technology.",
+          reverse:     true,
+          separator:   "—",
+          canonical:   request.original_url.split("?").first,
+          og:          {
+            title:        content_for(:title).presence || "OpenmindProjects",
+            description:  content_for(:description).presence || "Fight Poverty with Education",
+            url:          request.original_url,
+            image:        content_for(:og_image).presence || image_url("/omp-globe.png"),
+            site_name:    "OpenmindProjects",
+            type:         "website",
+            locale:       "en_US"
+          },
+          twitter: {
+            card:        "summary_large_image",
+            title:       content_for(:title).presence || "OpenmindProjects",
+            description: content_for(:description).presence || "Fight Poverty with Education",
+            image:       content_for(:og_image).presence || image_url("/omp-globe.png")
+          }
+        ) %>
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -26,6 +46,9 @@
 
     <%= stylesheet_link_tag "brand", "application", "actiontext", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%# JSON-LD structured data %>
+    <script type="application/ld+json"><%== json_ld_schema_for(controller_name, action_name, assigns).to_json.html_safe %></script>
   </head>
 
   <body>
@@ -36,5 +59,8 @@
     </main>
 
     <%= render "organisms/footer" %>
+
+    <%# Jet AI chatbot (external — omp.openskills.dev). Only loads on the public layout, not /admin. %>
+    <script src="https://omp.openskills.dev/embed-launcher.js" defer></script>
   </body>
 </html>

@@ -1,0 +1,23 @@
+<%# locals: { faqs:, heading: "Frequently Asked Questions" } %>
+<section class="faq-section" data-controller="faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-question"></i> FAQ</span>
+      <h2 class="section-header__title"><%= heading %></h2>
+    </div>
+    <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
+      <% faqs.each_with_index do |f, i| %>
+        <details class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="faq-item__q" itemprop="name">
+            <span><%= f[:question] %></span>
+            <i class="ph ph-plus-circle faq-item__icon-closed"></i>
+            <i class="ph ph-minus-circle faq-item__icon-open"></i>
+          </summary>
+          <div class="faq-item__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div itemprop="text"><%= f[:answer] %></div>
+          </div>
+        </details>
+      <% end %>
+    </div>
+  </div>
+</section>

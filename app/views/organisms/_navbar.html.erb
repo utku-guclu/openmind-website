@@ -1,7 +1,7 @@
 <nav class="navbar" id="navbar" data-controller="navbar">
   <div class="navbar__inner">
     <a href="<%= root_path %>" class="navbar__logo" id="nav-logo">
-      <img src="/omp-logo.png" alt="OpenMind Projects" class="navbar__logo-img" height="40">
+      <img src="/omp-logo.png" alt="OpenmindProjects" class="navbar__logo-img" height="40">
     </a>
 
     <div class="navbar__links" id="nav-links">
@@ -49,7 +49,7 @@
           <div class="mega-menu-audiences">
             <div class="mega-menu-audiences__title">FIND YOUR PATH</div>
             <div class="mega-menu-audiences__grid">
-              <% VolunteerAudience.all.each do |a| %>
+              <% VolunteerAudience.active.ordered.each do |a| %>
                 <%= link_to a.path, class: "mega-menu-audience" do %>
                   <i class="ph <%= a.icon %>"></i>
                   <span><%= a.name %></span>
