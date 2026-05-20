@@ -22,7 +22,7 @@
       <% end %>
     <% end %>
     <h1 class="project-hero__title"><%= @project.title %></h1>
-    <%= link_to new_application_path(project_id: @project.id), class: "btn btn--accent btn--lg" do %>
+    <%= link_to new_application_path(project_id: @project.id), class: "btn btn--accent btn--lg", data: { turbo_frame: "modal" } do %>
       <i class="ph ph-paper-plane-tilt"></i> Apply Now
     <% end %>
   </div>
@@ -72,7 +72,7 @@
 
     <%# Apply Today + Social Share %>
     <div class="project-intro__cta">
-      <%= link_to new_application_path(project_id: @project.id), class: "btn btn--primary btn--lg" do %>
+      <%= link_to new_application_path(project_id: @project.id), class: "btn btn--primary btn--lg", data: { turbo_frame: "modal" } do %>
         <i class="ph ph-paper-plane-tilt"></i> Apply Today!
       <% end %>
     </div>
@@ -202,7 +202,7 @@
           <li>We will reply with suggestions of what you can work on, then schedule a talk online.</li>
           <li>After we agree on your project, you receive a Volunteer/Intern Handbook with teaching, culture, language, and travel advice.</li>
         </ol>
-        <%= link_to new_application_path(project_id: @project.id), class: "btn btn--primary btn--lg" do %>
+        <%= link_to new_application_path(project_id: @project.id), class: "btn btn--primary btn--lg", data: { turbo_frame: "modal" } do %>
           <i class="ph ph-paper-plane-tilt"></i> Click here to Apply
         <% end %>
       </div>

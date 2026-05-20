@@ -1,4 +1,4 @@
-# db/seeds.rb - Seed data from openmindprojects.org content
+# db/seeds.rb - Seed data with placeholder media (replace via admin panel).
 
 require_relative "seed_data/volunteer_audiences"
 
@@ -13,7 +13,7 @@ destination_data = [
     longitude: 100.5018,
     position: 0,
     status: "active",
-    hero_image_url: "https://openmindprojects.org/wp-content/uploads/2024/11/family-volunteer-kids-trip15.jpg",
+    hero_image_url: "https://placehold.co/1600x900/2a5d5a/ffffff?text=Thailand+Hero",
     activities: ["Teach English", "Learning Camp", "IT Training", "Conservation", "Social Media", "Online Marketing", "Ethnic Minority", "Migrant"],
     locations: [
       { "name" => "Nong Khai",  "region" => "Northeast Thailand",  "summary" => "Our primary hub — schools, training centers, and the volunteer base." },
@@ -31,7 +31,7 @@ destination_data = [
     longitude: 102.6331,
     position: 1,
     status: "active",
-    hero_image_url: "https://openmindprojects.org/wp-content/uploads/2024/11/volunteer-in-laos.jpg",
+    hero_image_url: "https://placehold.co/1600x900/3d6b4a/ffffff?text=Laos+Hero",
     activities: ["Teach English", "Eco Tourism"],
     locations: [
       { "name" => "Nalong",            "region" => "Vientiane Province", "summary" => "Rural village partner for IT training and learning camps." },
@@ -47,7 +47,7 @@ destination_data = [
     longitude: 85.3240,
     position: 2,
     status: "active",
-    hero_image_url: "https://openmindprojects.org/wp-content/uploads/2024/11/kids-nepal2-scaled.jpg",
+    hero_image_url: "https://placehold.co/1600x900/8a4b2a/ffffff?text=Nepal+Hero",
     activities: ["Teach English", "Conservation", "Eco Tourism", "Social Media"],
     locations: [
       { "name" => "Chitwan", "region" => "Central Nepal", "summary" => "Lowland community partner for English teaching and conservation." }
@@ -194,12 +194,22 @@ projects = [
   }
 ]
 
+placeholder_path = Rails.root.join("db", "seed_assets", "placeholder_gallery.jpg")
+
 projects.each do |attrs|
   project = Project.find_or_initialize_by(slug: attrs[:slug])
   project.assign_attributes(attrs)
   project.save!
+
+  unless project.image.attached?
+    project.image.attach(
+      io: File.open(placeholder_path),
+      filename: "placeholder-#{project.slug}.jpg",
+      content_type: "image/jpeg"
+    )
+  end
 end
-puts "  Created/updated #{Project.count} projects"
+puts "  Created/updated #{Project.count} projects (placeholder images attached)"
 
 puts "Seeding partners..."
 [
@@ -251,8 +261,7 @@ end
 puts "  Admin user: admin@openmindprojects.org / changeme123"
 
 puts "Seeding team members..."
-TeamMember.destroy_all
-[
+team_members_data = [
   {
     name: "Ranjan Bhandari",
     role: "coordinator, volunteer contact",
@@ -302,10 +311,14 @@ TeamMember.destroy_all
     department: "leadership",
     position: 6
   }
-].each do |attrs|
-  TeamMember.create!(attrs)
+]
+
+team_members_data.each do |attrs|
+  member = TeamMember.find_or_initialize_by(name: attrs[:name])
+  member.assign_attributes(attrs)
+  member.save!
 end
-puts "  Created #{TeamMember.count} team members"
+puts "  Created/updated #{TeamMember.count} team members"
 
 puts "Seeding posts..."
 author = AdminUser.find_by(email: "admin@openmindprojects.org")
@@ -354,9 +367,11 @@ puts "  Created #{Post.count} posts"
 puts "Seeding volunteer audiences..."
 VOLUNTEER_AUDIENCES_SEED.each do |attrs|
   content = attrs[:content] || {}
+  is_new  = !VolunteerAudience.exists?(slug: attrs[:slug])
   audience = VolunteerAudience.find_or_initialize_by(slug: attrs[:slug])
-  # Exclude :hero_image (would collide with the ActiveStorage attachment setter)
-  # and :content (handled separately below).
+
+  # Always keep core fields (name, title, icon, position, etc.) in sync with seeds.
+  # These are structural, not editorial — safe to update every run.
   audience.assign_attributes(attrs.except(:content, :hero_image, :hero_image_url).merge(
     hero_image_url:                attrs[:hero_image] || attrs[:hero_image_url],
     activity_intro:                content["activity_intro"],
@@ -365,43 +380,41 @@ VOLUNTEER_AUDIENCES_SEED.each do |attrs|
   ))
   audience.save!
 
-  # Children — rebuild from scratch each seed run to keep ordering/positions clean.
-  audience.benefits.destroy_all
+  # ── GUARD: Only seed child records on first-ever creation. ──────────────────
+  # If the audience already exists in the DB, its children may have been edited
+  # via the admin panel. We skip re-seeding to protect those edits.
+  # To force a re-seed (e.g. after a fresh db:reset), drop the audience first.
+  next unless is_new
+  puts "    Seeding children for: #{audience.name}"
+
   Array(content["benefits"]).each_with_index do |b, i|
     audience.benefits.create!(icon: b["icon"], title: b["title"], text: b["text"], position: i)
   end
 
-  audience.journey.destroy_all
   Array(content["journey"]).each_with_index do |s, i|
     audience.journey.create!(step_label: s["step"], title: s["title"], text: s["text"], position: i)
   end
 
-  audience.intro_sections.destroy_all
   Array(content["intro_sections"]).each_with_index do |s, i|
     audience.intro_sections.create!(heading: s["heading"], body: s["body"], position: i)
   end
 
-  audience.bond_sections.destroy_all
   Array(content["bond_sections"]).each_with_index do |s, i|
     audience.bond_sections.create!(heading: s["heading"], body: s["body"], position: i)
   end
 
-  audience.activity_bullets.destroy_all
   Array(content["activity_bullets"]).each_with_index do |body, i|
     audience.activity_bullets.create!(body: body, position: i)
   end
 
-  audience.videos.destroy_all
   Array(content["video_playlist"]).each_with_index do |v, i|
     audience.videos.create!(youtube_id: v["youtube_id"], title: v["title"], duration: v["duration"], position: i)
   end
 
-  audience.faqs.destroy_all
   Array(content["faqs"]).each_with_index do |f, i|
     audience.faqs.create!(question: f["question"], answer: f["answer"], position: i)
   end
 
-  audience.gallery_images.destroy_all
   Array(content["gallery_images"]).each_with_index do |url, i|
     audience.gallery_images.create!(image_url: url, position: i)
   end

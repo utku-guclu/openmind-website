@@ -17,7 +17,7 @@
           <li><span class="apply__step-num">4</span><span>Start making an impact</span></li>
         </ol>
         <div class="apply__actions">
-          <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "apply-cta" do %>
+          <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "apply-cta", data: { turbo_frame: "modal" } do %>
             <i class="ph ph-hand-heart"></i>
             <span>Volunteer Today</span>
           <% end %>

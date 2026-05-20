@@ -82,7 +82,7 @@
                   <i class="ph ph-newspaper"></i> Learn more
                 <% end %>
 
-                <%= link_to new_application_path, class: "btn btn--primary", style: "flex: 1; justify-content: center; font-size: 0.9rem; padding: 10px;" do %>
+                <%= link_to new_application_path, class: "btn btn--primary", style: "flex: 1; justify-content: center; font-size: 0.9rem; padding: 10px;", data: { turbo_frame: "modal" } do %>
                   <i class="ph ph-check-circle"></i> Apply
                 <% end %>
               </div>

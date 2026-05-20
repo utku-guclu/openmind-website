@@ -61,6 +61,6 @@
     <%= render "organisms/footer" %>
 
     <%# Jet AI chatbot (external — omp.openskills.dev). Only loads on the public layout, not /admin. %>
-    <script src="https://omp.openskills.dev/embed-launcher.js" defer></script>
+    <%= turbo_frame_tag "modal" %>
   </body>
 </html>

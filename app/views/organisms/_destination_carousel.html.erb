@@ -1,7 +1,7 @@
 <%# locals: { destinations: } %>
 <section class="destination-carousel">
   <div class="container">
-    <div class="destination-carousel__grid" data-controller="carousel">
+    <div class="destination-carousel__grid">
       <% destinations.each do |dest| %>
         <% coming_soon = dest.coming_soon? %>
         <article class="destination-card <%= 'destination-card--coming-soon' if coming_soon %>">

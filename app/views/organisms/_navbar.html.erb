@@ -17,7 +17,7 @@
           <div class="mega-menu-grid">
             <%= link_to projects_path, class: "mega-menu-card" do %>
               <div class="mega-menu-card__img-wrap">
-                <img src="https://openmindprojects.org/wp-content/uploads/elementor/thumbs/Laos-village-girl2-scaled-qt9scq8octyj90f59fb9o18hh405wftukfkfe0eu88.jpg" alt="What we do">
+                <img src="https://placehold.co/600x400/2a5d5a/ffffff?text=What+We+Do" alt="What we do">
               </div>
               <div class="mega-menu-card__content">
                 <div class="mega-menu-card__title">What we do</div>
@@ -27,7 +27,7 @@
 
             <%= link_to destinations_path, class: "mega-menu-card" do %>
               <div class="mega-menu-card__img-wrap">
-                <img src="https://openmindprojects.org/wp-content/uploads/elementor/thumbs/272390-P5JPWJ-124-qy09yi905f0vdcqadwtc3490q2yfuj0fk3g42m1jt4.jpg" alt="Where we work">
+                <img src="https://placehold.co/600x400/3d6b4a/ffffff?text=Where+We+Work" alt="Where we work">
               </div>
               <div class="mega-menu-card__content">
                 <div class="mega-menu-card__title">Where we work</div>
@@ -37,7 +37,7 @@
 
             <%= link_to volunteer_path, class: "mega-menu-card" do %>
               <div class="mega-menu-card__img-wrap">
-                <img src="https://openmindprojects.org/wp-content/uploads/elementor/thumbs/Babyboomer-volunteers-qtno6ssksufnh5tplixw56run0kv9y44xs8g92tdsg.jpg" alt="Who volunteers">
+                <img src="https://placehold.co/600x400/8a5a4a/ffffff?text=Who+Volunteers" alt="Who volunteers">
               </div>
               <div class="mega-menu-card__content">
                 <div class="mega-menu-card__title">Who volunteers</div>
@@ -60,7 +60,7 @@
 
           <div class="mega-menu-footer">
             <h3 class="mega-menu-footer__title">GET INVOLVED</h3>
-            <%= link_to "Apply Today!", new_application_path, class: "btn btn--primary" %>
+            <%= link_to "Apply Today!", new_application_path, class: "btn btn--primary" , data: { turbo_frame: "modal" } %>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
       <%= link_to donate_path, class: "navbar__action navbar__action--ghost", id: "nav-donate" do %>
         <i class="ph ph-heart"></i><span>Donate</span>
       <% end %>
-      <%= link_to new_application_path, class: "navbar__action navbar__action--primary", id: "nav-apply" do %>
+      <%= link_to new_application_path, class: "navbar__action navbar__action--primary", id: "nav-apply", data: { turbo_frame: "modal" } do %>
         <i class="ph ph-paper-plane-tilt"></i><span>Apply</span>
       <% end %>
       <button class="navbar__hamburger" id="nav-hamburger" aria-label="Toggle menu" data-action="click->navbar#toggle">

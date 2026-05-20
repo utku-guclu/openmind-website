@@ -36,7 +36,7 @@
       <%= settings["hero_subtitle"] || "Ethical and responsible volunteer work empowering impoverished youth and their parents in Southeast Asia." %>
     </p>
     <div class="hero__cta-group">
-      <%= link_to new_application_path, class: "btn btn--primary btn--lg", id: "hero-volunteer" do %>
+      <%= link_to new_application_path, class: "btn btn--primary btn--lg", id: "hero-volunteer", data: { turbo_frame: "modal" } do %>
         <i class="ph ph-hand-heart"></i>
         <span>Volunteer Today</span>
       <% end %>

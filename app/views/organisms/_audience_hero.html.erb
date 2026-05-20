@@ -13,7 +13,7 @@
       <span class="audience-hero__meta-item"><i class="ph ph-clock"></i> <%= audience.duration %></span>
     </div>
     <div class="audience-hero__actions">
-      <%= link_to new_application_path, class: "btn btn--accent btn--lg" do %>
+      <%= link_to new_application_path, class: "btn btn--accent btn--lg", data: { turbo_frame: "modal" } do %>
         <i class="ph ph-paper-plane-tilt"></i> <%= audience.cta_text %>
       <% end %>
       <a href="#benefits" class="btn btn--glass btn--lg">

@@ -23,7 +23,7 @@
       <% end %>
     </div>
     <div class="inspired__actions" data-reveal-target="item">
-      <%= link_to new_application_path, class: "btn btn--primary btn--lg" do %>
+      <%= link_to new_application_path, class: "btn btn--primary btn--lg", data: { turbo_frame: "modal" } do %>
         <i class="ph ph-hand-heart"></i><span>Volunteer</span>
       <% end %>
       <%= link_to "https://idream.openmindprojects.org/", target: "_blank", rel: "noopener noreferrer nofollow", class: "btn btn--accent btn--lg" do %>

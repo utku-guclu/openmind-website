@@ -39,7 +39,7 @@
         <%= link_to "Volunteering", volunteer_path %>
         <%= link_to "R&D", research_development_path %>
         <%= link_to "News", news_index_path %>
-        <%= link_to "Apply", new_application_path %>
+        <%= link_to "Apply", new_application_path , data: { turbo_frame: "modal" } %>
         <%= link_to "Donate", donate_path %>
         <%= link_to "Contact", new_contact_path %>
       </div>

@@ -47,6 +47,10 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
+# S3-compatible storage backend (used by Active Storage when STORAGE_SERVICE=amazon).
+# Works against both AWS S3 and Cloudflare R2.
+gem "aws-sdk-s3", require: false
+
 # Admin UI: ActiveAdmin (login + CRUD + dashboard) + Devise (auth) +
 # CanCanCan (role-based authorization for superadmin/admin/editor).
 gem "activeadmin"

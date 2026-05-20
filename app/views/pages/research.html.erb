@@ -33,7 +33,7 @@
       <h2 class="cta-section__title">Join Our R&D Team</h2>
       <p class="cta-section__desc">We're looking for developers, researchers, and educators who want to use their skills for social impact.</p>
       <div class="cta-section__actions">
-        <%= link_to new_application_path(type: "volunteer_online"), class: "btn btn--accent btn--lg" do %>
+        <%= link_to new_application_path(type: "volunteer_online"), class: "btn btn--accent btn--lg", data: { turbo_frame: "modal" } do %>
           <i class="ph ph-code"></i> Contribute Remotely
         <% end %>
         <%= link_to new_contact_path, class: "btn btn--glass-dark btn--lg" do %>

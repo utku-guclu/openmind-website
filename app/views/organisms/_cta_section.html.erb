@@ -22,7 +22,7 @@
         <% end %>
       </div>
       <div class="cta-section__actions" data-reveal-target="item">
-        <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "cta-apply" do %>
+        <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "cta-apply", data: { turbo_frame: "modal" } do %>
           <i class="ph ph-paper-plane-tilt"></i>
           <span>Apply Today</span>
         <% end %>

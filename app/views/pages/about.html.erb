@@ -10,12 +10,12 @@
   <% else %>
     <!-- Default background image as requested -->
     <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 30, 55, 0.6) 0%, rgba(12, 30, 55, 0.8) 100%); z-index: 1;"></div>
-    <img src="https://openmindprojects.org/wp-content/uploads/2024/11/family-volunteer-makenew-friends14.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; z-index: 0;" alt="Family Volunteer Make New Friends" />
+    <img src="https://placehold.co/1920x1080/0c1e37/ffffff?text=About+Hero" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; z-index: 0;" alt="About hero placeholder" />
   <% end %>
   <div class="container" style="position: relative; z-index: 2; max-width: 900px; margin: 0 auto;">
     <h2 style="font-size: 3.5rem; margin-bottom: var(--space-md); font-weight: 700; color: #fff; line-height: 1.2;"><%= hero_title %></h2>
     <h3 style="font-size: 1.25rem; font-weight: 400; margin: 0 auto var(--space-lg); line-height: 1.6; color: #f0f0f0;"><%= hero_subtitle %></h3>
-    <%= link_to "Get Involved", new_application_path, class: "btn btn--primary btn--lg", style: "margin-top: var(--space-md);" %>
+    <%= link_to "Get Involved", new_application_path, class: "btn btn--primary btn--lg", style: "margin-top: var(--space-md);" , data: { turbo_frame: "modal" } %>
   </div>
 </section>
 
@@ -74,7 +74,7 @@
           <% end %>
         <% else %>
           <!-- Fallback Vimeo Video or Image -->
-          <img src="https://openmindprojects.org/wp-content/uploads/2024/09/1openmindprojecs-co-founder-1024x1024-1.jpg" alt="Photo of OpenmindProjects Co-founders Gaweechat Joompaula and Sven Mauleon." style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+          <img src="https://placehold.co/1024x1024/2a5d5a/ffffff?text=Founders+Photo" alt="OpenmindProjects co-founders placeholder" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
           <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.9); font-size: 4rem; cursor: pointer;">
             <i class="ph-fill ph-play-circle"></i>
           </div>
