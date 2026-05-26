@@ -1,0 +1,13 @@
+<% content_for(:title) { "Destinations — OpenmindProjects" } %>
+
+<section class="programs" style="padding-top: 120px; padding-bottom: var(--space-md);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-map-trifold"></i> Destinations</span>
+      <h1 class="section-header__title">Where We <span class="text-primary">Work</span></h1>
+      <p class="section-header__desc">Our programs span Southeast Asia, bringing education and opportunity to communities that need it most.</p>
+    </div>
+  </div>
+</section>
+
+<%= render "organisms/destination_carousel", destinations: @destinations %>

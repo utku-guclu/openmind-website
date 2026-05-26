@@ -1,0 +1,60 @@
+<div class="volunteer-modal" data-volunteer-modal-target="modal" aria-hidden="true" role="dialog">
+  <div class="volunteer-modal__backdrop" data-action="click->volunteer-modal#closeModal"></div>
+  <div class="volunteer-modal__sheet">
+    <header class="volunteer-modal__header">
+      <div class="volunteer-modal__brand">
+        <img src="/omp-logo.png" alt="OpenmindProjects Logo" class="volunteer-modal__logo">
+        <div class="volunteer-modal__brand-meta">
+          <span class="volunteer-modal__title">Volunteer Application</span>
+          <span class="volunteer-modal__badge"><i class="ph ph-hand-heart"></i> Official Portal</span>
+        </div>
+      </div>
+      
+      <div class="volunteer-modal__status">
+        <div class="volunteer-modal__status-pill">
+          <span class="pulse-beacon pulse-beacon--success"></span>
+          <span>SSL Secured Connection</span>
+        </div>
+      </div>
+
+      <button class="volunteer-modal__close-btn" data-action="click->volunteer-modal#closeModal" aria-label="Close form">
+        <span class="volunteer-modal__close-text">Back to Site</span>
+        <div class="volunteer-modal__close-icon-wrap">
+          <i class="ph ph-x"></i>
+        </div>
+      </button>
+    </header>
+
+    <div class="volunteer-modal__body">
+      <!-- High-end glassmorphic skeleton loader -->
+      <div class="volunteer-modal__loader" data-volunteer-modal-target="loader">
+        <div class="volunteer-modal__loader-card">
+          <div class="volunteer-modal__loader-logo-wrap">
+            <img src="/omp-logo.png" alt="OMP Logo" class="volunteer-modal__loader-logo">
+            <div class="volunteer-modal__loader-ring"></div>
+          </div>
+          <h3>Securing Connection...</h3>
+          <p>Opening OpenmindProjects application portal on SendImpact</p>
+          <div class="volunteer-modal__progress-bar">
+            <div class="volunteer-modal__progress-fill"></div>
+          </div>
+          <div class="volunteer-modal__security-info">
+            <i class="ph ph-lock-keyhole"></i>
+            <span>End-to-End 256-Bit SSL Encryption</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iframe for SendImpact -->
+      <iframe 
+        class="volunteer-modal__iframe" 
+        data-volunteer-modal-target="iframe"
+        data-action="load->volunteer-modal#onIframeLoad"
+        src="about:blank"
+        title="Volunteer Application Form"
+        allow="geolocation; microphone; camera; midi; encrypted-media;"
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox">
+      </iframe>
+    </div>
+  </div>
+</div>

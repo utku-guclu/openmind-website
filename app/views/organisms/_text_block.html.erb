@@ -1,0 +1,9 @@
+<%# locals: { heading:, body:, surface: "light" } %>
+<section class="text-block text-block--<%= surface %>">
+  <div class="container text-block__inner">
+    <h2 class="text-block__heading"><%= heading %></h2>
+    <% body.to_s.split(/\n{2,}/).each do |para| %>
+      <p class="text-block__body"><%= para %></p>
+    <% end %>
+  </div>
+</section>

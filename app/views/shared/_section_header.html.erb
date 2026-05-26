@@ -1,0 +1,14 @@
+<%# Reusable section header partial
+     Locals:
+       tag:   (String)  label text, e.g. "Our Projects"
+       icon:  (String)  Phosphor icon name, e.g. "briefcase"
+       title: (String)  heading — wrap accent word in <span class="text-primary">
+       desc:  (String, optional)  subtitle paragraph
+%>
+<div class="section-header">
+  <span class="section-header__tag"><i class="ph ph-<%= icon %>"></i> <%= tag %></span>
+  <h2 class="section-header__title"><%= raw title %></h2>
+  <% if defined?(desc) && desc.present? %>
+    <p class="section-header__desc"><%= desc %></p>
+  <% end %>
+</div>

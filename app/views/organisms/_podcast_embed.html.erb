@@ -1,0 +1,17 @@
+<%# locals: { track_url:, title: "Listen to our podcast", description: nil } %>
+<section class="podcast-embed">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-headphones"></i> Podcast</span>
+      <h2 class="section-header__title"><%= title %></h2>
+      <% if description.present? %>
+        <p class="section-header__desc"><%= description %></p>
+      <% end %>
+    </div>
+    <div class="podcast-embed__player">
+      <iframe
+        width="100%" height="300" frameborder="no" scrolling="no" loading="lazy"
+        src="https://w.soundcloud.com/player/?visual=true&url=<%= CGI.escape(track_url) %>&auto_play=false&show_artwork=true&color=%230C7ABF"></iframe>
+    </div>
+  </div>
+</section>

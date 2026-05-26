@@ -1,0 +1,23 @@
+<%# locals: { youtube_id:, title:, subtitle: nil, cta_text:, cta_path: } %>
+<section class="video-hero">
+  <div class="video-hero__bg">
+    <iframe
+      class="video-hero__iframe"
+      src="https://www.youtube-nocookie.com/embed/<%= youtube_id %>?autoplay=1&mute=1&loop=1&playlist=<%= youtube_id %>&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&cc_load_policy=0"
+      title="<%= title %>"
+      frameborder="0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen
+      loading="lazy"></iframe>
+  </div>
+  <div class="video-hero__overlay"></div>
+  <div class="container video-hero__content">
+    <h1 class="video-hero__title"><%= title %></h1>
+    <% if subtitle.present? %>
+      <p class="video-hero__subtitle"><%= subtitle %></p>
+    <% end %>
+    <%= link_to cta_path, class: "btn btn--accent btn--lg" do %>
+      <i class="ph ph-paper-plane-tilt"></i> <%= cta_text %>
+    <% end %>
+  </div>
+</section>

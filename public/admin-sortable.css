@@ -1,0 +1,41 @@
+/* Drag-and-drop styling for ActiveAdmin has_many forms */
+
+/* Legend is the drag handle */
+.has_many_fields legend.sortable-handle {
+  cursor: grab;
+  user-select: none;
+  position: relative;
+  padding-left: 22px;
+}
+.has_many_fields legend.sortable-handle::before {
+  content: "⋮⋮";
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 14px;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.has_many_fields legend.sortable-handle:hover::before {
+  color: #5294e2;
+}
+.has_many_fields legend.sortable-handle:active {
+  cursor: grabbing;
+}
+
+/* While dragging */
+.has_many_fields.sortable-chosen {
+  outline: 2px solid #5294e2;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.has_many_fields.sortable-ghost {
+  opacity: 0.35;
+  background: #eef5fc;
+}
+.has_many_fields.sortable-drag {
+  opacity: 0.95;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}

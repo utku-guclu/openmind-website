@@ -1,0 +1,90 @@
+<nav class="navbar" id="navbar" data-controller="navbar">
+  <div class="navbar__inner">
+    <a href="<%= root_path %>" class="navbar__logo" id="nav-logo">
+      <img src="/omp-logo.png" alt="OpenmindProjects" class="navbar__logo-img" height="40">
+    </a>
+
+    <div class="navbar__links" id="nav-links">
+      <%= link_to about_path, class: "navbar__link" do %>
+        <i class="ph ph-identification-card"></i> About Us
+      <% end %>
+
+      <div class="navbar__dropdown" data-controller="dropdown">
+        <button class="navbar__link navbar__link--dropdown" data-action="click->dropdown#toggle" aria-expanded="false">
+          <i class="ph ph-hand-waving"></i> Volunteering <i class="ph ph-caret-down navbar__caret"></i>
+        </button>
+        <div class="navbar__dropdown-menu" data-dropdown-target="menu">
+          <div class="mega-menu-grid">
+            <%= link_to projects_path, class: "mega-menu-card" do %>
+              <div class="mega-menu-card__img-wrap">
+                <% whatwedo_img = site_setting_image_url("navbar_whatwedo_image") %>
+                <% if whatwedo_img %><img src="<%= whatwedo_img %>" alt="What we do"><% end %>
+              </div>
+              <div class="mega-menu-card__content">
+                <div class="mega-menu-card__title">What we do</div>
+                <p class="mega-menu-card__desc"><%= site_setting("navbar_whatwedo_desc")&.value || "We empower students with 21st-century skills for brighter futures." %></p>
+              </div>
+            <% end %>
+
+            <%= link_to destinations_path, class: "mega-menu-card" do %>
+              <div class="mega-menu-card__img-wrap">
+                <% wherewework_img = site_setting_image_url("navbar_wherewework_image") %>
+                <% if wherewework_img %><img src="<%= wherewework_img %>" alt="Where we work"><% end %>
+              </div>
+              <div class="mega-menu-card__content">
+                <div class="mega-menu-card__title">Where we work</div>
+                <p class="mega-menu-card__desc"><%= site_setting("navbar_wherewework_desc")&.value || "Make a lasting impact in Southeast Asia." %></p>
+              </div>
+            <% end %>
+
+            <%= link_to volunteer_path, class: "mega-menu-card" do %>
+              <div class="mega-menu-card__img-wrap">
+                <% whovolunteers_img = site_setting_image_url("navbar_whovolunteers_image") %>
+                <% if whovolunteers_img %><img src="<%= whovolunteers_img %>" alt="Who volunteers"><% end %>
+              </div>
+              <div class="mega-menu-card__content">
+                <div class="mega-menu-card__title">Who volunteers</div>
+                <p class="mega-menu-card__desc"><%= site_setting("navbar_whovolunteers_desc")&.value || "We welcome you to volunteer in Southeast Asia." %></p>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="mega-menu-audiences">
+            <div class="mega-menu-audiences__title">FIND YOUR PATH</div>
+            <div class="mega-menu-audiences__grid">
+              <% VolunteerAudience.active.ordered.each do |a| %>
+                <%= link_to a.path, class: "mega-menu-audience" do %>
+                  <i class="ph <%= a.icon %>"></i>
+                  <span><%= a.name %></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="mega-menu-footer">
+            <h3 class="mega-menu-footer__title">GET INVOLVED</h3>
+            <%= link_to "Apply Today!", new_application_path, class: "btn btn--primary" %>
+          </div>
+        </div>
+      </div>
+
+      <%= link_to research_development_path, class: "navbar__link" do %>
+        <i class="ph ph-globe-hemisphere-west"></i> R&D
+      <% end %>
+    </div>
+
+    <div class="navbar__actions">
+      <%= link_to donate_path, class: "navbar__action navbar__action--ghost", id: "nav-donate" do %>
+        <i class="ph ph-heart"></i><span>Donate</span>
+      <% end %>
+      <%= link_to new_application_path, class: "navbar__action navbar__action--primary", id: "nav-apply" do %>
+        <i class="ph ph-paper-plane-tilt"></i><span>Apply</span>
+      <% end %>
+      <button class="navbar__hamburger" id="nav-hamburger" aria-label="Toggle menu" data-action="click->navbar#toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,13 @@
+<%# locals: { blocks: } %>
+<section class="bond-blocks">
+  <div class="container">
+    <div class="bond-blocks__grid">
+      <% blocks.each do |b| %>
+        <article class="bond-block">
+          <h3 class="bond-block__heading"><%= b[:heading] %></h3>
+          <p class="bond-block__body"><%= b[:body] %></p>
+        </article>
+      <% end %>
+    </div>
+  </div>
+</section>

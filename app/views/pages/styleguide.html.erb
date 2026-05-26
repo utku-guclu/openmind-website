@@ -1,0 +1,283 @@
+<% content_for(:title) { "Design System — OpenmindProjects" } %>
+
+<section style="padding-top: 120px; padding-bottom: var(--space-2xl);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-palette"></i> Design System</span>
+      <h1 class="section-header__title">OpenMind <span class="text-primary">Style Guide</span></h1>
+      <p class="section-header__desc">Living reference of all design tokens, components, and patterns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COLORS ========== -->
+<section style="padding: var(--space-2xl) 0;">
+  <div class="container">
+    <h2 style="margin-bottom: var(--space-xl);">Color Palette</h2>
+
+    <h3 style="margin-bottom: var(--space-md); color: var(--color-text-secondary);">Primary</h3>
+    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-md); margin-bottom: var(--space-xl);">
+      <% [
+        ["Deep Ocean Blue", "#0C7ABF", "--color-primary"],
+        ["Primary Dark", "#095A8F", "--color-primary-dark"],
+        ["Primary Light", "#3D9BD5", "--color-primary-light"],
+        ["Amber Gold", "#E89B1C", "--color-accent"],
+        ["Accent Dark", "#C07E10", "--color-accent-dark"],
+        ["Accent Light", "#F0B44D", "--color-accent-light"]
+      ].each do |name, hex, token| %>
+        <div style="text-align: center;">
+          <div style="height: 72px; background: <%= hex %>; border-radius: var(--radius-md); margin-bottom: var(--space-sm); box-shadow: var(--shadow-sm);"></div>
+          <strong style="font-size: .8rem; display: block;"><%= name %></strong>
+          <code style="font-size: .7rem; color: var(--color-primary);"><%= hex %></code>
+        </div>
+      <% end %>
+    </div>
+
+    <h3 style="margin-bottom: var(--space-md); color: var(--color-text-secondary);">Secondary</h3>
+    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-md); margin-bottom: var(--space-xl);">
+      <% [
+        ["Fresh Green", "#4CAF50", "--color-green"],
+        ["Sky Blue", "#5DADE2", "--color-sky"],
+        ["Cornflower", "#6B8EC7", "--color-cornflower"],
+        ["Teal", "#008B8B", "--color-teal"],
+        ["Error Red", "#E74C3C", "--color-error"],
+        ["Info Blue", "#5DADE2", "--color-info"]
+      ].each do |name, hex, token| %>
+        <div style="text-align: center;">
+          <div style="height: 72px; background: <%= hex %>; border-radius: var(--radius-md); margin-bottom: var(--space-sm); box-shadow: var(--shadow-sm);"></div>
+          <strong style="font-size: .8rem; display: block;"><%= name %></strong>
+          <code style="font-size: .7rem; color: var(--color-primary);"><%= hex %></code>
+        </div>
+      <% end %>
+    </div>
+
+    <h3 style="margin-bottom: var(--space-md); color: var(--color-text-secondary);">Neutrals</h3>
+    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-md);">
+      <% [
+        ["Charcoal", "#2C3E50", "--color-text-primary"],
+        ["Slate Gray", "#5D6D7E", "--color-text-secondary"],
+        ["Light Steel", "#D6E4F0", "--color-bg-section"],
+        ["Ice Blue", "#EBF5FB", "--color-bg-tint"],
+        ["White", "#FFFFFF", "--color-bg-white"],
+        ["Near Black", "#1A1A2E", "--color-dark"]
+      ].each do |name, hex, token| %>
+        <div style="text-align: center;">
+          <div style="height: 72px; background: <%= hex %>; border-radius: var(--radius-md); margin-bottom: var(--space-sm); border: 1px solid var(--color-bg-section);"></div>
+          <strong style="font-size: .8rem; display: block;"><%= name %></strong>
+          <code style="font-size: .7rem; color: var(--color-primary);"><%= hex %></code>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TYPOGRAPHY ========== -->
+<section style="padding: var(--space-2xl) 0; background: var(--color-bg-tint);">
+  <div class="container">
+    <h2 style="margin-bottom: var(--space-xl);">Typography</h2>
+
+    <div class="about__card" style="margin-bottom: var(--space-lg);">
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="text-align: left; border-bottom: 2px solid var(--color-bg-section);">
+            <th style="padding: 12px 16px; font-size: .85rem;">Element</th>
+            <th style="padding: 12px 16px; font-size: .85rem;">Size</th>
+            <th style="padding: 12px 16px; font-size: .85rem;">Weight</th>
+            <th style="padding: 12px 16px; font-size: .85rem;">Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--color-bg-section);">
+            <td style="padding: 16px;"><code>h1</code></td>
+            <td style="padding: 16px;">48px / 3rem</td>
+            <td style="padding: 16px;">700 Bold</td>
+            <td style="padding: 16px;"><h1 style="margin: 0; font-size: 2rem;">Page Title</h1></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--color-bg-section);">
+            <td style="padding: 16px;"><code>h2</code></td>
+            <td style="padding: 16px;">36px / 2.25rem</td>
+            <td style="padding: 16px;">600 Semi-Bold</td>
+            <td style="padding: 16px;"><h2 style="margin: 0;">Section Title</h2></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--color-bg-section);">
+            <td style="padding: 16px;"><code>h3</code></td>
+            <td style="padding: 16px;">24px / 1.5rem</td>
+            <td style="padding: 16px;">500 Medium</td>
+            <td style="padding: 16px;"><h3 style="margin: 0;">Subsection</h3></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--color-bg-section);">
+            <td style="padding: 16px;"><code>h4</code></td>
+            <td style="padding: 16px;">20px / 1.25rem</td>
+            <td style="padding: 16px;">600 Semi-Bold</td>
+            <td style="padding: 16px;"><h4 style="margin: 0;">Card Title</h4></td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--color-bg-section);">
+            <td style="padding: 16px;"><code>body</code></td>
+            <td style="padding: 16px;">16px / 1rem</td>
+            <td style="padding: 16px;">400 Regular</td>
+            <td style="padding: 16px;">Body text — Inter, the workhorse font.</td>
+          </tr>
+          <tr>
+            <td style="padding: 16px;"><code>code</code></td>
+            <td style="padding: 16px;">14px / .875rem</td>
+            <td style="padding: 16px;">400 Regular</td>
+            <td style="padding: 16px;"><code>Roboto Mono — code & technical text</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+      <div class="about__card">
+        <h4 style="margin-bottom: var(--space-md);">Font Stack</h4>
+        <p><strong>Primary:</strong> Outfit</p>
+        <p><strong>Display:</strong> Playfair Display (hero)</p>
+        <p><strong>Mono:</strong> Roboto Mono</p>
+      </div>
+      <div class="about__card">
+        <h4 style="margin-bottom: var(--space-md);">Hero Headline</h4>
+        <p style="font-family: var(--font-display); font-style: italic; font-size: 1.8rem; font-weight: 700; color: var(--color-primary);">
+          Fight Poverty with Education
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BUTTONS ========== -->
+<section style="padding: var(--space-2xl) 0;">
+  <div class="container">
+    <h2 style="margin-bottom: var(--space-xl);">Buttons</h2>
+
+    <div class="about__card" style="margin-bottom: var(--space-lg);">
+      <h4 style="margin-bottom: var(--space-lg);">Light Background</h4>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+        <a class="btn btn--primary"><i class="ph ph-rocket-launch"></i> Primary</a>
+        <a class="btn btn--accent"><i class="ph ph-paper-plane-tilt"></i> Accent</a>
+        <a class="btn btn--outline">Outline</a>
+        <a class="btn btn--primary btn--lg">Large Primary</a>
+        <a class="btn btn--accent btn--lg">Large Accent</a>
+      </div>
+    </div>
+
+    <div style="padding: var(--space-xl); background: var(--color-dark); border-radius: var(--radius-lg);">
+      <h4 style="margin-bottom: var(--space-lg); color: #fff;">Dark Background</h4>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+        <a class="btn btn--glass"><i class="ph ph-globe-hemisphere-west"></i> Glass</a>
+        <a class="btn btn--glass-dark">Glass Dark</a>
+        <a class="btn btn--accent btn--lg">Accent on Dark</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION HEADERS ========== -->
+<section style="padding: var(--space-2xl) 0; background: var(--color-bg-tint);">
+  <div class="container">
+    <h2 style="margin-bottom: var(--space-xl);">Section Headers</h2>
+
+    <div class="about__card" style="margin-bottom: var(--space-lg);">
+      <h4 style="margin-bottom: var(--space-lg);">Default</h4>
+      <%= render "shared/section_header", icon: "briefcase", tag: "Our Projects", title: "Explore <span class='text-primary'>Programs</span>", desc: "Browse volunteer opportunities across Southeast Asia." %>
+    </div>
+
+    <div class="about__card">
+      <h4 style="margin-bottom: var(--space-lg);">Minimal (no description)</h4>
+      <%= render "shared/section_header", icon: "users", tag: "Our Team", title: "The People <span class='text-primary'>Behind</span> the Mission" %>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PILLAR CARDS ========== -->
+<section style="padding: var(--space-2xl) 0;">
+  <div class="container">
+    <h2 style="margin-bottom: var(--space-xl);">Pillar Cards</h2>
+    <div class="pillars__grid">
+      <% [
+        { number: "01", icon: "graduation-cap", title: "Education & Cross-Cultural Learning", desc: "Empower students with 21st-century skills.", items: ["IT & Programming", "English Language", "Cross-Cultural Skills"], link_path: "/projects", color: "education" },
+        { number: "02", icon: "trend-up", title: "Upskill & Development", desc: "Building capacity in local communities.", items: ["Community Training", "Local Partnerships", "Sustainability"], link_path: "/volunteer", color: "development" },
+        { number: "03", icon: "flask", title: "Research & Development", desc: "Leveraging technology for social impact.", items: ["AI Technology", "Data Analytics", "Innovation"], link_path: "/research-development", color: "research" }
+      ].each do |p| %>
+        <%= render "shared/pillar_card", pillar: p, color_class: "pillar-card--#{p[:color]}" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT CARDS ========== -->
+<section style="padding: var(--space-2xl) 0; background: var(--color-bg-tint);">
+  <div class="container">
+    <h2 style="margin-bottom: var(--space-xl);">About Cards</h2>
+    <div class="about__grid">
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--blue"><i class="ph ph-target"></i></div>
+        <h3>Mission Card</h3>
+        <p>Default card with blue accent icon and hover lift effect.</p>
+      </div>
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--gold"><i class="ph ph-eye"></i></div>
+        <h3>Vision Card</h3>
+        <p>Gold accent icon variant for secondary importance.</p>
+      </div>
+      <div class="about__card">
+        <div class="about__card-icon about__card-icon--teal"><i class="ph ph-calendar"></i></div>
+        <h3>Founded Card</h3>
+        <p>Teal accent icon variant for tertiary information.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SPACING & RADII ========== -->
+<section style="padding: var(--space-2xl) 0;">
+  <div class="container">
+    <h2 style="margin-bottom: var(--space-xl);">Spacing & Radii</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+      <div class="about__card">
+        <h4 style="margin-bottom: var(--space-md);">Spacing Scale</h4>
+        <% { xs: 4, sm: 8, md: 16, lg: 24, xl: 32, "2xl": 48, "3xl": 64, "4xl": 96 }.each do |name, px| %>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+            <code style="width: 80px; font-size: .8rem;">--space-<%= name %></code>
+            <div style="height: 12px; width: <%= px %>px; background: var(--color-primary); border-radius: 2px;"></div>
+            <span style="font-size: .8rem; color: var(--color-text-secondary);"><%= px %>px</span>
+          </div>
+        <% end %>
+      </div>
+      <div class="about__card">
+        <h4 style="margin-bottom: var(--space-md);">Border Radii</h4>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <% { sm: "4px", md: "8px", lg: "12px", xl: "24px", full: "50%" }.each do |name, val| %>
+            <div style="text-align: center;">
+              <div style="width: 64px; height: 64px; background: var(--color-primary); border-radius: var(--radius-<%= name %>); margin-bottom: 6px;"></div>
+              <code style="font-size: .7rem;"><%= name %></code>
+              <div style="font-size: .65rem; color: var(--color-text-secondary);"><%= val %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SHADOWS ========== -->
+<section style="padding: var(--space-2xl) 0; background: var(--color-bg-tint);">
+  <div class="container">
+    <h2 style="margin-bottom: var(--space-xl);">Shadows</h2>
+    <div style="display: flex; gap: var(--space-xl); flex-wrap: wrap;">
+      <% %w[sm md lg xl].each do |size| %>
+        <div style="text-align: center;">
+          <div style="width: 120px; height: 80px; background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-<%= size %>); margin-bottom: var(--space-sm);"></div>
+          <code style="font-size: .8rem;">--shadow-<%= size %></code>
+        </div>
+      <% end %>
+      <div style="text-align: center;">
+        <div style="width: 120px; height: 80px; background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-accent); margin-bottom: var(--space-sm);"></div>
+        <code style="font-size: .8rem;">--shadow-accent</code>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 120px; height: 80px; background: #fff; border-radius: var(--radius-md); box-shadow: var(--shadow-gold); margin-bottom: var(--space-sm);"></div>
+        <code style="font-size: .8rem;">--shadow-gold</code>
+      </div>
+    </div>
+  </div>
+</section>

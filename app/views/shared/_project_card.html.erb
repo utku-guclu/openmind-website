@@ -1,0 +1,20 @@
+<%# Reusable project card partial
+     Locals:
+       project: (Project) ActiveRecord model instance
+%>
+<div class="program-card" id="project-<%= project.slug %>">
+  <% if project.category.present? %>
+    <div class="program-card__badge"><%= project.category.titleize %></div>
+  <% end %>
+  <div class="program-card__icon">
+    <i class="ph ph-<%= project_icon(project.category) %>"></i>
+  </div>
+  <h3 class="program-card__title"><%= project.title %></h3>
+  <p class="program-card__desc"><%= project.summary %></p>
+  <% if project.destination %>
+    <p style="font-size: .85rem; color: var(--color-text-secondary); margin-bottom: var(--space-md);">
+      <i class="ph ph-map-pin"></i> <%= project.destination.name %>
+    </p>
+  <% end %>
+  <%= link_to "Learn More", project_path(project.slug), class: "btn btn--primary btn--full" %>
+</div>

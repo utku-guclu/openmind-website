@@ -1,0 +1,20 @@
+<%# locals: { audiences: } %>
+<section class="audience-grid-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header__tag"><i class="ph ph-hand-waving"></i> Who volunteers</div>
+      <h2 class="section-header__title">Find the path that fits you</h2>
+      <p class="section-header__desc">From students taking a gap year to retired professionals sharing a lifetime of expertise — there's a way in for everyone.</p>
+    </div>
+    <div class="audience-grid">
+      <% audiences.each do |a| %>
+        <%= link_to a.path, class: "audience-tile" do %>
+          <div class="audience-tile__icon"><i class="ph <%= a.icon %>"></i></div>
+          <h3 class="audience-tile__title"><%= a.name %></h3>
+          <p class="audience-tile__text"><%= a.subtitle %></p>
+          <span class="audience-tile__link">Read more <i class="ph ph-arrow-right"></i></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>

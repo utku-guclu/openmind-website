@@ -1,0 +1,594 @@
+<%# ══════════════════════════════════════════════════════════════════
+   PROJECT SHOW — matches openmindprojects.org/project-explorer layout
+   1. Hero with cover image + overlaid title + Apply Now button
+   2. Green project subtitle + flag + meta cards
+   3. Two-column: Project Objectives text  |  Project image
+   4. Apply Today button + Social share
+   5. Tabs: Volunteer info / Gallery / Apply for free
+   6. Related projects
+   ══════════════════════════════════════════════════════════════════ %>
+
+<% content_for(:title) { "#{@project.seo_title.presence || @project.title} — OpenmindProjects" } %>
+<% if @project.seo_meta_description.present? || @project.summary.present? %>
+  <% content_for(:meta_description) { @project.seo_meta_description.presence || @project.summary } %>
+<% end %>
+
+<%# ── 1. HERO ──────────────────────────────────────────────────── %>
+<section class="project-hero">
+  <% if @project.image.attached? %>
+    <%= image_tag @project.image, class: "project-hero__bg", alt: @project.title %>
+  <% end %>
+  <div class="project-hero__overlay"></div>
+  <div class="project-hero__inner">
+    <% if @project.category.present? %>
+      <%= link_to projects_path(category: @project.category), class: "category-badge category-badge--#{@project.category_color}", style: "margin-bottom: var(--space-md); background: rgba(255,255,255,.15); color: #fff; backdrop-filter: blur(8px);" do %>
+        <i class="ph <%= @project.category_icon %>"></i>
+        <%= @project.category_label %>
+      <% end %>
+    <% end %>
+    <h1 class="project-hero__title"><%= @project.title %></h1>
+    <%= link_to new_application_path(project_id: @project.id), class: "btn btn--accent btn--lg" do %>
+      <i class="ph ph-paper-plane-tilt"></i> Apply Now
+    <% end %>
+  </div>
+</section>
+
+<%# ── 2. PROJECT INTRO ─────────────────────────────────────────── %>
+<section class="project-intro">
+  <div class="container">
+    <div class="project-intro__header">
+      <h2 class="project-intro__flag">
+        <% case @project.destination&.country_code
+           when 'TH' %>🇹🇭
+        <% when 'NP' %>🇳🇵
+        <% when 'LA' %>🇱🇦
+        <% end %>
+      </h2>
+      <h2 class="project-intro__subtitle"><%= @project.title %></h2>
+    </div>
+
+    <div class="project-intro__meta">
+      <% if @project.volunteer_role.present? %>
+        <div class="project-meta-pill">
+          <i class="ph ph-check-circle"></i>
+          <span><%= @project.volunteer_role %></span>
+        </div>
+      <% end %>
+      <div class="project-meta-pill">
+        <i class="ph ph-calendar"></i>
+        <span>Volunteer work starts on weekdays, <%= @project.start_dates.presence || "All year round" %></span>
+      </div>
+    </div>
+
+    <div class="project-intro__body">
+      <div class="project-intro__text">
+        <h3 class="project-intro__heading">Project Objectives</h3>
+        <% if @project.description.present? %>
+          <p style="white-space: pre-line;"><%= @project.description %></p>
+        <% else %>
+          <p><%= @project.summary %></p>
+        <% end %>
+      </div>
+
+      <div class="project-intro__media">
+        <% if @project.image.attached? %>
+          <%= image_tag @project.image, class: "project-intro__image", alt: @project.title %>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Apply Today + Social Share %>
+    <div class="project-intro__cta">
+      <%= link_to new_application_path(project_id: @project.id), class: "btn btn--primary btn--lg" do %>
+        <i class="ph ph-paper-plane-tilt"></i> Apply Today!
+      <% end %>
+    </div>
+
+    <div class="project-share">
+      <p class="project-share__label">Tell Your Friend:</p>
+      <div class="project-share__icons">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" target="_blank" rel="noopener" aria-label="Share on Facebook" style="background:#1877F2;">
+          <i class="ph ph-facebook-logo"></i>
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=<%= request.url %>&text=<%= CGI.escape(@project.title) %>" target="_blank" rel="noopener" aria-label="Share on Twitter" style="background:#1DA1F2;">
+          <i class="ph ph-twitter-logo"></i>
+        </a>
+        <a href="https://api.whatsapp.com/send?text=<%= CGI.escape("#{@project.title} #{request.url}") %>" target="_blank" rel="noopener" aria-label="Share on WhatsApp" style="background:#25D366;">
+          <i class="ph ph-whatsapp-logo"></i>
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<%= request.url %>&title=<%= CGI.escape(@project.title) %>" target="_blank" rel="noopener" aria-label="Share on LinkedIn" style="background:#0A66C2;">
+          <i class="ph ph-linkedin-logo"></i>
+        </a>
+        <a href="mailto:?subject=<%= CGI.escape(@project.title) %>&body=<%= CGI.escape(request.url) %>" aria-label="Share by Email" style="background:var(--color-bg-tint); color:var(--color-primary);">
+          <i class="ph ph-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# ── 3. TABS ──────────────────────────────────────────────────── %>
+<section class="project-tabs">
+  <div class="container">
+    <div class="project-tabs__bar" role="tablist" data-controller="tabs">
+      <button class="project-tabs__btn is-active" data-tabs-target="tab" data-tab="info" role="tab" aria-selected="true">Volunteer info</button>
+      <button class="project-tabs__btn" data-tabs-target="tab" data-tab="gallery" role="tab" aria-selected="false">Gallery</button>
+      <button class="project-tabs__btn" data-tabs-target="tab" data-tab="apply" role="tab" aria-selected="false">Apply for free</button>
+    </div>
+
+    <%# Tab: Volunteer info %>
+    <div class="project-tabs__panel is-active" data-panel="info" role="tabpanel">
+      <div class="project-info-grid">
+        <div class="project-info-grid__text project-content">
+          <% if @project.content.present? && @project.content.body.present? %>
+            <%= @project.content %>
+          <% else %>
+            <h1>Why this volunteer program?</h1>
+
+            <h2>💡 I. The Impact: Bridging the Digital and English Divide</h2>
+            <p>Unlike typical tourism-focused volunteering, your time with OpenmindProjects directly addresses critical educational gaps in rural Southeast Asia.</p>
+            <ul>
+              <li><strong>Empowerment Through 21st-Century Skills:</strong> Your primary role is to empower disadvantaged youth — many from rural villages or with disabilities — with the two skills that unlock the global economy: <strong>English and IT/Digital Literacy.</strong></li>
+              <li><strong>A "Learning by Doing" Philosophy:</strong> A hands-on, active learning approach. You will help design and lead <strong>Learning Camps</strong> and workshops focused on problem-solving, teamwork, critical thinking, and confidence.</li>
+              <li><strong>Grassroots and Ethical Volunteering:</strong> Working with an independent, local-focused NGO. Your contribution fees and time go directly into funding local staff, running the training center, and executing community projects.</li>
+            </ul>
+
+            <h2>🧑‍🤝‍🧑 II. The Experience: Deep Cultural Immersion</h2>
+            <p>This project provides an authentic experience far beyond the major tourist trail.</p>
+            <ul>
+              <li><strong>Authentic Isan Culture:</strong> Live and work outside the typical tourist bubble in <%= @project.destination&.name || "Southeast Asia" %>, providing a deeper, more meaningful cultural exchange.</li>
+              <li><strong>Work with Local Staff and Trainees:</strong> Collaborate daily with local staff and long-term trainees, fostering a genuine two-way exchange of experience and friendship.</li>
+              <li><strong>The Power of Mentorship:</strong> Act as a role model, boosting the confidence of young students to speak English and dream bigger.</li>
+            </ul>
+
+            <h2>🌱 III. Personal and Professional Growth</h2>
+            <table>
+              <thead>
+                <tr><td><strong>You Will GIVE</strong></td><td><strong>You Will RECEIVE</strong></td></tr>
+              </thead>
+              <tbody>
+                <tr><td>Your time, skills, and cultural knowledge.</td><td>Deep understanding of Southeast Asian culture.</td></tr>
+                <tr><td>Confidence and mentorship to local youth.</td><td>Practical experience in international development.</td></tr>
+                <tr><td>Support for grassroots, ethical community projects.</td><td>Lifelong friendships and a true sense of personal purpose.</td></tr>
+              </tbody>
+            </table>
+
+            <h1>Volunteer requirements</h1>
+            <ul class="checklist">
+              <li>All volunteers are required to have adequate travel insurance</li>
+              <li>All volunteers must speak good English</li>
+              <li>Volunteer must be 18 years of age or older</li>
+              <li>Volunteers under 18 are welcome with their parents</li>
+            </ul>
+          <% end %>
+        </div>
+
+        <aside class="project-info-grid__aside">
+          <% if @project.image.attached? %>
+            <%= image_tag @project.image, class: "project-info-grid__img", alt: @project.title %>
+          <% end %>
+          <div class="project-details-card">
+            <h4>Project Details</h4>
+            <ul>
+              <% if @project.destination %>
+                <li><i class="ph ph-map-pin"></i><span><strong>Location</strong><%= @project.location_name || @project.destination.name %></span></li>
+              <% end %>
+              <% if @project.category.present? %>
+                <li><i class="ph ph-tag"></i><span><strong>Category</strong><%= @project.category_label %></span></li>
+              <% end %>
+              <% if @project.duration_weeks_min || @project.duration_weeks_max %>
+                <li><i class="ph ph-clock"></i><span><strong>Duration</strong><%= @project.duration_weeks_min || 2 %> – <%= @project.duration_weeks_max || 12 %> weeks</span></li>
+              <% end %>
+              <% if @project.cost_per_week.present? %>
+                <li><i class="ph ph-currency-circle-dollar"></i><span><strong>Cost per week</strong><%= @project.cost_per_week %> <%= @project.currency || "USD" %></span></li>
+              <% end %>
+              <% if @project.minimum_age.present? || @project.maximum_age.present? %>
+                <li><i class="ph ph-user"></i><span><strong>Age</strong><%= @project.minimum_age || "18" %>+ years<%= " (max #{@project.maximum_age})" if @project.maximum_age.present? %></span></li>
+              <% end %>
+              <% if @project.language_requirements.present? %>
+                <li><i class="ph ph-translate"></i><span><strong>Language</strong><%= @project.language_requirements %></span></li>
+              <% end %>
+              <% if @project.accommodation_type.present? %>
+                <li><i class="ph ph-house"></i><span><strong>Accommodation</strong><%= @project.accommodation_type %></span></li>
+              <% end %>
+              <% if @project.meals_provided.present? %>
+                <li><i class="ph ph-fork-knife"></i><span><strong>Meals</strong><%= @project.meals_provided %></span></li>
+              <% end %>
+              <% if @project.working_hours_per_week.present? %>
+                <li><i class="ph ph-briefcase"></i><span><strong>Working hours</strong><%= @project.working_hours_per_week %> hrs/week</span></li>
+              <% end %>
+              <li><i class="ph ph-calendar"></i><span><strong>Availability</strong><%= @project.start_dates.presence || "All year round" %></span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <%# Tab: Gallery %>
+    <div class="project-tabs__panel" data-panel="gallery" role="tabpanel" hidden>
+      <% if @project.gallery_images.attached? %>
+        <div class="project-gallery">
+          <% @project.gallery_images.each do |img| %>
+            <%= image_tag img, alt: @project.title %>
+          <% end %>
+        </div>
+      <% else %>
+        <div style="text-align:center; padding:64px 0;">
+          <i class="ph ph-images" style="font-size:3rem; color:var(--color-primary-light); margin-bottom:var(--space-md); display:block;"></i>
+          <p style="color:var(--color-text-secondary); font-size:1rem; margin-bottom:8px;">No gallery images yet.</p>
+          <p style="color:var(--color-text-secondary); font-size:.85rem;">Gallery images can be uploaded from the admin panel.</p>
+        </div>
+      <% end %>
+    </div>
+
+    <%# Tab: Apply for free %>
+    <div class="project-tabs__panel" data-panel="apply" role="tabpanel" hidden>
+      <div class="project-apply-panel">
+        <h3>Application Process</h3>
+        <ol>
+          <li>Select the right application — Volunteer (Onsite/Online) or Internship — and fill out the form.</li>
+          <li>Tell us what you want to do, your skills and interests. The more information you give us, the better we can match you with the best project for you.</li>
+          <li>We will reply with suggestions of what you can work on, then schedule a talk online.</li>
+          <li>After we agree on your project, you receive a Volunteer/Intern Handbook with teaching, culture, language, and travel advice.</li>
+        </ol>
+        <%= link_to new_application_path(project_id: @project.id), class: "btn btn--primary btn--lg" do %>
+          <i class="ph ph-paper-plane-tilt"></i> Click here to Apply
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# ── 4. RELATED PROJECTS ──────────────────────────────────────── %>
+<% if @related_projects.any? %>
+  <section class="project-related">
+    <div class="container">
+      <h2 class="project-related__title">More Volunteer Opportunities</h2>
+      <div class="project-related__grid">
+        <% @related_projects.each do |project| %>
+          <article class="program-card" style="padding:0; overflow:hidden; display:flex; flex-direction:column;">
+            <% if project.image.attached? %>
+              <div style="height:180px;">
+                <%= image_tag project.image, style: "width:100%;height:100%;object-fit:cover;", alt: project.title %>
+              </div>
+            <% end %>
+            <div style="padding:20px; display:flex; flex-direction:column; flex-grow:1;">
+              <h3 style="font-size:1rem; font-weight:700; margin-bottom:10px; color:var(--color-primary); line-height:1.4;"><%= project.title %></h3>
+              <p style="font-size:.85rem; color:var(--color-text-secondary); flex-grow:1; margin-bottom:16px;"><%= truncate(project.summary, length: 90) %></p>
+              <%= link_to "Learn More →", project_path(project.slug), class: "btn btn--ghost btn--full", style: "justify-content:center; font-size:.9rem;" %>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<%# ══════════════════════════════════════════════════════════════════
+   STYLES — scoped to .project-* classes
+   ══════════════════════════════════════════════════════════════════ %>
+<style>
+  /* ── HERO ─────────────────────────────────────────────────── */
+  .project-hero {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 120px var(--space-lg) 80px;
+    margin-top: 0;
+    background: var(--color-dark);
+  }
+  .project-hero__bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .project-hero__overlay {
+    position: absolute; inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(26,26,46,.45) 0%, rgba(26,26,46,.55) 50%, rgba(232,155,28,.35) 100%);
+  }
+  .project-hero__inner {
+    position: relative; z-index: 2;
+    text-align: center;
+    max-width: 900px;
+  }
+  .project-hero__title {
+    color: #fff;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    margin-bottom: var(--space-xl);
+    text-shadow: 0 2px 16px rgba(0,0,0,.45);
+  }
+
+  /* ── INTRO ────────────────────────────────────────────────── */
+  .project-intro { padding: var(--space-3xl) 0 var(--space-2xl); background: var(--color-bg-white); }
+  .project-intro__header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    flex-wrap: wrap;
+  }
+  .project-intro__flag { font-size: 2.4rem; line-height: 1; margin: 0; }
+  .project-intro__subtitle {
+    color: var(--color-green);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+    flex: 1;
+    min-width: 280px;
+  }
+  .project-intro__meta {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-2xl);
+  }
+  .project-meta-pill {
+    flex: 1;
+    min-width: 260px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: var(--color-bg-tint);
+    border: 1px solid var(--color-bg-section);
+    border-radius: var(--radius-md);
+    font-size: .92rem;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+  }
+  .project-meta-pill i {
+    color: var(--color-green);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .project-intro__body {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-3xl);
+    align-items: flex-start;
+    margin-bottom: var(--space-2xl);
+  }
+  .project-intro__heading {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+  }
+  .project-intro__text p {
+    color: var(--color-text-primary);
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+  .project-intro__image {
+    width: 100%;
+    height: 460px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+  .project-intro__cta { text-align: center; margin: var(--space-2xl) 0 var(--space-xl); }
+
+  /* ── SHARE ────────────────────────────────────────────────── */
+  .project-share { text-align: center; }
+  .project-share__label { font-weight: 600; color: var(--color-text-primary); margin-bottom: var(--space-md); }
+  .project-share__icons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .project-share__icons a {
+    width: 38px; height: 38px;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    color: #fff;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base);
+  }
+  .project-share__icons a:hover { transform: translateY(-2px); opacity: .9; }
+  .project-share__icons i { font-size: 1.1rem; }
+
+  /* ── TABS ─────────────────────────────────────────────────── */
+  .project-tabs { padding: var(--space-3xl) 0; background: var(--color-bg-tint); }
+  .project-tabs__bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+  }
+  .project-tabs__btn {
+    padding: 10px 26px;
+    border-radius: 50px;
+    background: rgba(12,122,191,.10);
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: .92rem;
+    border: none;
+    cursor: pointer;
+    transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+  }
+  .project-tabs__btn:hover { background: rgba(12,122,191,.18); }
+  .project-tabs__btn.is-active { background: var(--color-primary); color: #fff; }
+  .project-tabs__panel { display: none; }
+  .project-tabs__panel.is-active { display: block; }
+
+  /* ── INFO GRID ────────────────────────────────────────────── */
+  .project-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .project-info-grid__aside { display: flex; flex-direction: column; gap: var(--space-md); position: sticky; top: 100px; }
+  .project-info-grid__img {
+    width: 100%; height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+  .project-details-card {
+    background: #fff;
+    border: 1px solid var(--color-bg-section);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .project-details-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--color-accent);
+  }
+  .project-details-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+  .project-details-card li { display: flex; gap: 12px; align-items: flex-start; }
+  .project-details-card i { color: var(--color-primary); font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+  .project-details-card strong {
+    display: block;
+    font-size: .72rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .project-details-card span { font-size: .95rem; color: var(--color-text-primary); }
+
+  /* ── RICH CONTENT ─────────────────────────────────────────── */
+  .project-content { font-size: 1.02rem; line-height: 1.8; color: var(--color-text-primary); }
+  .project-content h1, .project-content h2, .project-content h3 {
+    color: var(--color-green);
+    margin-top: 1.8em;
+    margin-bottom: .5em;
+    line-height: 1.3;
+    font-weight: 700;
+  }
+  .project-content h1 { font-size: 1.7rem; }
+  .project-content h2 { font-size: 1.35rem; }
+  .project-content h3 { font-size: 1.15rem; }
+  .project-content p { margin-bottom: 1.2em; }
+  .project-content ul, .project-content ol { margin: 0 0 1.4em 1.2em; padding-left: 12px; }
+  .project-content li { margin-bottom: .55em; }
+  .project-content ul.checklist { list-style: none; padding-left: 0; margin-left: 0; }
+  .project-content ul.checklist li {
+    position: relative;
+    padding-left: 28px;
+  }
+  .project-content ul.checklist li::before {
+    content: '✓';
+    position: absolute; left: 0; top: 0;
+    color: var(--color-green);
+    font-weight: 700;
+  }
+  .project-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    font-size: .95rem;
+  }
+  .project-content thead td, .project-content th {
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 14px 18px;
+    text-align: left;
+  }
+  .project-content tbody td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--color-bg-section);
+    background: #fff;
+  }
+  .project-content tbody tr:nth-child(even) td { background: var(--color-bg-tint); }
+  .project-content img { max-width: 100%; height: auto; border-radius: var(--radius-md); margin: 20px 0; }
+
+  /* ── GALLERY ──────────────────────────────────────────────── */
+  .project-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .project-gallery img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .project-gallery img:hover { transform: scale(1.02); }
+
+  /* ── APPLY PANEL ──────────────────────────────────────────── */
+  .project-apply-panel {
+    max-width: 760px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    box-shadow: var(--shadow-md);
+  }
+  .project-apply-panel h3 { color: var(--color-primary); margin-bottom: 16px; font-size: 1.3rem; }
+  .project-apply-panel ol { padding-left: 22px; margin-bottom: 24px; }
+  .project-apply-panel li { margin-bottom: 10px; line-height: 1.6; }
+
+  /* ── RELATED ──────────────────────────────────────────────── */
+  .project-related { padding: var(--space-3xl) 0 var(--space-4xl); background: var(--color-bg-white); }
+  .project-related__title {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .project-related__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  /* ── RESPONSIVE ───────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .project-intro__body { grid-template-columns: 1fr; }
+    .project-info-grid { grid-template-columns: 1fr; }
+    .project-info-grid__aside { position: static; }
+    .project-related__grid { grid-template-columns: 1fr 1fr; }
+    .project-gallery { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .project-related__grid { grid-template-columns: 1fr; }
+    .project-gallery { grid-template-columns: repeat(2, 1fr); }
+    .project-intro__image { height: 320px; }
+  }
+</style>
+
+<%# ── JS: tab switcher ────────────────────────────────────────── %>
+<script>
+  (function () {
+    document.querySelectorAll('.project-tabs__bar').forEach(function (bar) {
+      var section = bar.closest('.project-tabs');
+      bar.addEventListener('click', function (e) {
+        var btn = e.target.closest('.project-tabs__btn');
+        if (!btn) return;
+        var target = btn.dataset.tab;
+        section.querySelectorAll('.project-tabs__btn').forEach(function (b) {
+          var on = b.dataset.tab === target;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        section.querySelectorAll('.project-tabs__panel').forEach(function (p) {
+          var on = p.dataset.panel === target;
+          p.classList.toggle('is-active', on);
+          if (on) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
+        });
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Codex — Empowering Education Through AI & Technology</title>
+  <meta name="description" content="AI Codex by OpenMind Projects: Bridging the digital divide through AI-powered education, coding workshops, and technology training for underserved communities in Southeast Asia.">
+  <meta property="og:title" content="AI Codex — Empowering Education Through AI & Technology">
+  <meta property="og:description" content="AI-powered education platform empowering disadvantaged youth with 21st-century skills in Southeast Asia.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://codex.openmindprojects.org">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__logo" id="nav-logo">
+        <div class="navbar__logo-icon">
+          <i class="ph ph-globe-hemisphere-west"></i>
+          <i class="ph ph-code navbar__logo-code"></i>
+        </div>
+        <span class="navbar__logo-text">AI <span class="text-accent">Codex</span></span>
+      </a>
+      <div class="navbar__links" id="nav-links">
+        <a href="#about" class="navbar__link">About</a>
+        <a href="#pillars" class="navbar__link">What We Do</a>
+        <a href="#impact" class="navbar__link">Impact</a>
+        <a href="#programs" class="navbar__link">Programs</a>
+        <a href="#team" class="navbar__link">Team</a>
+      </div>
+      <div class="navbar__actions">
+        <a href="#get-involved" class="btn btn--accent" id="nav-apply">Get Involved</a>
+        <a href="https://fundhub.openskills.dev/" class="btn btn--outline" id="nav-donate">Donate</a>
+        <button class="navbar__hamburger" id="nav-hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <header class="hero" id="hero">
+    <div class="hero__bg">
+      <div class="hero__particles" id="hero-particles"></div>
+      <div class="hero__gradient"></div>
+    </div>
+    <div class="hero__content">
+      <div class="hero__badge">
+        <i class="ph ph-sparkle"></i>
+        <span>OpenMind Projects R&D</span>
+      </div>
+      <h1 class="hero__title">
+        <span class="hero__title-line">Empowering Youth</span>
+        <span class="hero__title-line hero__title-line--accent">Through AI & Code</span>
+      </h1>
+      <p class="hero__subtitle">
+        Bridging the digital divide with AI-powered education, coding workshops, 
+        and technology training for underserved communities across Southeast Asia.
+      </p>
+      <div class="hero__cta-group">
+        <a href="#get-involved" class="btn btn--primary btn--lg" id="hero-volunteer">
+          <i class="ph ph-hand-heart"></i>
+          <span>Volunteer Today</span>
+        </a>
+        <a href="#pillars" class="btn btn--glass btn--lg" id="hero-explore">
+          <i class="ph ph-compass"></i>
+          <span>Explore Programs</span>
+        </a>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-value" data-count="20">0</span><span class="hero__stat-suffix">+</span>
+          <span class="hero__stat-label">Years Active</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-value" data-count="5000">0</span><span class="hero__stat-suffix">+</span>
+          <span class="hero__stat-label">Students Trained</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-value" data-count="3">0</span>
+          <span class="hero__stat-label">Countries</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll-indicator" id="scroll-indicator">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__tag"><i class="ph ph-info"></i> About AI Codex</span>
+        <h2 class="section-header__title">Technology for <span class="text-primary">Good</span></h2>
+        <p class="section-header__desc">
+          AI Codex is the research & development arm of OpenMind Projects — 
+          building open-source tools and curricula that harness artificial intelligence 
+          to transform education in underserved communities.
+        </p>
+      </div>
+      <div class="about__grid">
+        <div class="about__card" id="about-mission">
+          <div class="about__card-icon about__card-icon--blue">
+            <i class="ph ph-target"></i>
+          </div>
+          <h3>Our Mission</h3>
+          <p>Democratize access to AI and coding education, empowering disadvantaged youth to become creators of technology, not just consumers.</p>
+        </div>
+        <div class="about__card" id="about-vision">
+          <div class="about__card-icon about__card-icon--gold">
+            <i class="ph ph-eye"></i>
+          </div>
+          <h3>Our Vision</h3>
+          <p>A world where every young person, regardless of background, has the skills and tools to shape their future through technology.</p>
+        </div>
+        <div class="about__card" id="about-approach">
+          <div class="about__card-icon about__card-icon--teal">
+            <i class="ph ph-strategy"></i>
+          </div>
+          <h3>Our Approach</h3>
+          <p>We combine hands-on coding bootcamps, AI-assisted learning tools, and cross-cultural volunteer mentorship to create lasting impact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PILLARS ========== -->
+  <section class="pillars" id="pillars">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__tag"><i class="ph ph-stack"></i> What We Do</span>
+        <h2 class="section-header__title">Three Pillars of <span class="text-primary">Impact</span></h2>
+        <p class="section-header__desc">Our programs are built on three interconnected pillars that together create a comprehensive ecosystem for digital empowerment.</p>
+      </div>
+      <div class="pillars__grid">
+        <!-- Education Pillar -->
+        <div class="pillar-card pillar-card--education" id="pillar-education">
+          <div class="pillar-card__header">
+            <div class="pillar-card__number">01</div>
+            <div class="pillar-card__icon"><i class="ph ph-graduation-cap"></i></div>
+          </div>
+          <h3 class="pillar-card__title">Educational & Cross-Cultural Training</h3>
+          <p class="pillar-card__desc">
+            Volunteers help train youth and adults in IT, programming, and English. 
+            Gain cross-cultural skills while contributing to educational projects 
+            that create positive impact.
+          </p>
+          <ul class="pillar-card__list">
+            <li><i class="ph ph-check-circle"></i> Coding bootcamps & workshops</li>
+            <li><i class="ph ph-check-circle"></i> English language classes</li>
+            <li><i class="ph ph-check-circle"></i> Digital literacy programs</li>
+            <li><i class="ph ph-check-circle"></i> Cross-cultural exchange</li>
+          </ul>
+          <a href="https://openmindprojects.org/project/computer-training/" class="pillar-card__link">
+            Learn more <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Development Pillar -->
+        <div class="pillar-card pillar-card--development" id="pillar-development">
+          <div class="pillar-card__header">
+            <div class="pillar-card__number">02</div>
+            <div class="pillar-card__icon"><i class="ph ph-trend-up"></i></div>
+          </div>
+          <h3 class="pillar-card__title">Upskill & Development for Local People</h3>
+          <p class="pillar-card__desc">
+            We address educational and employment gaps faced by disadvantaged youth. 
+            Providing English, technology, and job skills training with mentorships 
+            for a more equitable society.
+          </p>
+          <ul class="pillar-card__list">
+            <li><i class="ph ph-check-circle"></i> Job skills development</li>
+            <li><i class="ph ph-check-circle"></i> Technology upskilling</li>
+            <li><i class="ph ph-check-circle"></i> Mentorship programs</li>
+            <li><i class="ph ph-check-circle"></i> Career pathway guidance</li>
+          </ul>
+          <a href="https://openmindprojects.org/project/computer-training/" class="pillar-card__link">
+            Learn more <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- R&D Pillar -->
+        <div class="pillar-card pillar-card--research" id="pillar-research">
+          <div class="pillar-card__header">
+            <div class="pillar-card__number">03</div>
+            <div class="pillar-card__icon"><i class="ph ph-atom"></i></div>
+          </div>
+          <h3 class="pillar-card__title">Research & Development</h3>
+          <p class="pillar-card__desc">
+            Empowering youth through technology, English, and job skills development. 
+            We seek passionate people to contribute expertise and build innovative 
+            solutions through education.
+          </p>
+          <ul class="pillar-card__list">
+            <li><i class="ph ph-check-circle"></i> AI-powered learning tools</li>
+            <li><i class="ph ph-check-circle"></i> Open-source curricula</li>
+            <li><i class="ph ph-check-circle"></i> Educational technology R&D</li>
+            <li><i class="ph ph-check-circle"></i> Community tech solutions</li>
+          </ul>
+          <a href="https://openmindprojects.org/research-development/" class="pillar-card__link">
+            Learn more <i class="ph ph-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== IMPACT / STATS ========== -->
+  <section class="impact" id="impact">
+    <div class="impact__bg"></div>
+    <div class="container">
+      <div class="section-header section-header--light">
+        <span class="section-header__tag section-header__tag--light"><i class="ph ph-chart-line-up"></i> Our Impact</span>
+        <h2 class="section-header__title">Making a <span class="text-accent-light">Measurable</span> Difference</h2>
+      </div>
+      <div class="impact__grid">
+        <div class="impact__card" id="impact-volunteers">
+          <div class="impact__card-icon"><i class="ph ph-users-three"></i></div>
+          <div class="impact__card-value" data-count="850">0</div>
+          <div class="impact__card-label">Volunteers Globally</div>
+        </div>
+        <div class="impact__card" id="impact-workshops">
+          <div class="impact__card-icon"><i class="ph ph-chalkboard-teacher"></i></div>
+          <div class="impact__card-value" data-count="120">0</div>
+          <div class="impact__card-label">Workshops Delivered</div>
+        </div>
+        <div class="impact__card" id="impact-communities">
+          <div class="impact__card-icon"><i class="ph ph-map-trifold"></i></div>
+          <div class="impact__card-value" data-count="15">0</div>
+          <div class="impact__card-label">Communities Served</div>
+        </div>
+        <div class="impact__card" id="impact-projects">
+          <div class="impact__card-icon"><i class="ph ph-code-block"></i></div>
+          <div class="impact__card-value" data-count="30">0</div>
+          <div class="impact__card-label">Open-Source Projects</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROGRAMS ========== -->
+  <section class="programs" id="programs">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__tag"><i class="ph ph-rocket-launch"></i> Programs</span>
+        <h2 class="section-header__title">How You Can <span class="text-primary">Contribute</span></h2>
+        <p class="section-header__desc">Whether you're a developer, educator, or simply passionate about making a difference — there's a place for you.</p>
+      </div>
+      <div class="programs__grid">
+        <div class="program-card" id="program-onsite">
+          <div class="program-card__badge">Most Popular</div>
+          <div class="program-card__icon"><i class="ph ph-map-pin"></i></div>
+          <h3 class="program-card__title">Onsite Volunteering</h3>
+          <p class="program-card__desc">Join us in Thailand, Laos, or Nepal. Teach coding, English, and digital skills to local communities.</p>
+          <ul class="program-card__features">
+            <li><i class="ph ph-check"></i> 2-12 week programs</li>
+            <li><i class="ph ph-check"></i> Accommodation provided</li>
+            <li><i class="ph ph-check"></i> Cultural immersion</li>
+            <li><i class="ph ph-check"></i> Mentorship training</li>
+          </ul>
+          <a href="https://openmindprojects.org/volunteer-abroad/" class="btn btn--primary btn--full" id="program-onsite-cta">Apply Now</a>
+        </div>
+        <div class="program-card program-card--featured" id="program-online">
+          <div class="program-card__badge program-card__badge--accent">New</div>
+          <div class="program-card__icon"><i class="ph ph-globe"></i></div>
+          <h3 class="program-card__title">Online Volunteering</h3>
+          <p class="program-card__desc">Contribute remotely. Build AI tools, develop curricula, or mentor students from anywhere in the world.</p>
+          <ul class="program-card__features">
+            <li><i class="ph ph-check"></i> Flexible schedule</li>
+            <li><i class="ph ph-check"></i> Open-source contributions</li>
+            <li><i class="ph ph-check"></i> AI/ML project work</li>
+            <li><i class="ph ph-check"></i> Global team collaboration</li>
+          </ul>
+          <a href="https://openmindprojects.org/volunteer-abroad/" class="btn btn--accent btn--full" id="program-online-cta">Apply Now</a>
+        </div>
+        <div class="program-card" id="program-intern">
+          <div class="program-card__icon"><i class="ph ph-briefcase"></i></div>
+          <h3 class="program-card__title">Internship Program</h3>
+          <p class="program-card__desc">Gain real-world experience. Work on impactful projects while building your portfolio and global network.</p>
+          <ul class="program-card__features">
+            <li><i class="ph ph-check"></i> Onsite in SE Asia</li>
+            <li><i class="ph ph-check"></i> Certificate provided</li>
+            <li><i class="ph ph-check"></i> Project-based learning</li>
+            <li><i class="ph ph-check"></i> Reference letter</li>
+          </ul>
+          <a href="https://openmindprojects.org/volunteer-abroad/" class="btn btn--primary btn--full" id="program-intern-cta">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RECOGNIZED BY ========== -->
+  <section class="recognized" id="recognized">
+    <div class="container">
+      <p class="recognized__label">Recognized & Recommended by</p>
+      <div class="recognized__logos">
+        <div class="recognized__logo"><span>UNESCO</span></div>
+        <div class="recognized__logo"><span>Google</span></div>
+        <div class="recognized__logo"><span>ChangeX</span></div>
+        <div class="recognized__logo"><span>GlobalGiving</span></div>
+        <div class="recognized__logo"><span>TechSoup</span></div>
+        <div class="recognized__logo"><span>CNN</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TEAM ========== -->
+  <section class="team" id="team">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-header__tag"><i class="ph ph-users"></i> Our Team</span>
+        <h2 class="section-header__title">The People <span class="text-primary">Behind</span> AI Codex</h2>
+        <p class="section-header__desc">A global team of educators, technologists, and changemakers united by a shared mission.</p>
+      </div>
+      <div class="team__grid">
+        <div class="team__card" id="team-member-1">
+          <div class="team__avatar">
+            <i class="ph ph-user-circle"></i>
+          </div>
+          <h4 class="team__name">Program Director</h4>
+          <p class="team__role">Education & Strategy</p>
+          <p class="team__bio">Leading curriculum development and volunteer coordination across 3 countries.</p>
+        </div>
+        <div class="team__card" id="team-member-2">
+          <div class="team__avatar team__avatar--accent">
+            <i class="ph ph-user-circle"></i>
+          </div>
+          <h4 class="team__name">Tech Lead</h4>
+          <p class="team__role">AI & Development</p>
+          <p class="team__bio">Building open-source AI tools and managing the R&D engineering team.</p>
+        </div>
+        <div class="team__card" id="team-member-3">
+          <div class="team__avatar team__avatar--green">
+            <i class="ph ph-user-circle"></i>
+          </div>
+          <h4 class="team__name">Community Manager</h4>
+          <p class="team__role">Outreach & Engagement</p>
+          <p class="team__bio">Connecting volunteers with communities and fostering cross-cultural exchange.</p>
+        </div>
+        <div class="team__card" id="team-member-4">
+          <div class="team__avatar team__avatar--teal">
+            <i class="ph ph-user-circle"></i>
+          </div>
+          <h4 class="team__name">Research Lead</h4>
+          <p class="team__role">EdTech & Innovation</p>
+          <p class="team__bio">Researching AI applications in education and piloting new learning methodologies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GET INVOLVED CTA ========== -->
+  <section class="cta-section" id="get-involved">
+    <div class="cta-section__bg"></div>
+    <div class="container">
+      <div class="cta-section__content">
+        <h2 class="cta-section__title">Ready to Make an Impact?</h2>
+        <p class="cta-section__desc">
+          Join a global community of volunteers, developers, and educators 
+          working to bridge the digital divide. Your skills can change lives.
+        </p>
+        <div class="cta-section__steps">
+          <div class="cta-step">
+            <div class="cta-step__number">1</div>
+            <p>Choose your program — Volunteer, Intern, or Contribute online</p>
+          </div>
+          <div class="cta-step">
+            <div class="cta-step__number">2</div>
+            <p>Tell us about your skills and interests</p>
+          </div>
+          <div class="cta-step">
+            <div class="cta-step__number">3</div>
+            <p>We'll match you with the perfect project</p>
+          </div>
+          <div class="cta-step">
+            <div class="cta-step__number">4</div>
+            <p>Start creating impact!</p>
+          </div>
+        </div>
+        <div class="cta-section__actions">
+          <a href="https://sendimpact.com/?ff_landing=31" class="btn btn--accent btn--lg" id="cta-apply">
+            <i class="ph ph-paper-plane-tilt"></i>
+            <span>Apply Today</span>
+          </a>
+          <a href="https://fundhub.openskills.dev/" class="btn btn--glass-dark btn--lg" id="cta-donate">
+            <i class="ph ph-heart"></i>
+            <span>Support with a Donation</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <div class="navbar__logo-icon">
+              <i class="ph ph-globe-hemisphere-west"></i>
+              <i class="ph ph-code navbar__logo-code"></i>
+            </div>
+            <span class="navbar__logo-text">AI <span class="text-accent">Codex</span></span>
+          </div>
+          <p class="footer__tagline">Empowering youth through AI-powered education across Southeast Asia.</p>
+          <p class="footer__legal">Registered Nonprofit: 2526/2 Thailand EST. 2001</p>
+        </div>
+        <div class="footer__links-group">
+          <h4>Programs</h4>
+          <a href="https://openmindprojects.org/project/">Projects</a>
+          <a href="https://openmindprojects.org/location/">Destinations</a>
+          <a href="https://openmindprojects.org/volunteer-abroad/">Volunteering</a>
+          <a href="https://openmindprojects.org/research-development/">R&D</a>
+        </div>
+        <div class="footer__links-group">
+          <h4>Organization</h4>
+          <a href="https://openmindprojects.org/about">About Us</a>
+          <a href="https://fundhub.openskills.dev/">Donate</a>
+          <a href="https://sendimpact.com/?ff_landing=31">Apply</a>
+          <a href="#">News & Updates</a>
+        </div>
+        <div class="footer__links-group">
+          <h4>Connect</h4>
+          <a href="#"><i class="ph ph-github-logo"></i> GitHub</a>
+          <a href="#"><i class="ph ph-linkedin-logo"></i> LinkedIn</a>
+          <a href="#"><i class="ph ph-youtube-logo"></i> YouTube</a>
+          <a href="#"><i class="ph ph-envelope"></i> Contact</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 AI Codex — OpenMind Projects. All rights reserved.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>

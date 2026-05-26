@@ -1,0 +1,29 @@
+<%# locals: { audience: } %>
+<% object_fit = audience.respond_to?(:hero_image_object_fit) && audience.hero_image_object_fit.present? ? audience.hero_image_object_fit : "cover" %>
+<% object_position = audience.respond_to?(:hero_image_object_position) && audience.hero_image_object_position.present? ? audience.hero_image_object_position : "center" %>
+<section class="audience-hero">
+  <img src="<%= audience.hero_image_src %>" 
+       class="audience-hero__bg" 
+       style="object-fit: <%= object_fit %>; object-position: <%= object_position %>;" 
+       alt="">
+  <div class="audience-hero__overlay"></div>
+  <div class="container audience-hero__content">
+    <div class="audience-hero__badge">
+      <i class="ph <%= audience.icon %>"></i>
+      <span>For <%= audience.name %> Volunteers</span>
+    </div>
+    <h1 class="audience-hero__title"><%= audience.title %></h1>
+    <p class="audience-hero__subtitle"><%= audience.subtitle %></p>
+    <div class="audience-hero__meta">
+      <span class="audience-hero__meta-item"><i class="ph ph-clock"></i> <%= audience.duration %></span>
+    </div>
+    <div class="audience-hero__actions">
+      <%= link_to new_application_path, class: "btn btn--accent btn--lg" do %>
+        <i class="ph ph-paper-plane-tilt"></i> <%= audience.cta_text %>
+      <% end %>
+      <a href="#benefits" class="btn btn--glass btn--lg">
+        <i class="ph ph-arrow-down"></i> Learn more
+      </a>
+    </div>
+  </div>
+</section>

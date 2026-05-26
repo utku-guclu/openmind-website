@@ -1,0 +1,92 @@
+<% content_for(:title) { "#{@audience.name} Volunteers — OpenmindProjects" } %>
+
+<%# 1. Hero — video background for Family, static image for other audiences %>
+<% if @audience.hero_video_id.present? %>
+  <%= render "organisms/video_bg_hero",
+        youtube_id: @audience.hero_video_id,
+        title: "Family Volunteering",
+        subtitle: nil,
+        cta_text: "Learn More",
+        cta_path: "#learnmore" %>
+<% else %>
+  <%= render "organisms/audience_hero", audience: @audience %>
+<% end %>
+
+<%# 2. Globe-divider intro section (matches live "Create Lasting Memories" block) %>
+<% if @audience.title.present? && @audience.intro.present? %>
+  <%= render "organisms/divider_intro",
+        heading: @audience.title,
+        body: @audience.intro,
+        anchor_id: "learnmore" %>
+<% else %>
+  <%= render "organisms/audience_intro", audience: @audience %>
+<% end %>
+
+<%# 3. Additional intro sections (e.g. "Make a Difference Together") %>
+<% @audience.intro_sections.each do |section| %>
+  <%= render "organisms/text_block", heading: section.heading, body: section.body, surface: "light" %>
+<% end %>
+
+<%# 4. Image gallery %>
+<% if @audience.gallery_images.any? %>
+  <%= render "organisms/image_gallery",
+        images: @audience.gallery_images,
+        tag: "Moments",
+        title: "Snapshots from #{@audience.name.downcase} volunteers" %>
+<% end %>
+
+<%# 5. Video playlist %>
+<% if @audience.videos.any? %>
+  <%= render "organisms/video_playlist", videos: @audience.videos %>
+<% end %>
+
+<%# 6. Podcast (with deep-dive card for Family, plain otherwise) %>
+<% if @audience.podcast_url.present? %>
+  <% if @audience.podcast_deepdive %>
+    <%= render "organisms/podcast_with_deepdive",
+          track_url: @audience.podcast_url,
+          deepdive: @audience.podcast_deepdive %>
+  <% else %>
+    <%= render "organisms/podcast_embed",
+          track_url: @audience.podcast_url,
+          title: "Listen to our podcast" %>
+  <% end %>
+<% end %>
+
+<%# 7. Activity bullets (heading + intro + list) OR standard benefits+journey %>
+<% if @audience.activity_bullets.any? %>
+  <%= render "organisms/activity_bullets",
+        heading: @audience.activity_intro,
+        intro: nil,
+        bullets: @audience.activity_bullets %>
+<% else %>
+  <%= render "organisms/audience_benefits", audience: @audience %>
+  <%= render "organisms/audience_journey",  audience: @audience %>
+<% end %>
+
+<%# 8. Bond / philosophy sections — stacked text blocks %>
+<% @audience.bond_sections.each_with_index do |section, i| %>
+  <%= render "organisms/text_block",
+        heading: section.heading,
+        body: section.body,
+        surface: i.even? ? "light" : "tint" %>
+<% end %>
+
+<%# 9. Apply CTA after the philosophy blocks %>
+<% if @audience.bond_sections.any? %>
+  <%= render "organisms/inline_cta", text: @audience.cta_text, surface: "light" %>
+<% end %>
+
+<%# 10. FAQ %>
+<% if @audience.faqs.any? %>
+  <%= render "organisms/faq_accordion",
+        faqs: @audience.faqs,
+        heading: "OpenmindProjects #{@audience.name} Volunteering FAQ" %>
+<% end %>
+
+<%# 11. Final Apply CTA %>
+<%= render "organisms/inline_cta", text: @audience.cta_text, surface: "tint" %>
+
+<%# 12. Other audiences + standard CTA section %>
+<%= render "organisms/cta_section" %>
+<%= render "organisms/audience_other", audiences: @other_audiences %>

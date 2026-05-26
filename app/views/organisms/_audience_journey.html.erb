@@ -1,0 +1,19 @@
+<%# locals: { audience: } %>
+<section class="audience-journey">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header__tag"><i class="ph ph-path"></i> Your journey</div>
+      <h2 class="section-header__title">How it works</h2>
+      <p class="section-header__desc">A clear path from "I'm interested" to "I'm on the ground."</p>
+    </div>
+    <ol class="audience-journey__steps">
+      <% audience.journey.each do |s| %>
+        <li class="journey-step">
+          <div class="journey-step__num"><%= s.step_label %></div>
+          <h3 class="journey-step__title"><%= s.title %></h3>
+          <p class="journey-step__text"><%= s.text %></p>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</section>

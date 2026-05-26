@@ -1,0 +1,41 @@
+<%# Hub Row organism — CTA card (left) + image carousel (right).
+    Now reads content from SiteSetting database records.
+    Hub carousel images are served from Active Storage via hub_image_N SiteSetting keys. %>
+<% hub_title = site_setting("hub_title")&.value || "Chonburi Hub is Calling" %>
+<% hub_desc  = site_setting("hub_description")&.value || "Get up to 100,000 THB in funding per project for skill development camps." %>
+<% hub_link  = site_setting("hub_link")&.value || "https://sendimpact.com/?ff_landing=31" %>
+<% hub_images_setting = site_setting("hub_images") %>
+<% hub_slides = if hub_images_setting&.value.present?
+     parsed = JSON.parse(hub_images_setting.value) rescue []
+     parsed.map.with_index do |h, idx|
+       # Try Active Storage file first, then fall back to URL
+       local_key = h["local_key"] || "hub_image_#{idx}"
+       img_url = site_setting_image_url(local_key) || h["url"]
+       [img_url, h["alt"]]
+     end
+   else
+     []
+   end %>
+
+<section class="hub-row" data-controller="reveal">
+  <div class="container">
+    <div class="hub-row__grid">
+      <div class="hub-row__cta" data-reveal-target="item">
+        <h2 class="hub-row__cta-title"><%= hub_title %></h2>
+        <p class="hub-row__cta-desc"><%= hub_desc %></p>
+        <%= link_to hub_link, target: "_blank", rel: "noopener noreferrer nofollow", class: "btn btn--accent btn--lg", data: { volunteer_modal: "true" } do %>
+          Apply Now
+        <% end %>
+      </div>
+
+      <% if hub_slides.any? %>
+        <div class="hub-row__carousel" data-reveal-target="item">
+          <%= render "molecules/carousel",
+                     slides: hub_slides,
+                     autoplay: 5000,
+                     per_view: 1 %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

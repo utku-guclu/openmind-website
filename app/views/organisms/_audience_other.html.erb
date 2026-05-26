@@ -1,0 +1,22 @@
+<%# locals: { audiences: } %>
+<section class="audience-other">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header__tag"><i class="ph ph-users-four"></i> Other ways to volunteer</div>
+      <h2 class="section-header__title">Not quite the right fit?</h2>
+      <p class="section-header__desc">Explore other paths into OpenmindProjects.</p>
+    </div>
+    <div class="audience-other__grid">
+      <% audiences.each do |a| %>
+        <%= link_to a.path, class: "audience-card" do %>
+          <div class="audience-card__icon"><i class="ph <%= a.icon %>"></i></div>
+          <div class="audience-card__body">
+            <h3 class="audience-card__title"><%= a.name %></h3>
+            <p class="audience-card__text"><%= a.subtitle %></p>
+            <span class="audience-card__link">Explore <i class="ph ph-arrow-right"></i></span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>

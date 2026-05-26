@@ -1,0 +1,23 @@
+<%# locals: { categories:, current:, counts: } %>
+<nav class="category-filter" aria-label="Filter projects by category">
+  <div class="container">
+    <div class="category-filter__chips">
+      <%= render "molecules/category_chip",
+            key: "all",
+            label: "All",
+            icon: "ph-squares-four",
+            active: current.blank?,
+            href: projects_path,
+            count: counts.values.sum %>
+      <% categories.each do |key, meta| %>
+        <%= render "molecules/category_chip",
+              key: key,
+              label: meta[:label],
+              icon: meta[:icon],
+              active: current == key,
+              href: projects_path(category: key),
+              count: counts[key] %>
+      <% end %>
+    </div>
+  </div>
+</nav>

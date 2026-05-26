@@ -1,0 +1,25 @@
+<%# Video Card molecule — YouTube embed + title + meta.
+    Locals:
+      youtube_id: string — required
+      title:      string — required
+      meta:       string — optional %>
+<% youtube_id = local_assigns.fetch(:youtube_id) %>
+<% title      = local_assigns.fetch(:title) %>
+<% meta       = local_assigns[:meta] %>
+
+<article class="video-card" data-reveal-target="item" id="video-<%= youtube_id %>">
+  <div class="video-card__media">
+    <iframe
+      src="https://www.youtube.com/embed/<%= youtube_id %>?rel=0"
+      title="<%= title %>"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      loading="lazy"></iframe>
+  </div>
+  <div class="video-card__body">
+    <h3 class="video-card__title"><%= title %></h3>
+    <% if meta.present? %>
+      <p class="video-card__meta"><%= meta %></p>
+    <% end %>
+  </div>
+</article>

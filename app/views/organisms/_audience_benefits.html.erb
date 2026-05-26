@@ -1,0 +1,19 @@
+<%# locals: { audience: } %>
+<section class="audience-benefits" id="benefits">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header__tag"><i class="ph ph-sparkle"></i> Why volunteer with us</div>
+      <h2 class="section-header__title">What you'll get out of it</h2>
+      <p class="section-header__desc">Tangible impact, real growth, lasting connections — built around your strengths.</p>
+    </div>
+    <div class="audience-benefits__grid">
+      <% audience.benefits.each do |b| %>
+        <article class="benefit-card">
+          <div class="benefit-card__icon"><i class="ph <%= b.icon %>"></i></div>
+          <h3 class="benefit-card__title"><%= b.title %></h3>
+          <p class="benefit-card__text"><%= b.text %></p>
+        </article>
+      <% end %>
+    </div>
+  </div>
+</section>

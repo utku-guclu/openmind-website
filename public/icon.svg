@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Globe outline rings -->
+  <circle cx="256" cy="256" r="240" fill="none" stroke="#E89B1C" stroke-width="8"/>
+  <circle cx="256" cy="256" r="228" fill="none" stroke="#0C7ABF" stroke-width="6"/>
+
+  <!-- Ocean fill -->
+  <circle cx="256" cy="256" r="222" fill="#5DADE2"/>
+
+  <!-- SE Asia landmass (simplified) -->
+  <g fill="#E89B1C">
+    <!-- Main continent (SE Asia / India area) -->
+    <path d="M180 120 C200 100, 280 90, 320 110 C340 120, 360 140, 370 170 C380 200, 370 230, 350 250 C330 270, 300 280, 280 290 C260 300, 240 310, 230 340 C225 355, 220 370, 210 380 C200 390, 185 385, 180 370 C175 355, 178 340, 180 320 C182 300, 175 280, 165 260 C155 240, 150 220, 155 200 C160 180, 165 150, 180 120Z"/>
+    <!-- Islands (Indonesia/Philippines) -->
+    <ellipse cx="310" cy="330" rx="30" ry="12" transform="rotate(-20 310 330)"/>
+    <ellipse cx="340" cy="360" rx="25" ry="10" transform="rotate(-30 340 360)"/>
+    <ellipse cx="280" cy="370" rx="20" ry="8" transform="rotate(-15 280 370)"/>
+    <ellipse cx="350" cy="310" rx="15" ry="8" transform="rotate(10 350 310)"/>
+    <!-- Australia hint -->
+    <path d="M300 400 C320 390, 370 395, 390 410 C400 420, 405 440, 395 455 C385 465, 360 470, 340 465 C320 460, 300 445, 295 430 C292 420, 295 408, 300 400Z"/>
+  </g>
+
+  <!-- Japan / Korea -->
+  <g fill="#E89B1C">
+    <ellipse cx="380" cy="160" rx="8" ry="25" transform="rotate(15 380 160)"/>
+    <ellipse cx="360" cy="145" rx="6" ry="15" transform="rotate(10 360 145)"/>
+  </g>
+
+  <!-- Subtle globe grid lines -->
+  <g fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5">
+    <ellipse cx="256" cy="256" rx="222" ry="100"/>
+    <ellipse cx="256" cy="256" rx="222" ry="170"/>
+    <line x1="256" y1="34" x2="256" y2="478"/>
+    <ellipse cx="256" cy="256" rx="100" ry="222"/>
+  </g>
+
+  <!-- Outer coral/salmon ring accent -->
+  <circle cx="256" cy="256" r="248" fill="none" stroke="#E8836B" stroke-width="4" opacity="0.6"/>
+</svg>

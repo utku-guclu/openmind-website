@@ -1,0 +1,22 @@
+{
+  "name": "openmind-website-openmind-app-v4",
+  "version": "1.0.0",
+  "description": "Rails 8 monolith for **openmindprojects.org** — server-rendered with ERB + Hotwire (Turbo + Stimulus), backed by PostgreSQL 16 with the TimescaleDB extension. Brand identity ported from the OpenMind Projects visual system (`theme/AI_CODEX_BRAND_GUIDE.md`).",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@activeadmin/activeadmin": "^3.5.1",
+    "esbuild": "^0.28.0",
+    "jsdom": "^29.1.1"
+  }
+}

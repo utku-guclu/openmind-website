@@ -1,0 +1,46 @@
+<%# Apply / Get Involved organism — 4-step intro + volunteer story video. %>
+<section class="apply" id="apply" data-controller="reveal">
+  <div class="apply__bg"></div>
+  <div class="container">
+    <div class="apply__grid">
+      <div class="apply__intro" data-reveal-target="item">
+        <span class="section-header__tag"><i class="ph ph-paper-plane-tilt"></i> Get Involved</span>
+        <h2 class="apply__title">Volunteer <span class="text-primary">Application</span></h2>
+        <p class="apply__desc">
+          Four simple steps from interest to impact. Watch how previous volunteers
+          got started — then apply to join the next cohort.
+        </p>
+        <ol class="apply__steps">
+          <li><span class="apply__step-num">1</span><span>Choose your program — onsite, online, or internship</span></li>
+          <li><span class="apply__step-num">2</span><span>Tell us about your skills and interests</span></li>
+          <li><span class="apply__step-num">3</span><span>We match you with the right project</span></li>
+          <li><span class="apply__step-num">4</span><span>Start making an impact</span></li>
+        </ol>
+        <div class="apply__actions">
+          <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "apply-cta" do %>
+            <i class="ph ph-hand-heart"></i>
+            <span>Volunteer Today</span>
+          <% end %>
+          <%= link_to destinations_path, class: "btn btn--ghost btn--lg" do %>
+            <i class="ph ph-map-pin"></i>
+            <span>See Locations</span>
+          <% end %>
+        </div>
+      </div>
+      <div class="apply__video-wrap" data-reveal-target="item">
+        <div class="apply__video">
+          <iframe
+            src="https://www.youtube.com/embed/Sjdc-G7Ah7A"
+            title="OpenmindProjects — Volunteer Story"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"></iframe>
+        </div>
+        <div class="apply__video-caption">
+          <i class="ph ph-play-circle"></i>
+          <span>Hear it from our volunteers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+<%# CTA Section organism — final "Ready to Make an Impact?" with 4 steps. %>
+<section class="cta-section" id="get-involved" data-controller="reveal">
+  <div class="cta-section__bg"></div>
+  <div class="container">
+    <div class="cta-section__content">
+      <h2 class="cta-section__title" data-reveal-target="item">Ready to Make an Impact?</h2>
+      <p class="cta-section__desc" data-reveal-target="item">
+        Join a global community of volunteers, developers, and educators
+        working to bridge the digital divide. Your skills can change lives.
+      </p>
+      <div class="cta-section__steps" data-reveal-target="item">
+        <% [
+          "Choose your program — Volunteer, Intern, or Contribute online",
+          "Tell us about your skills and interests",
+          "We'll match you with the perfect project",
+          "Start creating impact!"
+        ].each_with_index do |step_text, i| %>
+          <div class="cta-step">
+            <div class="cta-step__number"><%= i + 1 %></div>
+            <p><%= step_text %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="cta-section__actions" data-reveal-target="item">
+        <%= link_to new_application_path, class: "btn btn--accent btn--lg", id: "cta-apply" do %>
+          <i class="ph ph-paper-plane-tilt"></i>
+          <span>Apply Today</span>
+        <% end %>
+        <%= link_to donate_path, class: "btn btn--glass-dark btn--lg", id: "cta-donate" do %>
+          <i class="ph ph-heart"></i>
+          <span>Support with a Donation</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

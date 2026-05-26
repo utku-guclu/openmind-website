@@ -1,0 +1,148 @@
+<% content_for(:title) { "About Us — OpenmindProjects" } %>
+
+<% hero_media = site_setting("about_hero_image") %>
+<% hero_title = site_setting("about_hero_title")&.value || "Join us on a Mission to Fight Poverty" %>
+<% hero_subtitle = site_setting("about_hero_subtitle")&.value || "Volunteer with OpenmindProjects, a nonprofit grassroots organization empowering impoverished youth and their parents in Southeast Asia." %>
+
+<section class="about-hero" style="position: relative; padding: 180px 0 120px; color: #fff; text-align: center; overflow: hidden; background-color: var(--color-dark);">
+  <% if hero_media&.file&.attached? %>
+    <%= image_tag url_for(hero_media.file), style: "position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 1;" %>
+  <% else %>
+    <!-- Default background image as requested -->
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 30, 55, 0.6) 0%, rgba(12, 30, 55, 0.8) 100%); z-index: 1;"></div>
+    <img src="<%= site_setting_image_url('about_hero_bg_image') || '/hero-volunteer.jpg' %>" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; z-index: 0;" alt="Family Volunteer Make New Friends" />
+  <% end %>
+  <div class="container" style="position: relative; z-index: 2; max-width: 900px; margin: 0 auto;">
+    <h2 style="font-size: 3.5rem; margin-bottom: var(--space-md); font-weight: 700; color: #fff; line-height: 1.2;"><%= hero_title %></h2>
+    <h3 style="font-size: 1.25rem; font-weight: 400; margin: 0 auto var(--space-lg); line-height: 1.6; color: #f0f0f0;"><%= hero_subtitle %></h3>
+    <%= link_to "Get Involved", new_application_path, class: "btn btn--primary btn--lg", style: "margin-top: var(--space-md);" %>
+  </div>
+</section>
+
+<% intro_text = site_setting("about_intro_text") %>
+<section class="about-intro" style="padding: var(--space-xl) 0; text-align: left; background: #fff;">
+  <div class="container" style="max-width: 1000px;">
+    <% if intro_text&.content&.present? %>
+      <div style="font-size: 1.15rem; line-height: 1.8; color: var(--color-text);"><%= intro_text.content %></div>
+    <% else %>
+      <p style="font-size: 1.15rem; line-height: 1.8; color: var(--color-text); margin: 0;">
+        OpenmindProjects is a nonprofit charity founded in Thailand in 2002. We started with IT learning for the underprivileged in 2001 and have since expanded to help disadvantaged people throughout Southeast Asia. We are supported by a local and global network of staff, trainees, volunteers, friends, and alumni. Our focus is on helping poor children through schools, camps, and a Training Center. <span style="color: var(--color-text);">The Covid pandemic disrupted our work, leading us to launch online training programs. We are now working to restart our pre-Covid projects and welcome volunteers. As a nonprofit charity, we rely on donations to continue our mission.</span>
+      </p>
+    <% end %>
+  </div>
+</section>
+
+<section class="about-dna-founders" style="padding: var(--space-xl) 0; background: var(--color-surface);">
+  <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-xl);">
+    
+    <!-- Left Column: DNA -->
+    <div class="about-dna" style="background: transparent;">
+      <h1 style="color: var(--color-text); margin-bottom: var(--space-lg); font-size: 2.5rem; font-weight: 700;">Our DNA</h1>
+      
+      <h1 style="font-size: 2rem; margin-bottom: var(--space-sm); font-weight: 700;">Vision</h1>
+      <% vision = site_setting("about_vision") %>
+      <blockquote style="font-size: 1.15rem; font-style: italic; color: var(--color-text-secondary); margin: 0 0 var(--space-xl) 0; padding-left: var(--space-md); border-left: 4px solid var(--color-primary);">
+        <% if vision&.content&.present? %>
+          <%= vision.content %>
+        <% else %>
+          <p>We envision a future of equal opportunities in which young people, no matter their backgrounds, have hope, inspiration and confidence to realize their dreams.</p>
+        <% end %>
+      </blockquote>
+
+      <h1 style="font-size: 2rem; margin-bottom: var(--space-sm); font-weight: 700;">Mission</h1>
+      <% mission = site_setting("about_mission") %>
+      <blockquote style="font-size: 1.15rem; font-style: italic; color: var(--color-text-secondary); margin: 0; padding-left: var(--space-md); border-left: 4px solid var(--color-primary);">
+        <% if mission&.content&.present? %>
+          <%= mission.content %>
+        <% else %>
+          <p>Our mission is to empower disadvantaged youth in rural Southeast Asia through active learning, bridging the digital and educational divide, and fostering confidence for a brighter future.</p>
+        <% end %>
+      </blockquote>
+    </div>
+
+    <!-- Right Column: Founders -->
+    <div class="about-founders" style="background: transparent;">
+      <h1 style="color: var(--color-text); margin-bottom: var(--space-lg); font-size: 2.5rem; font-weight: 700;">Founders</h1>
+      
+      <% founders_media = site_setting("about_founders_video") %>
+      <div style="aspect-ratio: 16/9; background: #000; border-radius: var(--radius-md); overflow: hidden; margin-bottom: var(--space-md); position: relative; box-shadow: var(--shadow-sm);">
+        <% if founders_media&.file&.attached? %>
+          <% if founders_media.file.content_type.start_with?('video/') %>
+            <%= video_tag url_for(founders_media.file), controls: true, style: "width: 100%; height: 100%; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag url_for(founders_media.file), style: "width: 100%; height: 100%; object-fit: cover;" %>
+          <% end %>
+        <% else %>
+          <!-- Fallback Vimeo Video or Image -->
+          <img src="<%= site_setting_image_url('about_founders_image') || '/hero-volunteer.jpg' %>" alt="Photo of OpenmindProjects Co-founders Gaweechat Joompaula and Sven Mauleon." style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.9); font-size: 4rem; cursor: pointer;">
+            <i class="ph-fill ph-play-circle"></i>
+          </div>
+        <% end %>
+      </div>
+
+      <h2 style="font-size: 1.8rem; margin-bottom: var(--space-sm); font-weight: 700;">Sven Mauleon and Gaweechat Joompaula</h2>
+      <% founders_text = site_setting("about_founders_text") %>
+      <div style="font-size: 1rem; line-height: 1.7; color: var(--color-text);">
+        <% if founders_text&.content&.present? %>
+          <%= founders_text.content %>
+        <% else %>
+          <p><strong>East meets West!</strong></p>
+          <p>About our founders Sven Mauleon and Gaweechat Joompaula. Sven, from Sweden, and Gaweechat, from Thailand, once set out to find how to use IT to help poor kids.</p>
+          <p>We wanted to bridge knowledge divides using IT and the internet and included English learning. Since then we have bridged knowledge and culture divides together with volunteers and local people, old and young.</p>
+          <p><span style="color: var(--color-primary);"><strong><a style="color: var(--color-primary);" href="http://www.gp.se/livsstil/svens-mission-%C3%A4r-att-st%C3%B6tta-barn-i-thailand-1.9537303" target="_blank" rel="noopener noreferrer nofollow">Read About: Sven in leading Swedish newspaper, Goteborgs Posten</a>.</strong></span></p>
+          <p><strong>Gaweechat:</strong> ‘I grew up without electricity but got a chance to learn to use computers and believe in learning by doing.’</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TEAM ========== -->
+<section class="about-team" style="padding: var(--space-xl) 0; background: #fff;">
+  <div class="container">
+    <h1 style="color: var(--color-text); margin-bottom: var(--space-xl); font-size: 3rem; font-weight: 700;">Our Team</h1>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-xl);">
+      <% @team_members.each do |member| %>
+        <div class="team-card" style="display: flex; flex-direction: column; gap: var(--space-md);">
+          <!-- Image -->
+          <div style="width: 100%; aspect-ratio: 1/1; overflow: hidden;">
+            <% if member.image.attached? %>
+              <%= image_tag url_for(member.image), style: "width: 100%; height: 100%; object-fit: cover;" %>
+            <% else %>
+              <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: #ccc; background: var(--color-surface);">
+                <i class="ph ph-user-circle"></i>
+              </div>
+            <% end %>
+          </div>
+          
+          <!-- Name & Role -->
+          <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <i class="ph ph-address-card" style="font-size: 1.5rem; color: var(--color-text); margin-top: 4px;"></i>
+            <div>
+              <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 2px;"><%= member.name %></h3>
+              <p style="font-size: .95rem; color: var(--color-text-secondary); margin: 0;"><%= member.role %></p>
+            </div>
+          </div>
+
+          <!-- Tabs: Country & Bio (Static approach for simplicity, combining both) -->
+          <div style="border: 1px solid var(--color-border); padding: var(--space-md); border-radius: 4px; background: #fafafa; display: flex; flex-direction: column; gap: var(--space-sm); flex-grow: 1;">
+            <% if member.country.present? %>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="ph ph-globe-asia" style="font-size: 1.25rem; color: var(--color-text);"></i>
+                <span style="font-size: .95rem; font-weight: 600;"><%= member.country %></span>
+              </div>
+            <% end %>
+            
+            <% if member.bio.present? %>
+              <div style="font-size: .95rem; color: var(--color-text-secondary); line-height: 1.6;">
+                <%= simple_format member.bio %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

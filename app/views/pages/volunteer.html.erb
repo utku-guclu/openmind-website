@@ -1,0 +1,42 @@
+<% content_for(:title) { "Who Volunteers — OpenmindProjects" } %>
+
+<section class="about" style="padding-top: 120px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-hand-heart"></i> Volunteer with us</span>
+      <h1 class="section-header__title">Who <span class="text-primary">Volunteers</span></h1>
+      <p class="section-header__desc">Whether you're on a career break, holiday, gap year, traveling with family, retired, or seeking an interesting internship — there's a meaningful volunteering path for you in Southeast Asia.</p>
+    </div>
+  </div>
+</section>
+
+<%= render "organisms/audience_grid", audiences: @audiences %>
+
+<% if @destinations.any? %>
+<section class="pillars">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-map-trifold"></i> Where</span>
+      <h2 class="section-header__title">Our <span class="text-primary">Destinations</span></h2>
+    </div>
+    <div class="pillars__grid">
+      <% colors = ["pillar-card--education", "pillar-card--development", "pillar-card--research"] %>
+      <% @destinations.each_with_index do |dest, i| %>
+        <div class="pillar-card <%= colors[i % 3] %>">
+          <div class="pillar-card__header">
+            <div class="pillar-card__number"><%= dest.country_code %></div>
+            <div class="pillar-card__icon"><i class="ph ph-map-pin"></i></div>
+          </div>
+          <h3 class="pillar-card__title"><%= dest.name %></h3>
+          <p class="pillar-card__desc"><%= dest.summary %></p>
+          <%= link_to destination_path(dest.slug), class: "pillar-card__link" do %>
+            Explore <i class="ph ph-arrow-right"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<%= render "organisms/cta_section" %>

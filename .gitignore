@@ -1,0 +1,91 @@
+# ═══════════════════════════════════════════════════════════════
+# .gitignore — Git ignored files and directories for OpenMind Projects
+# ═══════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────
+# System & IDE Files
+# ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+._*
+.vscode/
+.idea/
+.cursor/
+.gemini/
+.ruby-lsp/
+.byebug_history
+
+# ───────────────────────────────────────────────────────────────
+# Environmental Secrets & Credentials
+# ───────────────────────────────────────────────────────────────
+.env
+.env*
+!.env.example
+
+# Rails master keys for decrypting credentials (keep private!)
+/config/master.key
+/config/credentials/*.key
+/config/*.key
+/config/credentials.yml.enc.bak
+
+# ───────────────────────────────────────────────────────────────
+# Dependencies
+# ───────────────────────────────────────────────────────────────
+# Node modules
+/node_modules/
+
+# Bundler / Ruby dependencies
+/.bundle/
+/vendor/bundle
+/bin/bundle
+
+# ───────────────────────────────────────────────────────────────
+# Logs, Temp, and Cache Directories
+# ───────────────────────────────────────────────────────────────
+/log/*
+!/log/.keep
+
+/tmp/*
+!/tmp/.keep
+
+# ───────────────────────────────────────────────────────────────
+# Active Storage & Media Uploads
+# ───────────────────────────────────────────────────────────────
+/storage/*
+!/storage/.keep
+/storage.tar.gz
+
+# ───────────────────────────────────────────────────────────────
+# Database Files & Exports
+# ───────────────────────────────────────────────────────────────
+/*.sqlite3
+/*.sqlite3-journal
+/*.sqlite3-shm
+/*.sqlite3-wal
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-shm
+/db/*.sqlite3-wal
+/db/*.sql
+/db/*.dump
+/db/export/
+
+# ───────────────────────────────────────────────────────────────
+# Compiled Assets & Webpack Builds
+# ───────────────────────────────────────────────────────────────
+/public/assets
+/public/packs
+/public/packs-test
+
+# ───────────────────────────────────────────────────────────────
+# Custom Local Bundles & Test Artifacts
+# ───────────────────────────────────────────────────────────────
+# Built JS bundles from esbuild or tests at root level
+/active_admin_bundle.js
+/bundle_test.js
+/bundle_src_test.js
+
+# ───────────────────────────────────────────────────────────────
+# Nested Git Snippets / Subprojects
+# ───────────────────────────────────────────────────────────────
+/my-opengist-snippet/

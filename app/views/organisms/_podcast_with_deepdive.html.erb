@@ -1,0 +1,21 @@
+<%# locals: { track_url:, deepdive: } %>
+<section class="podcast-deepdive">
+  <div class="container podcast-deepdive__grid">
+    <div class="podcast-deepdive__player">
+      <iframe
+        width="100%" height="400" frameborder="no" scrolling="no" loading="lazy"
+        src="https://w.soundcloud.com/player/?visual=true&url=<%= CGI.escape(track_url) %>&auto_play=false&show_artwork=true&color=%230C7ABF"></iframe>
+    </div>
+    <% if deepdive %>
+      <aside class="podcast-deepdive__card">
+        <% if deepdive[:image].present? %>
+          <img class="podcast-deepdive__image" src="<%= deepdive[:image] %>" alt="<%= deepdive[:title] %>" loading="lazy">
+        <% end %>
+        <div class="podcast-deepdive__body">
+          <h3 class="podcast-deepdive__title"><%= deepdive[:title] %></h3>
+          <p class="podcast-deepdive__desc"><%= deepdive[:description] %></p>
+        </div>
+      </aside>
+    <% end %>
+  </div>
+</section>

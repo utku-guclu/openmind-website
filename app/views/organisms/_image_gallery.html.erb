@@ -1,0 +1,64 @@
+<%# locals: { images:, tag: "Gallery", title: "Moments from the field" } %>
+<section class="image-gallery-section" data-controller="gallery">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-images"></i> <%= tag %></span>
+      <h2 class="section-header__title"><%= title %></h2>
+    </div>
+
+    <div class="image-gallery">
+      <% images.each_with_index do |image, idx| %>
+        <% url = image.is_a?(String) ? image : image.display_url %>
+        <% next unless url %>
+        <% alt_text = image.respond_to?(:alt) ? image.alt.presence : nil %>
+        <button class="image-gallery__item"
+                data-gallery-target="thumb"
+                data-action="click->gallery#open"
+                data-index="<%= idx %>"
+                type="button"
+                aria-label="<%= alt_text || "View gallery image #{idx + 1}" %>">
+          <img src="<%= url %>" alt="<%= alt_text || "Gallery image #{idx + 1}" %>" loading="lazy">
+          <span class="image-gallery__overlay">
+            <i class="ph ph-magnifying-glass-plus"></i>
+          </span>
+        </button>
+      <% end %>
+    </div>
+
+    <p class="image-gallery__count">
+      <i class="ph ph-camera"></i>
+      <%= images.count { |i| i.is_a?(String) ? i.present? : i.display_url.present? } %> photos
+    </p>
+  </div>
+
+  <%# Lightbox modal %>
+  <div class="lightbox" data-gallery-target="lightbox" aria-hidden="true" role="dialog" aria-label="Image lightbox">
+    <div class="lightbox__backdrop" data-action="click->gallery#close"></div>
+    <button class="lightbox__close" data-action="click->gallery#close" aria-label="Close lightbox">
+      <i class="ph ph-x"></i>
+    </button>
+
+    <button class="lightbox__nav lightbox__nav--prev" data-action="click->gallery#prev" aria-label="Previous image">
+      <i class="ph ph-caret-left"></i>
+    </button>
+
+    <div class="lightbox__stage">
+      <img class="lightbox__img" data-gallery-target="lightboxImg" src="" alt="">
+    </div>
+
+    <button class="lightbox__nav lightbox__nav--next" data-action="click->gallery#next" aria-label="Next image">
+      <i class="ph ph-caret-right"></i>
+    </button>
+
+    <div class="lightbox__counter" data-gallery-target="counter"></div>
+  </div>
+
+  <%# Pass image URLs to JS controller %>
+  <template data-gallery-target="urls">
+    <% images.each do |image| %>
+      <% url = image.is_a?(String) ? image : image.display_url %>
+      <% next unless url %>
+      <span data-url="<%= url %>" data-alt="<%= image.respond_to?(:alt) ? image.alt : '' %>"></span>
+    <% end %>
+  </template>
+</section>

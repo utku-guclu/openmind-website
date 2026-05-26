@@ -1,0 +1,34 @@
+<%# Get Inspired organism — 6 video cards + Volunteer / Give Today CTAs. %>
+<%
+  videos = [
+    { youtube_id: "64KzIobxLJI", title: "Francesco Palmieri Lupia — Teaching & Solar Energy", meta: "Volunteer · 4:38" },
+    { youtube_id: "qiEXsT7PuWs", title: "IT Volunteer — Teach Coding",                         meta: "Workshop · 1:47" },
+    { youtube_id: "3AfDLor6AM8", title: "A True Story — Alumni James",                         meta: "Alumni · 2:58" },
+    { youtube_id: "63j5vQzyHew", title: "Day 2 of the Active Learning Camp",                   meta: "Camp · 1:12" },
+    { youtube_id: "hZW4CRhD5wQ", title: "Couple Volunteer Abroad — Chris & Jacqueline",        meta: "Austria · 0:53" },
+    { youtube_id: "D24B0i06c_M", title: "Laura Colantonio — Crafting Stories",                 meta: "Italy · 2:26" }
+  ]
+%>
+
+<section class="inspired" id="inspired" data-controller="reveal">
+  <div class="container">
+    <div class="section-header" data-reveal-target="item">
+      <span class="section-header__tag"><i class="ph ph-film-reel"></i> Stories</span>
+      <h2 class="section-header__title">Get <span class="text-primary">Inspired</span></h2>
+      <p class="section-header__desc">Hear directly from volunteers, alumni, and the communities we serve.</p>
+    </div>
+    <div class="inspired__grid">
+      <% videos.each do |v| %>
+        <%= render "molecules/video_card", **v %>
+      <% end %>
+    </div>
+    <div class="inspired__actions" data-reveal-target="item">
+      <%= link_to new_application_path, class: "btn btn--primary btn--lg" do %>
+        <i class="ph ph-hand-heart"></i><span>Volunteer</span>
+      <% end %>
+      <%= link_to "https://idream.openmindprojects.org/", target: "_blank", rel: "noopener noreferrer nofollow", class: "btn btn--accent btn--lg" do %>
+        <i class="ph ph-heart"></i><span>Give Today</span>
+      <% end %>
+    </div>
+  </div>
+</section>

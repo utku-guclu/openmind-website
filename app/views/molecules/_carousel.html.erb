@@ -1,0 +1,33 @@
+<%# Carousel molecule.
+    Locals:
+      slides:    Array of [src, alt] pairs — required
+      autoplay:  ms between slides (default 0 = off)
+      per_view:  slides visible at once (default 1)
+      modifier:  extra class on .carousel (e.g. "carousel--awards") %>
+<% slides    = local_assigns.fetch(:slides) %>
+<% autoplay  = local_assigns[:autoplay] || 0 %>
+<% per_view  = local_assigns[:per_view] || 1 %>
+<% modifier  = local_assigns[:modifier] %>
+
+<div class="carousel <%= modifier %>"
+     data-controller="carousel"
+     data-carousel-autoplay-value="<%= autoplay %>"
+     data-carousel-loop-value="true"
+     data-carousel-per-view-value="<%= per_view %>">
+  <div class="carousel__viewport">
+    <div class="carousel__track" data-carousel-target="track">
+      <% slides.each_with_index do |(src, alt), i| %>
+        <figure class="carousel__slide" data-carousel-target="slide" aria-label="<%= i + 1 %> of <%= slides.size %>">
+          <img src="<%= src %>" alt="<%= alt %>" loading="<%= i.zero? ? "eager" : "lazy" %>">
+        </figure>
+      <% end %>
+    </div>
+  </div>
+  <button type="button" class="carousel__btn carousel__btn--prev" data-action="click->carousel#prev" aria-label="Previous slide">
+    <i class="ph ph-caret-left"></i>
+  </button>
+  <button type="button" class="carousel__btn carousel__btn--next" data-action="click->carousel#next" aria-label="Next slide">
+    <i class="ph ph-caret-right"></i>
+  </button>
+  <div class="carousel__pagination" data-carousel-target="pagination" role="tablist"></div>
+</div>

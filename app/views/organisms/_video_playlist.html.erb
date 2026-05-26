@@ -1,0 +1,37 @@
+<%# locals: { videos:, tag: "Get Inspired", title: "Stories from the field" } %>
+<section class="video-playlist-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-header__tag"><i class="ph ph-play-circle"></i> <%= tag %></span>
+      <h2 class="section-header__title"><%= title %></h2>
+    </div>
+
+    <div class="video-playlist" data-controller="video-playlist">
+      <div class="video-playlist__stage">
+        <iframe
+          data-video-playlist-target="player"
+          src="https://www.youtube.com/embed/<%= videos.first.youtube_id %>?rel=0&enablejsapi=1"
+          title="<%= videos.first.title %>"
+          frameborder="0"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+
+      <ul class="video-playlist__list">
+        <% videos.each_with_index do |v, i| %>
+          <li class="video-playlist__item <%= 'is-active' if i == 0 %>"
+              data-video-playlist-target="item"
+              data-youtube-id="<%= v.youtube_id %>"
+              data-title="<%= v.title %>"
+              data-action="click->video-playlist#select">
+            <img class="video-playlist__thumb" src="https://img.youtube.com/vi/<%= v.youtube_id %>/mqdefault.jpg" alt="" loading="lazy">
+            <div class="video-playlist__meta">
+              <h4 class="video-playlist__title"><%= v.title %></h4>
+              <span class="video-playlist__duration"><i class="ph ph-clock"></i> <%= v.duration %></span>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</section>
